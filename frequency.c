@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "libs/frequency.h"
 
 #define MAX_SIZE 256
 
 /**
  * - Uses unsigned char to preserve the pattern and the most significant bit to lose its function as signal bit
  */
-typedef unsigned char BYTE;
+typedef unsigned char U_BYTE;
 
 /**
  * The function receives an array, its size and an index, and returns an array initialized with 0's
@@ -41,7 +42,7 @@ int *create_frequency_array(char arq[])
         if (!feof(file))
         {
             /** It takes each byte of the array and stores its frequency in the array. */
-            BYTE c = fgetc(file);
+            U_BYTE c = fgetc(file);
             i = (int)c;
             freq[i] += 1;
         }
