@@ -81,7 +81,7 @@ int maximum(priority_queue *PQ)
 }
 
 /** Returns the value of the head (start) */
-int peek(priority_queue *PQ)
+NODE *peek(priority_queue *PQ)
 {
     return PQ->head;
 }

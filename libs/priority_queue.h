@@ -34,6 +34,6 @@ extern NODE *dequeue(priority_queue *PQ);
 extern int maximum(priority_queue *PQ);
 
 /** Returns the value of the head (start) */
-extern int peek(priority_queue *PQ);
+extern NODE *peek(priority_queue *PQ);
 
 #endif
