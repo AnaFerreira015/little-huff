@@ -2,18 +2,6 @@
 #include <stdlib.h>
 #include "libs/priority_queue.h"
 
-typedef struct NODE
-{
-    char character;
-    int frequency;
-    struct NODE *next;
-} NODE;
-
-typedef struct priority_queue
-{
-    NODE *head;
-} priority_queue;
-
 /** Checks if queue is empty */
 int isEmpty(priority_queue *PQ)
 {
