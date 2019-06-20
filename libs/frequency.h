@@ -11,16 +11,16 @@ typedef unsigned char BYTE;
 /**
  * The function receives an array, its size and an index, and returns an array initialized with 0's
  */
-void initialize_array(int *array, int size, int i);
+extern void initialize_array(int *array, int size, int i);
 
 /**
 * The function receives the file name and returns an array with the frequency of each byte in the file
  */
-int *create_frequency_array(char arq[]);
+extern int *create_frequency_array(char arq[]);
 
 /**
  * Receive an array already created and display what's in it
  */
-void printing_frequency_array(int *array);
+extern void printing_frequency_array(int *array);
 
 #endif
