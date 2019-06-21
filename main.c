@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
-#include "libs/frequency.h"
+#include "frequency.c"
 
 #define ANSI_COLOR_RESET "\033[0;0m"
 #define ANSI_COLOR_LIGHT_MAGENTA "\033[1;95m"
@@ -11,7 +11,7 @@
 int main()
 {
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
-    printf("WELCOME TO LITLE HUFF\n");
+    printf("\n\tWELCOME TO LITLE HUFF\n");
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
     printf(ANSI_COLOR_RESET);
 

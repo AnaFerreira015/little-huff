@@ -71,18 +71,18 @@ void printing_frequency_array(int *array)
     }
 }
 
-int main()
-{
-    int i;
-    char file_name[256];
-
-    printf("FILE: ");
-    scanf("%s", file_name);
-
-    printf("THE FILE %s IS OPENED\n", file_name);
-    int *f = create_frequency_array(file_name);
-
-    printing_frequency_array(f);
-
-    return 0;
-}
+// int main()
+// {
+//     int i;
+//     char file_name[256];
+//
+//     printf("FILE: ");
+//     scanf("%s", file_name);
+//
+//     printf("THE FILE %s IS OPENED\n", file_name);
+//     int *f = create_frequency_array(file_name);
+//
+//     printing_frequency_array(f);
+//
+//     return 0;
+// }
