@@ -11,7 +11,7 @@
 int main()
 {
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
-    printf("\n\tWELCOME TO LITLE HUFF\n");
+    printf("\n\tWELCOME TO LITTLE HUFF\n");
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
     printf(ANSI_COLOR_RESET);
 
