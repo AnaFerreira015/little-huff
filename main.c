@@ -48,7 +48,7 @@ int main()
             break;
 
         default:
-            printf("Invalid option! Try again: \n");
+            printf("\nInvalid option! Try again: \n\n");
             break;
         }
     }
