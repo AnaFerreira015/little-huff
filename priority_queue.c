@@ -98,10 +98,3 @@ NODE *peek(priority_queue *PQ)
 {
     return PQ->head;
 }
-
-int main()
-{
-    NODE *new_node = (NODE *)malloc(sizeof(NODE));
-
-    return 0;
-}
