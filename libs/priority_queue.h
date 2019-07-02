@@ -1,18 +1,6 @@
 #ifndef _PRIORITY_QUEUE_H_
 #define _PRIORITY_QUEUE_H_
 
-typedef struct NODE
-{
-    char character;
-    int frequency;
-    struct NODE *next;
-} NODE;
-
-typedef struct priority_queue
-{
-    NODE *head;
-} priority_queue;
-
 /** Checks if queue is empty */
 extern int isEmpty(priority_queue *PQ);
 
