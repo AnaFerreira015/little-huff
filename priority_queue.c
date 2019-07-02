@@ -2,19 +2,6 @@
 #include <stdlib.h>
 #include "libs/priority_queue.h"
 
-typedef struct NODE
-{
-    char character;
-    int frequency;
-    struct NODE *next;
-} NODE;
-
-typedef struct priority_queue
-{
-    NODE *head;
-} priority_queue;
-
-
 /** Checks if queue is empty */
 int isEmpty(priority_queue *PQ)
 {
@@ -59,6 +46,19 @@ void enqueue(priority_queue *PQ, char character, int frequency)
     }
 }
 
+priority_queue *enqueue_f_array(int frequency_array[]) {
+    priority_queue *PQ = (priority_queue*)malloc(sizeof(priority_queue));
+    
+    int i;
+    
+    for(i = 0; i < 256; i++) {
+        if(frequency_array[i]){
+            enqueue(PQ, i, frequency_array[i]);
+        }
+    }
+    return PQ;
+}
+
 /**
  * - Receives a cell from the priority queue and removes it from the queue
  * - Returns the value taken
@@ -97,4 +97,16 @@ int maximum(priority_queue *PQ)
 NODE *peek(priority_queue *PQ)
 {
     return PQ->head;
+}
+
+void printing_pq(priority_queue *PQ)
+{
+    priority_queue *PQ_temp = PQ;
+    // printf("%c\n", PQ_temp->head->character);
+    while(PQ_temp->head != NULL) 
+    {
+        printf("%c (%d)\n", PQ_temp->head->character, PQ_temp->head->frequency);
+        PQ_temp->head = PQ_temp->head->next;
+    }
+    printf("\n");
 }
