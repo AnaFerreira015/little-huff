@@ -26,33 +26,27 @@ void initialize_array(int *array, int size, int i)
 /**
 * The function receives the file name and returns an array with the frequency of each byte in the file
  */
-int *create_frequency_array(char arq[])
+void create_frequency_array(char arq[], int freq[])
 {
     /** Opens the file in binary read mode */
     FILE *file = fopen(arq, "rb");
 
-    /** Creates an initialized array for the frequency */
-    int *freq = (int *)calloc(MAX_SIZE, sizeof(int));
-
-    // initialize_array(freq, MAX_SIZE, 0);
-
-    int i;
-    while (1)
-    {
-        if (!feof(file))
+    // if(file != NULL) {
+        /** Initializes the array with 0's */
+        initialize_array(freq, MAX_SIZE, 0);
+        
+        char i[2];
+        while (fscanf(file, "%c", i) != EOF)
         {
-            /** It takes each byte of the array and stores its frequency in the array. */
-            U_BYTE c = fgetc(file);
-            i = (int)c;
-            freq[i] += 1;
+            U_BYTE c = i[0];
+            freq[c] += 1;
         }
-        else
-        {
-            break;
-        }
-    }
 
-    return freq;
+    // }
+    // else {
+    //     printf("File doesn't exist\n");
+    // }
+
 }
 
 /**
