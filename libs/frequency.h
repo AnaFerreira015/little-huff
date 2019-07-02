@@ -16,7 +16,7 @@ extern void initialize_array(int *array, int size, int i);
 /**
 * The function receives the file name and returns an array with the frequency of each byte in the file
  */
-extern int *create_frequency_array(char arq[]);
+extern void create_frequency_array(char arq[], int freq[]);
 
 /**
  * Receive an array already created and display what's in it
