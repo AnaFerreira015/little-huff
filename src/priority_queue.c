@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "libs/priority_queue.h"
+#include "../libs/priority_queue.h"
 
 /** Checks if queue is empty */
 int isEmpty(priority_queue *PQ)

@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "libs/frequency.h"
+#include "../libs/frequency.h"
+
+#define ANSI_COLOR_RED "\033[0;31m"
+#define ANSI_COLOR_RESET "\033[0;0m"
 
 #define MAX_SIZE 256
 

@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
-#include "frequency.c"
-#include "priority_queue.c"
+#include "./src/frequency.c"
+#include "./src/priority_queue.c"
 
 #define ANSI_COLOR_RESET "\033[0;0m"
 #define ANSI_COLOR_LIGHT_MAGENTA "\033[1;95m"
