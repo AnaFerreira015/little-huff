@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include "../libs/priority_queue.h"
 
-/** Checks if queue is empty */
+/** Checks if queue is empty
+ * @param a priority queue
+ */
 int isEmpty(priority_queue *PQ)
 {
     return (PQ->head == NULL);
 }
 
-/** Creates a new cell for the priority queue and returns it */
+/** Creates a new cell for the priority queue and returns it
+ * @param each character of the file and its respective frequency
+ */
 NODE *creating_element(char character, int frequency)
 {
     NODE *new_node = (NODE *)malloc(sizeof(NODE));
@@ -22,6 +26,7 @@ NODE *creating_element(char character, int frequency)
 /**
  * - You receive a cell from the priority queue and the data to add to it
  * - Add the parameter data in the queue
+ * @param a priority queue, each character of the file and its frequency
  */
 void enqueue(priority_queue *PQ, char character, int frequency)
 {
@@ -46,6 +51,9 @@ void enqueue(priority_queue *PQ, char character, int frequency)
     }
 }
 
+/** Line each character and frequency of the array
+ * @param a frequency array
+ */
 priority_queue *enqueue_f_array(int frequency_array[]) {
     priority_queue *PQ = (priority_queue*)malloc(sizeof(priority_queue));
     
@@ -62,6 +70,7 @@ priority_queue *enqueue_f_array(int frequency_array[]) {
 /**
  * - Receives a cell from the priority queue and removes it from the queue
  * - Returns the value taken
+ * @param a priority queue
  */
 NODE *dequeue(priority_queue *PQ)
 {
@@ -79,7 +88,9 @@ NODE *dequeue(priority_queue *PQ)
     }
 }
 
-/** Receives a priority queue and returns the highest value (frequency) of the queue */
+/** Receives a priority queue and returns the highest value (frequency) of the queue
+ * @param a priority queue
+ */
 int maximum(priority_queue *PQ)
 {
     if (isEmpty(PQ))
@@ -93,12 +104,17 @@ int maximum(priority_queue *PQ)
     }
 }
 
-/** Returns the value of the head (start) */
+/** Returns the value of the head (start)
+ * @param a priority queue
+ */
 NODE *peek(priority_queue *PQ)
 {
     return PQ->head;
 }
 
+/** Prints all priority queue data 
+ * @param a priority queue
+ */
 void printing_pq(priority_queue *PQ)
 {
     priority_queue *PQ_temp = PQ;

@@ -15,6 +15,7 @@ typedef unsigned char U_BYTE;
 
 /**
  * The function receives an array, its size and an index, and returns an array initialized with 0's
+ * @param an array, its size, and an index
  */
 void initialize_array(int *array, int size, int i)
 {
@@ -27,7 +28,8 @@ void initialize_array(int *array, int size, int i)
 }
 
 /**
-* The function receives the file name and returns an array with the frequency of each byte in the file
+ * The function receives the file name and returns an array with the frequency of each byte in the file 
+ * @param the name of a file and the array for frequency 
  */
 void create_frequency_array(char arq[], int freq[])
 {
@@ -54,6 +56,7 @@ void create_frequency_array(char arq[], int freq[])
 
 /**
  * Receive an array already created and display what's in it
+ * @param a frequency array
  */
 void printing_frequency_array(int *array)
 {
