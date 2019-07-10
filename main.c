@@ -5,11 +5,36 @@
 #include "./src/frequency.c"
 #include "./src/priority_queue.c"
 
+/**
+ * @define ANSI_COLOR_RESET
+ * 
+ * @discussion Returns to the default print color
+*/
 #define ANSI_COLOR_RESET "\033[0;0m"
+/**
+ * @define ANSI_COLOR_LIGHT_MAGENTA
+ * 
+ * @discussion Inserts magenta light color into terminal
+*/
 #define ANSI_COLOR_LIGHT_MAGENTA "\033[1;95m"
+/**
+ * @define ANSI_COLOR_GREEN
+ * 
+ * @discussion Inserts green color into terminal
+*/
 #define ANSI_COLOR_GREEN "\033[1;32m"
+/**
+ * @define ANSI_COLOR_RED
+ * 
+ * @discussion Inserts red color into terminal
+*/
 #define ANSI_COLOR_RED "\033[0;31m"
 
+/**
+ * @define MAX_SIZE
+ * 
+ * @discussion Maximum array size
+*/
 #define MAX_SIZE 256
 
 int main()
@@ -39,24 +64,23 @@ int main()
             printf("FILE: ");
             scanf("%s", file_name);
             printf("\n");
-            
-            
+
             printf("THE FILE %s IS OPENED\n", file_name);
-                
+
             create_frequency_array(file_name, freq);
-                
+
             printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
             printf(ANSI_COLOR_RESET);
-                
+
             printing_frequency_array(freq);
-                
+
             priority_queue *PQ_frequency = enqueue_f_array(freq);
-                
+
             printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             printf(ANSI_COLOR_RESET);
-                
+
             printing_pq(PQ_frequency);
-            
+
             break;
         }
 
