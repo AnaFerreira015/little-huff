@@ -4,4 +4,8 @@ In computer science and information theory, a Huffman code is a particular type 
 
 [Learn more here](https://en.wikipedia.org/wiki/Huffman_coding)
 
-This project was created during the discipline of *data structure 2019.1*.
+This project was developed jointly during the discipline *data structure 2019.1* by the students:
+* Ana Ferreira
+* Gabriel César
+* Kelly Bianca
+* Marcos Ivan
