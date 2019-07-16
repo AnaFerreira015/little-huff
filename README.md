@@ -38,7 +38,7 @@ gcc main.c -o main
 ./main
 ```
 
-## Operational system (OS)
+## Operational System (OS)
 
 The project is being developed in the GNU/Linux operating system and tested on GNU/Linux and Windows.
 
