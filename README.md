@@ -51,4 +51,4 @@ In short, the project will have treatment for other operating systems, however t
 
 ## Disclaimer
 
-This material was prepared based on the README.md made by [Prof. André Lage Freitas] (https://github.com/proflage/teaching) and is licensed under the [MIT Massachusetts Institute of Technology] (https://opensource.org/licenses/MIT) license.
+This material was prepared based on the README.md made by [Prof. André Lage Freitas](https://github.com/proflage/teaching) and is licensed under the [MIT Massachusetts Institute of Technology](https://opensource.org/licenses/MIT) license.
