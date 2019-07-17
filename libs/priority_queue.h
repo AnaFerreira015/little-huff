@@ -81,7 +81,7 @@ extern NODE *dequeue(priority_queue *PQ);
  * 
  * @result The max value
  */
-extern int maximum(priority_queue *PQ);
+extern int minimum(priority_queue *PQ);
 
 /** @discussion Returns the value of the head (start)
  * 

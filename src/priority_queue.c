@@ -44,7 +44,7 @@ void enqueue(priority_queue *PQ, char character, int frequency)
     new_node->character = character;
     new_node->frequency = frequency;
 
-    if ((isEmpty(PQ)) || (frequency > PQ->head->frequency))
+    if ((isEmpty(PQ)) || (frequency < PQ->head->frequency))
     {
         new_node->next = PQ->head;
         PQ->head = new_node;
@@ -52,7 +52,7 @@ void enqueue(priority_queue *PQ, char character, int frequency)
     else
     {
         NODE *current = PQ->head;
-        while ((current->next != NULL) && (current->next->frequency > frequency))
+        while ((current->next != NULL) && (current->next->frequency < frequency))
         {
             current = current->next;
         }
@@ -113,7 +113,7 @@ NODE *dequeue(priority_queue *PQ)
  * 
  * @result The max value
  */
-int maximum(priority_queue *PQ)
+int minimum(priority_queue *PQ)
 {
     if (isEmpty(PQ))
     {

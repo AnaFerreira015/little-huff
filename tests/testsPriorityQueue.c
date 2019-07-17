@@ -18,14 +18,14 @@ void creating_element_test()
 void enqueue_test()
 {
     priority_queue *pq = (priority_queue *)malloc(sizeof(priority_queue));
-    int array[3] = {1, 5, 7};
+    int array[3] = {2, 5, 7};
 
     enqueue(pq, 'x', 2);
     enqueue(pq, 'y', 5);
     enqueue(pq, 'z', 7);
 
     CU_ASSERT(pq != NULL);
-    CU_ASSERT_EQUAL(pq->head->frequency, array[2]);
+    CU_ASSERT_EQUAL(pq->head->frequency, array[0]);
 }
 
 void queue_empty_test()
@@ -48,7 +48,7 @@ void dequeue_test()
     CU_ASSERT_EQUAL(pq->head->frequency, array[3]);
 }
 
-void maximum_test()
+void minimum_test()
 {
     priority_queue *pq = (priority_queue *)malloc(sizeof(priority_queue));
 
@@ -56,18 +56,18 @@ void maximum_test()
     enqueue(pq, 'y', 11);
     enqueue(pq, 'z', 4);
 
-    int i, max = 0;
+    int i, min = 0;
     for (i = 0; i < pq->head->frequency; ++i)
     {
-        if (pq->head->frequency > max)
+        if (pq->head->frequency > min)
         {
-            max = pq->head->frequency;
-            pq->head->frequency = max;
+            min = pq->head->frequency;
+            pq->head->frequency = min;
         }
     }
 
     CU_ASSERT(pq != NULL);
-    CU_ASSERT_EQUAL(max, 11);
+    CU_ASSERT_EQUAL(min, 4);
 }
 
 int main()
@@ -107,7 +107,7 @@ int main()
         CU_cleanup_registry();
         return CU_get_error();
     }
-    if (NULL == CU_add_test(pSuite, "test - 4", maximum_test))
+    if (NULL == CU_add_test(pSuite, "test - 5", minimum_test))
     {
         CU_cleanup_registry();
         return CU_get_error();
