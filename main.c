@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "./src/frequency.c"
 #include "./src/priority_queue.c"
+#include "./src/huffman_tree.c"
 
 /**
  * @define ANSI_COLOR_RESET
@@ -36,6 +37,13 @@
  * @discussion Maximum array size
 */
 #define MAX_SIZE 256
+
+/**
+ * @typedef BYTE 
+ * 
+ * @discussion Uses unsigned char to preserve the pattern and the most significant bit to lose its function as signal bit
+ */
+typedef unsigned char U_BYTE;
 
 int main()
 {
@@ -74,18 +82,32 @@ int main()
 
             // printing_frequency_array(freq);
 
-            priority_queue *PQ_frequency = enqueue_f_array(freq);
+            PRIORITY_QUEUE *pq_frequency = enqueue_f_array(freq);
 
             // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             // printf(ANSI_COLOR_RESET);
+            // desinfileira 2
+            // soma a frequência
+            // cria um novo nó com a soma e enfileira de novo
 
-            // printing_pq(PQ_frequency);
+            // printf("ANTES DO FOR\n");
+            // printing_pq(pq_frequency);
+            NODE_TREE *node_tree = NULL;
 
             for(i = 0; i < MAX_SIZE; i++) {
                 if(freq[i]) {
-                    
+                    node_tree = create_node();
+                    node_tree->frequency = freq[i];
+                    node_tree->character = (U_BYTE)i;
+                    enqueue(pq_frequency, node_tree->character, node_tree->frequency);
                 }
             }
+
+            node_tree = build_node(pq_frequency);
+            // printf("DEPOIS DA BUILD\n");
+            // printing_pq(pq_frequency);
+            printf("PRE ORDER\n");
+            print_pre_order(node_tree);
 
             break;
         }
