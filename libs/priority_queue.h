@@ -19,24 +19,24 @@ typedef struct NODE
 } NODE;
 
 /**
- * @typedef priority_queue
+ * @typedef PRIORITY_QUEUE
  * 
- * @discussion Properties of priority_queue (head) are stored in this structure
+ * @discussion Properties of PRIORITY_QUEUE (head) are stored in this structure
  * 
  * @field head Pointer to the first node in the queue
 */
-typedef struct priority_queue
+typedef struct PRIORITY_QUEUE
 {
     NODE *head;
-} priority_queue;
+} PRIORITY_QUEUE;
 
 /** @discussion Checks if queue is empty
  * 
- * @param PQ A priority queue
+ * @param pq A priority queue
  * 
  * @result true (1) or false (0)
  */
-extern int isEmpty(priority_queue *PQ);
+extern int isEmpty(PRIORITY_QUEUE *pq);
 
 /** @discussion Creates a new cell for the priority queue and returns it
  * 
@@ -51,11 +51,11 @@ extern NODE *creating_element(char character, int frequency);
  * @discussion You receive a cell from the priority queue and the data to add to it
  *             Add the parameter data in the queue
  * 
- * @param PQ A priority queue
+ * @param pq A priority queue
  * @param character Each character of the file
  * @param frequency Character frequency
  */
-extern void enqueue(priority_queue *PQ, char character, int frequency);
+extern void enqueue(PRIORITY_QUEUE *pq, char character, int frequency);
 
 /** @discussion Line each character and frequency of the array
  * 
@@ -63,38 +63,38 @@ extern void enqueue(priority_queue *PQ, char character, int frequency);
  * 
  * @result A priority queue with frequency
  */
-extern priority_queue *enqueue_f_array(int frequency_array[]);
+extern PRIORITY_QUEUE *enqueue_f_array(int frequency_array[]);
 
 /**
  * @discussion Receives a cell from the priority queue and removes it from the queue
  *             Returns the value taken
  * 
- * @param PQ A priority queue
+ * @param pq A priority queue
  * 
  * @result The pointer to node dequeued
  */
-extern NODE *dequeue(priority_queue *PQ);
+extern NODE *dequeue(PRIORITY_QUEUE *pq);
 
 /** @discussion Receives a priority queue and returns the highest value (frequency) of the queue
  * 
- * @param PQ A priority queue
+ * @param pq A priority queue
  * 
  * @result The max value
  */
-extern int minimum(priority_queue *PQ);
+extern int minimum(PRIORITY_QUEUE *pq);
 
 /** @discussion Returns the value of the head (start)
  * 
- * @param PQ A priority queue
+ * @param pq A priority queue
  * 
  * @result The node of head
  */
-extern NODE *peek(priority_queue *PQ);
+extern NODE *peek(PRIORITY_QUEUE *pq);
 
 /** @discussion Prints all priority queue data 
  * 
- * @param PQ A priority queue
+ * @param pq A priority queue
  */
-extern void printing_pq(priority_queue *PQ);
+extern void printing_pq(PRIORITY_QUEUE *pq);
 
 #endif

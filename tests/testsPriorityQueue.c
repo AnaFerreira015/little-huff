@@ -17,7 +17,7 @@ void creating_element_test()
 
 void enqueue_test()
 {
-    priority_queue *pq = (priority_queue *)malloc(sizeof(priority_queue));
+    PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
     int array[3] = {2, 5, 7};
 
     enqueue(pq, 'x', 2);
@@ -30,13 +30,13 @@ void enqueue_test()
 
 void queue_empty_test()
 {
-    priority_queue *pq;
+    PRIORITY_QUEUE *pq;
     CU_ASSERT(pq != NULL);
 }
 
 void dequeue_test()
 {
-    priority_queue *pq = (priority_queue *)malloc(sizeof(priority_queue));
+    PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
     int array[4] = {1, 2, 3, 4};
 
     enqueue(pq, 'x', 6);
@@ -50,7 +50,7 @@ void dequeue_test()
 
 void minimum_test()
 {
-    priority_queue *pq = (priority_queue *)malloc(sizeof(priority_queue));
+    PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
 
     enqueue(pq, 'x', 6);
     enqueue(pq, 'y', 11);
