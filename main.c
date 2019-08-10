@@ -44,7 +44,7 @@ int main()
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
     printf(ANSI_COLOR_RESET);
 
-    int opt;
+    int opt, i;
 
     while (1)
     {
@@ -54,13 +54,13 @@ int main()
         printf("3. Exit\n");
         scanf("%d", &opt);
 
-        char file_name[256];
+        char file_name[MAX_SIZE];
 
         switch (opt)
         {
         case 1:
         {
-            int freq[256];
+            int freq[MAX_SIZE];
             printf("FILE: ");
             scanf("%s", file_name);
             printf("\n");
@@ -69,17 +69,23 @@ int main()
 
             create_frequency_array(file_name, freq);
 
-            printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
-            printf(ANSI_COLOR_RESET);
+            // printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
+            // printf(ANSI_COLOR_RESET);
 
-            printing_frequency_array(freq);
+            // printing_frequency_array(freq);
 
             priority_queue *PQ_frequency = enqueue_f_array(freq);
 
-            printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
-            printf(ANSI_COLOR_RESET);
+            // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
+            // printf(ANSI_COLOR_RESET);
 
-            printing_pq(PQ_frequency);
+            // printing_pq(PQ_frequency);
+
+            for(i = 0; i < MAX_SIZE; i++) {
+                if(freq[i]) {
+                    
+                }
+            }
 
             break;
         }
