@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../libs/huffman_tree.h"
+#include "../libs/priority_queue.h"
 
 /**
  * @discussion Creates a new node for later addition to the huffman tree.
@@ -17,6 +18,15 @@ NODE_TREE *create_node()
     return node;
 }
 
+NODE_TREE *associate_nodes(NODE *node) {
+    NODE_TREE *node_tree = create_node();
+
+    node_tree->character = node->character;
+    node_tree->frequency = node->frequency;
+
+    return node_tree;
+}
+
 /**
  * @discussion Receives two nodes and creates a parent node in the tree by adding the '*' symbol
  * 
@@ -25,15 +35,19 @@ NODE_TREE *create_node()
  * 
  * @result A knot of huffman tree
  */
-NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
+NODE_TREE *huffman_create_node(NODE *node1, NODE *node2)
 {
-    NODE_TREE *huffman_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-    huffman_tree->left = node1;
-    huffman_tree->right = node2;
-    huffman_tree->frequency = node1->frequency + node2->frequency;
-    huffman_tree->character = '*';
+    NODE_TREE *node_huff = (NODE_TREE*)malloc(sizeof(NODE_TREE));
 
-    return huffman_tree;
+    NODE_TREE *node_tree1 = associate_nodes(node1);
+    NODE_TREE *node_tree2 = associate_nodes(node2);
+
+    node_huff->left = node_tree1;
+    node_huff->right = node_tree2;
+    node_huff->character = '*';
+    node_huff->frequency = node1->frequency + node2->frequency;
+
+    return node_huff;
 }
 
 /**
@@ -51,4 +65,36 @@ int equate_nodes(NODE_TREE *node1, NODE_TREE *node2)
         return 1;
     }
     return 0;
+}
+
+NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
+    int t;
+    NODE_TREE *node_huff;
+    while (pq->head != NULL)
+    {
+        NODE *node1 = dequeue(pq);
+        NODE *node2 = dequeue(pq);
+
+        node_huff = huffman_create_node(node1, node2);
+
+        enqueue(pq, node_huff->character, node_huff->frequency);
+        // printf("debug\n");
+        pq->head = pq->head->next;
+        // scanf("%d", &t);
+        
+    }
+    return node_huff;
+    
+}
+
+int isEmty(NODE_TREE *node_tree) {
+    return (node_tree == NULL);
+}
+
+void print_pre_order(NODE_TREE *node_tree) {
+    if(node_tree != NULL) {
+        printf("%c (%d)\n", node_tree->character, node_tree->frequency);
+        print_pre_order(node_tree->left);
+        print_pre_order(node_tree->right);
+    }
 }
