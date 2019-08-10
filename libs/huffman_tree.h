@@ -28,6 +28,13 @@ typedef struct NODE_TREE
 } NODE_TREE;
 
 /**
+ * @discussion Creates a new node for later addition to the huffman tree.
+ * 
+ * @result The new node created
+ */
+extern NODE_TREE *create_node();
+
+/**
  * @discussion Receives two nodes and creates a parent node in the tree by adding the '*' symbol
  * 
  * @param node1 The first lowest frequency node in the queue
@@ -35,7 +42,7 @@ typedef struct NODE_TREE
  * 
  * @result A knot of huffman tree
  */
-NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2);
+extern NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2);
 
 /**
  * @discussion Get two nodes and compare which one is the smallest
@@ -45,6 +52,6 @@ NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2);
  * 
  * @result True (1) or False (0)
  */
-int equate_nodes(NODE_TREE *node1, NODE_TREE *node2);
+extern int equate_nodes(NODE_TREE *node1, NODE_TREE *node2);
 
 #endif
