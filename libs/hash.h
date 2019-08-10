@@ -3,7 +3,7 @@
 
 #define MAX_SIZE 256
 
-typedef unsigned char uBYTE;
+typedef unsigned char U_BYTE;
 typedef unsigned short uSHORT;
 
 typedef struct ELEMENT
@@ -19,10 +19,10 @@ typedef struct HASH_TABLE
 
 extern HASH_TABLE *creating_hash_table();
 
-extern HASH_TABLE *put(HASH_TABLE *hash_table, uSHORT binary_code, uBYTE symbol, int i);
+extern HASH_TABLE *put(HASH_TABLE *hash_table, uSHORT binary_code, U_BYTE symbol, int i);
 
-extern int is_bit_i_set(uBYTE c, int i);
+extern int is_bit_i_set(U_BYTE c, int i);
 
-extern uBYTE set_bit(uBYTE c, int i);
+extern U_BYTE set_bit(U_BYTE c, int i);
 
 #endif

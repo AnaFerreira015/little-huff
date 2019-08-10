@@ -9,11 +9,11 @@
 #define MAX_SIZE 256
 
 /**
- * @typedef uBYTE 
+ * @typedef U_BYTE 
  * 
  * @discussion Uses unsigned char to preserve the pattern and the most significant bit to lose its function as signal bit
  */
-typedef unsigned char uBYTE;
+typedef unsigned char U_BYTE;
 
 /**
  * @discussion The function receives an array, its size and an index, and returns an array initialized with 0's

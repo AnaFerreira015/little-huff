@@ -17,7 +17,7 @@ HASH_TABLE *creating_hash_table()
     return new_hash_table;
 }
 
-HASH_TABLE *put(HASH_TABLE *hash_table, uSHORT binary_code, uBYTE symbol, int i)
+HASH_TABLE *put(HASH_TABLE *hash_table, uSHORT binary_code, U_BYTE symbol, int i)
 {
     ELEMENT *element = (ELEMENT *)malloc(sizeof(ELEMENT));
     element->binary_code = binary_code;
@@ -28,16 +28,16 @@ HASH_TABLE *put(HASH_TABLE *hash_table, uSHORT binary_code, uBYTE symbol, int i)
     return hash_table;
 }
 
-int is_bit_i_set(uBYTE c, int i)
+int is_bit_i_set(U_BYTE c, int i)
 {
-    uBYTE mask = 1 << i;
+    U_BYTE mask = 1 << i;
 
     return mask & c;
 }
 
-uBYTE set_bit(uBYTE c, int i)
+U_BYTE set_bit(U_BYTE c, int i)
 {
-    uBYTE mask = 1 << i;
+    U_BYTE mask = 1 << i;
 
     return mask | c;
 }

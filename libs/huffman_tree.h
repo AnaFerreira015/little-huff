@@ -2,11 +2,11 @@
 #define _HUFFMAN_TREE_
 
 /**
- * @typedef uBYTE 
+ * @typedef U_BYTE 
  * 
  * @discussion Uses unsigned char to preserve the pattern and the most significant bit to lose its function as signal bit
  */
-typedef unsigned char uBYTE;
+typedef unsigned char U_BYTE;
 
 /**
  * @typedef NODE_TREE
@@ -21,7 +21,7 @@ typedef unsigned char uBYTE;
 */
 typedef struct NODE_TREE
 {
-    uBYTE character;
+    U_BYTE character;
     int frequency;
     struct NODE_TREE *left;
     struct NODE_TREE *right;
