@@ -83,31 +83,41 @@ int main()
             // printing_frequency_array(freq);
 
             PRIORITY_QUEUE *pq_frequency = enqueue_f_array(freq);
+            PRIORITY_QUEUE *pq_teste = NULL;
 
             // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             // printf(ANSI_COLOR_RESET);
+            // printing_pq(pq_frequency);
             // desinfileira 2
             // soma a frequência
             // cria um novo nó com a soma e enfileira de novo
 
+            NODE_TREE *node_tree = NULL;
+            NODE_TREE *tree = NULL;
             // printf("ANTES DO FOR\n");
             // printing_pq(pq_frequency);
-            NODE_TREE *node_tree = NULL;
 
+            // printf("DEPOIS DA BUILD\n");
+            // printing_pq(pq_frequency);
             for(i = 0; i < MAX_SIZE; i++) {
                 if(freq[i]) {
                     node_tree = create_node();
                     node_tree->frequency = freq[i];
                     node_tree->character = (U_BYTE)i;
-                    enqueue(pq_frequency, node_tree->character, node_tree->frequency);
+                    // enqueue(pq_frequency, node_tree);
                 }
             }
 
-            node_tree = build_node(pq_frequency);
-            // printf("DEPOIS DA BUILD\n");
-            // printing_pq(pq_frequency);
+            
+            printf("DEPOIS DA BUILD\n");
+            printing_pq(pq_frequency);
+            
+
+            tree = build_node(pq_frequency);
             printf("PRE ORDER\n");
-            print_pre_order(node_tree);
+            print_pre_order(tree);
+            // NODE_TREE *aux = node_tree->left;
+            // printf("teste %c (%d)\n", aux->left->character, aux->left->frequency);
 
             break;
         }

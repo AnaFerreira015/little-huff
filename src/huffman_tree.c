@@ -10,15 +10,17 @@
  */
 NODE_TREE *create_node()
 {
-    NODE_TREE *node = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-    node->frequency = 0;
-    node->left = NULL;
-    node->right = NULL;
+    NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
+    node_tree->frequency = 0;
+    node_tree->character = ' ';
+    node_tree->left = NULL;
+    node_tree->right = NULL;
+    node_tree->next = NULL;
 
-    return node;
+    return node_tree;
 }
 
-NODE_TREE *associate_nodes(NODE *node) {
+NODE_TREE *associate_nodes(NODE_TREE *node) {
     NODE_TREE *node_tree = create_node();
 
     node_tree->character = node->character;
@@ -35,15 +37,15 @@ NODE_TREE *associate_nodes(NODE *node) {
  * 
  * @result A knot of huffman tree
  */
-NODE_TREE *huffman_create_node(NODE *node1, NODE *node2)
+NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
 {
     NODE_TREE *node_huff = (NODE_TREE*)malloc(sizeof(NODE_TREE));
 
-    NODE_TREE *node_tree1 = associate_nodes(node1);
-    NODE_TREE *node_tree2 = associate_nodes(node2);
+    // NODE_TREE *node_tree1 = associate_nodes(node1);
+    // NODE_TREE *node_tree2 = associate_nodes(node2);
 
-    node_huff->left = node_tree1;
-    node_huff->right = node_tree2;
+    node_huff->left = node1;
+    node_huff->right = node2;
     node_huff->character = '*';
     node_huff->frequency = node1->frequency + node2->frequency;
 
@@ -68,23 +70,26 @@ int equate_nodes(NODE_TREE *node1, NODE_TREE *node2)
 }
 
 NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
-    int t;
-    NODE_TREE *node_huff;
-    while (pq->head != NULL)
+    // int t;
+    NODE_TREE *node_huff = NULL;
+    while (pq->head->next != NULL)
     {
-        NODE *node1 = dequeue(pq);
-        NODE *node2 = dequeue(pq);
+        printf("aaaaa\n");
+        NODE_TREE *node1 = dequeue(pq);
+        NODE_TREE *node2 = dequeue(pq);
 
         node_huff = huffman_create_node(node1, node2);
 
-        enqueue(pq, node_huff->character, node_huff->frequency);
+        enqueue(pq, node_huff);
         // printf("debug\n");
-        pq->head = pq->head->next;
+        // pq->head = pq->head->next;
         // scanf("%d", &t);
         
     }
-    return node_huff;
-    
+    NODE_TREE *test = dequeue(pq);
+    printf("teste dequeue\n");
+
+    return test;
 }
 
 int isEmty(NODE_TREE *node_tree) {
@@ -93,7 +98,8 @@ int isEmty(NODE_TREE *node_tree) {
 
 void print_pre_order(NODE_TREE *node_tree) {
     if(node_tree != NULL) {
-        printf("%c (%d)\n", node_tree->character, node_tree->frequency);
+    printf("oi\n");
+        // printf("%c (%d)\n", node_tree->character, node_tree->frequency);
         print_pre_order(node_tree->left);
         print_pre_order(node_tree->right);
     }

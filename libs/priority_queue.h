@@ -1,6 +1,8 @@
 #ifndef _PRIORITY_QUEUE_H_
 #define _PRIORITY_QUEUE_H_
 
+typedef struct NODE_TREE NODE_TREE;
+
 /**
  * @typedef NODE
  * 
@@ -11,12 +13,12 @@
  * @field frequency Frequency of each character above
  * @field next Pointer to the next node
 */
-typedef struct NODE
-{
-    char character;
-    int frequency;
-    struct NODE *next;
-} NODE;
+// typedef struct NODE
+// {
+//     char character;
+//     int frequency;
+//     struct NODE *next;
+// } NODE;
 
 /**
  * @typedef PRIORITY_QUEUE
@@ -27,7 +29,7 @@ typedef struct NODE
 */
 typedef struct PRIORITY_QUEUE
 {
-    NODE *head;
+    NODE_TREE *head;
 } PRIORITY_QUEUE;
 
 /** @discussion Checks if queue is empty
@@ -45,7 +47,7 @@ extern int isEmpty(PRIORITY_QUEUE *pq);
  * 
  * @result A pointer to new node
  */
-extern NODE *creating_element(char character, int frequency);
+extern NODE_TREE *creating_element(char character, int frequency);
 
 /**
  * @discussion You receive a cell from the priority queue and the data to add to it
@@ -55,7 +57,7 @@ extern NODE *creating_element(char character, int frequency);
  * @param character Each character of the file
  * @param frequency Character frequency
  */
-extern void enqueue(PRIORITY_QUEUE *pq, char character, int frequency);
+extern void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree);
 
 /** @discussion Line each character and frequency of the array
  * 
@@ -73,7 +75,7 @@ extern PRIORITY_QUEUE *enqueue_f_array(int frequency_array[]);
  * 
  * @result The pointer to node dequeued
  */
-extern NODE *dequeue(PRIORITY_QUEUE *pq);
+extern NODE_TREE *dequeue(PRIORITY_QUEUE *pq);
 
 /** @discussion Receives a priority queue and returns the highest value (frequency) of the queue
  * 
@@ -89,7 +91,7 @@ extern int minimum(PRIORITY_QUEUE *pq);
  * 
  * @result The node of head
  */
-extern NODE *peek(PRIORITY_QUEUE *pq);
+extern NODE_TREE *peek(PRIORITY_QUEUE *pq);
 
 /** @discussion Prints all priority queue data 
  * 

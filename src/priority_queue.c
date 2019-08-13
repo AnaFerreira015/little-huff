@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../libs/priority_queue.h"
+#include "../libs/huffman_tree.h"
 
 /** @discussion Checks if queue is empty
  * 
@@ -20,9 +21,9 @@ int isEmpty(PRIORITY_QUEUE *pq)
  * 
  * @result A pointer to new node
  */
-NODE *creating_element(char character, int frequency)
+NODE_TREE *creating_element(char character, int frequency)
 {
-    NODE *new_node = (NODE *)malloc(sizeof(NODE));
+    NODE_TREE *new_node = (NODE_TREE *)malloc(sizeof(NODE_TREE));
     new_node->character = character;
     new_node->frequency = frequency;
     new_node->next = NULL;
@@ -38,30 +39,42 @@ NODE *creating_element(char character, int frequency)
  * @param character Each character of the file
  * @param frequency Character frequency
  */
-void enqueue(PRIORITY_QUEUE *pq, char character, int frequency)
+void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree)
 {
-    NODE *new_node = (NODE *)malloc(sizeof(NODE));
-    new_node->character = character;
-    new_node->frequency = frequency;
+    // NODE *new_node = (NODE *)malloc(sizeof(NODE));
+    // new_node->character = node_tree->character;
+    // new_node->frequency = node_tree->frequency;
     // new_node->next = NULL;    
 
-    if ((isEmpty(pq)) || (frequency < pq->head->frequency))
+    if ((isEmpty(pq)) || (node_tree->frequency < pq->head->frequency))
     {
-        new_node->next = pq->head;
-        pq->head = new_node;
+        node_tree->next = pq->head;
+        pq->head = node_tree;
     }
     else
     {
-        NODE *current = pq->head;
-        while ((current->next != NULL) && (current->next->frequency < frequency))
+        NODE_TREE *current = pq->head;
+        while ((current->next != NULL) && (current->next->frequency < node_tree->frequency))
         {
             current = current->next;
         }
-        new_node->next = current->next;
-        current->next = new_node;
+        node_tree->next = current->next;
+        current->next = node_tree;
     }
 }
 
+NODE_TREE *build_node_tree(char character, int frequency)
+{
+    NODE_TREE *node_tree = (NODE_TREE*)malloc(sizeof(NODE_TREE));
+    // printf("desgraça\n");
+    node_tree->character = character;
+    node_tree->frequency = frequency;
+    node_tree->next = NULL;
+    node_tree->left = NULL;
+    node_tree->right = NULL;
+
+    return node_tree;
+}
 /** @discussion Line each character and frequency of the array
  * 
  * @param frequency_array A frequency array
@@ -71,6 +84,7 @@ void enqueue(PRIORITY_QUEUE *pq, char character, int frequency)
 PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
 {
     PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
+    NODE_TREE *node_tree = (NODE_TREE*)malloc(sizeof(NODE_TREE));
 
     int i;
 
@@ -78,7 +92,10 @@ PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
     {
         if (frequency_array[i])
         {
-            enqueue(pq, i, frequency_array[i]);
+            // printf("desgraça 2\n");
+            node_tree = build_node_tree(i, frequency_array[i]);
+            // enfileirar
+            enqueue(pq, node_tree);
         }
     }
     return pq;
@@ -92,20 +109,17 @@ PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
  * 
  * @result The pointer to node dequeued
  */
-NODE *dequeue(PRIORITY_QUEUE *pq)
+NODE_TREE *dequeue(PRIORITY_QUEUE *pq)
 {
-    if (isEmpty(pq))
-    {
-        printf("Priority queue underflow\n");
-        return NULL;
-    }
-    else
-    {
-        NODE *new_node = pq->head;
+    // if (!isEmpty(pq))
+    // {
+        // printf("teste\n");
+        NODE_TREE *new_node = pq->head;
         pq->head = pq->head->next;
         new_node->next = NULL;
+        printf("DEQUEUE %c %d\n", new_node->character, new_node->frequency);
         return new_node;
-    }
+    // }
 }
 
 /** @discussion Receives a priority queue and returns the highest value (frequency) of the queue
@@ -116,12 +130,7 @@ NODE *dequeue(PRIORITY_QUEUE *pq)
  */
 int minimum(PRIORITY_QUEUE *pq)
 {
-    if (isEmpty(pq))
-    {
-        printf("Priority queue underflow\n");
-        return -1;
-    }
-    else
+    if (!isEmpty(pq))
     {
         return pq->head->frequency;
     }
@@ -133,7 +142,7 @@ int minimum(PRIORITY_QUEUE *pq)
  * 
  * @result The node of head
  */
-NODE *peek(PRIORITY_QUEUE *pq)
+NODE_TREE *peek(PRIORITY_QUEUE *pq)
 {
     return pq->head;
 }

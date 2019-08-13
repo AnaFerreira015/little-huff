@@ -25,6 +25,7 @@ typedef struct NODE_TREE
     int frequency;
     struct NODE_TREE *left;
     struct NODE_TREE *right;
+    struct NODE_TREE *next;
 } NODE_TREE;
 
 /**
@@ -34,7 +35,7 @@ typedef struct NODE_TREE
  */
 extern NODE_TREE *create_node();
 
-extern NODE_TREE *associate_nodes(NODE *node);
+extern NODE_TREE *associate_nodes(NODE_TREE *node);
 
 /**
  * @discussion Receives two nodes and creates a parent node in the tree by adding the '*' symbol
@@ -44,7 +45,7 @@ extern NODE_TREE *associate_nodes(NODE *node);
  * 
  * @result A knot of huffman tree
  */
-extern NODE_TREE *huffman_create_node(NODE *node1, NODE *node2);
+extern NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2);
 
 /**
  * @discussion Get two nodes and compare which one is the smallest
