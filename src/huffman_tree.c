@@ -102,7 +102,7 @@ int isEmty(NODE_TREE *node_tree) {
 
 void print_pre_order(NODE_TREE *node_tree) {
     if(node_tree != NULL) {
-        // printf("%c (%d)\n", node_tree->character, node_tree->frequency);
+        printf("%c (%d)\n", node_tree->character, node_tree->frequency);
         print_pre_order(node_tree->left);
         print_pre_order(node_tree->right);
     }

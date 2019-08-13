@@ -191,7 +191,7 @@ int main()
             // // printf(ANSI_COLOR_RESET);
             // // printf("%c", tree->right->right->character);
 
-            // print_pre_order(node_tree);
+            print_pre_order(node_tree);
             // NODE_TREE *aux = node_tree->left;
             // printf("teste %c (%d)\n", aux->left->character, aux->left->frequency);
 
