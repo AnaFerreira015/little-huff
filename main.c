@@ -109,13 +109,64 @@ int main()
             }
 
             
-            printf("DEPOIS DA BUILD\n");
-            printing_pq(pq_frequency);
-            
+            // printf("DEPOIS DA BUILD\n");
+            // printing_pq(pq_frequency);
+            // printf("%c %d", pq_frequency->head->next->character, pq_frequency->head->next->frequency);
 
+            
             tree = build_node(pq_frequency);
             printf("PRE ORDER\n");
-            print_pre_order(tree);
+            // printf("tree char %c\ttree freq %d\n", tree->character, tree->frequency);
+            
+            // printf("left char %c\nleft freq %d\n", tree->left->character, tree->left->frequency);
+            // printf("left left char %c\tleft left freq %d\n", tree->left->left->character, tree->left->left->frequency);
+            
+            // printf("left right char %c\tleft right freq %d\n", tree->left->right->character, tree->left->right->frequency);
+
+            // printf("right char %c\tright freq %d\n", tree->right->character, tree->right->frequency);
+            // printf("right left char %c\tright left freq %d\n", tree->right->left->character, tree->right->left->frequency);
+            // printf("right left left char %c\tright left left freq %d\n", tree->right->left->left->character, tree->right->left->left->frequency);
+            // printf("right left left left char %c\tright left left left freq %d\n", tree->right->left->left->left->character, tree->right->left->left->left->frequency);
+
+            // printf("right left left right char %c\tright left left right freq %d\n", tree->right->left->left->right->character, tree->right->left->left->right->frequency);
+
+            // printf("right left right char %c\tright left right freq %d\n", tree->right->left->right->character, tree->right->left->right->frequency);
+            // printf("right right char %c\tright right freq %d\n", tree->right->right->character, tree->right->right->frequency);
+            // printf("%c\t%d\n", tree->character, tree->frequency);
+            
+            // printf("%c\n%d\n", tree->left->character, tree->left->frequency);
+            // printf("%c\t%d\n", tree->left->left->character, tree->left->left->frequency);
+            
+            // printf("%c\t%d\n", tree->left->right->character, tree->left->right->frequency);
+
+            // printf("%c\t%d\n", tree->right->character, tree->right->frequency);
+            // printf("%c\t%d\n", tree->right->left->character, tree->right->left->frequency);
+            // printf("%c\t%d\n", tree->right->left->left->character, tree->right->left->left->frequency);
+            // printf("%c\t%d\n", tree->right->left->left->left->character, tree->right->left->left->left->frequency);
+
+            // printf("%c\t%d\n", tree->right->left->left->right->character, tree->right->left->left->right->frequency);
+
+            // printf("%c\t%d\n", tree->right->left->right->character, tree->right->left->right->frequency);
+            // printf("%c\t%d\n", tree->right->right->character, tree->right->right->frequency);
+
+            printf("%c\n", tree->character);
+            
+            printf("%c\n", tree->left->character);
+            printf("%c\n", tree->left->left->character);
+            
+            printf("%c\n", tree->left->right->character);
+
+            printf("%c\n", tree->right->character);
+            printf("%c\n", tree->right->left->character);
+            printf("%c\n", tree->right->left->left->character);
+            printf("%c\n", tree->right->left->left->left->character);
+
+            printf("%c\n", tree->right->left->left->right->character);
+
+            printf("%c\n", tree->right->left->right->character);
+            printf("%c\n", tree->right->right->character);
+
+            // print_pre_order(node_tree);
             // NODE_TREE *aux = node_tree->left;
             // printf("teste %c (%d)\n", aux->left->character, aux->left->frequency);
 

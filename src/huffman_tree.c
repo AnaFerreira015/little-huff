@@ -74,7 +74,8 @@ NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
     NODE_TREE *node_huff = NULL;
     while (pq->head->next != NULL)
     {
-        printf("aaaaa\n");
+    // printf("\ntraste\n");
+        // printf("aaaaa\n");
         NODE_TREE *node1 = dequeue(pq);
         NODE_TREE *node2 = dequeue(pq);
 
@@ -87,7 +88,7 @@ NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
         
     }
     NODE_TREE *test = dequeue(pq);
-    printf("teste dequeue\n");
+    // printf("teste dequeue\n");
 
     return test;
 }
@@ -98,7 +99,6 @@ int isEmty(NODE_TREE *node_tree) {
 
 void print_pre_order(NODE_TREE *node_tree) {
     if(node_tree != NULL) {
-    printf("oi\n");
         // printf("%c (%d)\n", node_tree->character, node_tree->frequency);
         print_pre_order(node_tree->left);
         print_pre_order(node_tree->right);

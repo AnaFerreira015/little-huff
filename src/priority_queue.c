@@ -117,7 +117,7 @@ NODE_TREE *dequeue(PRIORITY_QUEUE *pq)
         NODE_TREE *new_node = pq->head;
         pq->head = pq->head->next;
         new_node->next = NULL;
-        printf("DEQUEUE %c %d\n", new_node->character, new_node->frequency);
+        // printf("DEQUEUE %c %d\n", new_node->character, new_node->frequency);
         return new_node;
     // }
 }
