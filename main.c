@@ -149,22 +149,47 @@ int main()
             // printf("%c\t%d\n", tree->right->left->right->character, tree->right->left->right->frequency);
             // printf("%c\t%d\n", tree->right->right->character, tree->right->right->frequency);
 
+            // AAAAAAAAAA
+            printf(ANSI_COLOR_RED "1\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->character);
-            
+
+            printf(ANSI_COLOR_RED "2\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->left->character);
+            printf(ANSI_COLOR_RED "3\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->left->left->character);
+            printf(ANSI_COLOR_RED "4\n");
+            printf(ANSI_COLOR_RESET);
             
+            printf(ANSI_COLOR_RED "5\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->left->right->character);
 
+            printf(ANSI_COLOR_RED "6\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->right->character);
+            printf(ANSI_COLOR_RED "7\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->right->left->character);
+            printf(ANSI_COLOR_RED "8\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->right->left->left->character);
+            printf(ANSI_COLOR_RED "9\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->right->left->left->left->character);
 
+            printf(ANSI_COLOR_RED "10\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->right->left->left->right->character);
 
+            printf(ANSI_COLOR_RED "11\n");
+            printf(ANSI_COLOR_RESET);
             printf("%c\n", tree->right->left->right->character);
-            printf("%c\n", tree->right->right->character);
+            printf(ANSI_COLOR_RED "12\n");
+            printf(ANSI_COLOR_RESET);
+            printf("%c", tree->right->right->character);
 
             // print_pre_order(node_tree);
             // NODE_TREE *aux = node_tree->left;
