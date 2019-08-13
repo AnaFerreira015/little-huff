@@ -74,10 +74,12 @@ NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
     NODE_TREE *node_huff = NULL;
     while (pq->head->next != NULL)
     {
-    // printf("\ntraste\n");
-        // printf("aaaaa\n");
+        // printf("traste\n");
+        
         NODE_TREE *node1 = dequeue(pq);
         NODE_TREE *node2 = dequeue(pq);
+        printf("dequeue1 %c %d\n", node1->character, node1->frequency);
+        printf("dequeue2 %c %d\n", node2->character, node2->frequency);
 
         node_huff = huffman_create_node(node1, node2);
 
@@ -88,6 +90,7 @@ NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
         
     }
     NODE_TREE *test = dequeue(pq);
+    printf("dequeue teste %c %d\n", test->character, test->frequency);
     // printf("teste dequeue\n");
 
     return test;
