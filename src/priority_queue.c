@@ -45,28 +45,34 @@ void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree)
     // new_node->character = node_tree->character;
     // new_node->frequency = node_tree->frequency;
     // new_node->next = NULL;    
-
-    if ((isEmpty(pq)) || (node_tree->frequency < pq->head->frequency))
+    NODE_TREE *aux = node_tree;
+    if (isEmpty(pq))
     {
-        node_tree->next = pq->head;
-        pq->head = node_tree;
+        aux->next = pq->head;
+        pq->head = aux;
     }
     else
     {
         NODE_TREE *current = pq->head;
-        while ((current->next != NULL) && (current->next->frequency < node_tree->frequency))
+        NODE_TREE *previous = NULL;
+        while ((current != NULL) && (current->frequency < aux->frequency))
         {
+            previous = current;
             current = current->next;
         }
-        node_tree->next = current->next;
-        current->next = node_tree;
+        if(previous == NULL) {
+            aux->next = pq->head;
+            pq->head = aux;
+            return;
+        }
+        previous->next = aux;
+        aux->next = current;
     }
 }
 
 NODE_TREE *build_node_tree(char character, int frequency)
 {
     NODE_TREE *node_tree = (NODE_TREE*)malloc(sizeof(NODE_TREE));
-    // printf("desgraça\n");
     node_tree->character = character;
     node_tree->frequency = frequency;
     node_tree->next = NULL;
@@ -111,15 +117,15 @@ PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
  */
 NODE_TREE *dequeue(PRIORITY_QUEUE *pq)
 {
-    // if (!isEmpty(pq))
-    // {
+    if (!isEmpty(pq))
+    {
         // printf("teste\n");
         NODE_TREE *new_node = pq->head;
         pq->head = pq->head->next;
         new_node->next = NULL;
         // printf("DEQUEUE %c %d\n", new_node->character, new_node->frequency);
         return new_node;
-    // }
+    }
 }
 
 /** @discussion Receives a priority queue and returns the highest value (frequency) of the queue

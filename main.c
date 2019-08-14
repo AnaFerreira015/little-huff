@@ -87,6 +87,7 @@ int main()
 
             // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             // printf(ANSI_COLOR_RESET);
+            // printf("MAIN\n");
             // printing_pq(pq_frequency);
             // desinfileira 2
             // soma a frequência
@@ -99,14 +100,14 @@ int main()
 
             // printf("DEPOIS DA BUILD\n");
             // printing_pq(pq_frequency);
-            for(i = 0; i < MAX_SIZE; i++) {
-                if(freq[i]) {
-                    node_tree = create_node();
-                    node_tree->frequency = freq[i];
-                    node_tree->character = (U_BYTE)i;
-                    // enqueue(pq_frequency, node_tree);
-                }
-            }
+            // for(i = 0; i < MAX_SIZE; i++) {
+            //     if(freq[i]) {
+            //         node_tree = create_node();
+            //         node_tree->frequency = freq[i];
+            //         node_tree->character = (U_BYTE)i;
+            //         // enqueue(pq_frequency, node_tree);
+            //     }
+            // }
 
             
             // printf("DEPOIS DA BUILD\n");
@@ -116,6 +117,7 @@ int main()
             
             tree = build_node(pq_frequency);
             printf("PRE ORDER\n");
+            print_pre_order(tree);
             // printf("tree char %c\ttree freq %d\n", tree->character, tree->frequency);
             
             // printf("left char %c\nleft freq %d\n", tree->left->character, tree->left->frequency);
@@ -191,7 +193,7 @@ int main()
             // // printf(ANSI_COLOR_RESET);
             // // printf("%c", tree->right->right->character);
 
-            print_pre_order(node_tree);
+            // print_pre_order(node_tree);
             // NODE_TREE *aux = node_tree->left;
             // printf("teste %c (%d)\n", aux->left->character, aux->left->frequency);
 

@@ -12,7 +12,6 @@ NODE_TREE *create_node()
 {
     NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
     node_tree->frequency = 0;
-    node_tree->character = ' ';
     node_tree->left = NULL;
     node_tree->right = NULL;
     node_tree->next = NULL;
@@ -48,6 +47,7 @@ NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
     node_huff->right = node2;
     node_huff->character = '*';
     node_huff->frequency = node1->frequency + node2->frequency;
+    node_huff->next = NULL;
 
     return node_huff;
 }
@@ -72,28 +72,35 @@ int equate_nodes(NODE_TREE *node1, NODE_TREE *node2)
 NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
     // int t;
     NODE_TREE *node_huff = NULL;
+    if(pq->head->next == NULL){
+        return huffman_create_node(pq->head, create_node());
+    }
     while (pq->head->next != NULL)
     {
-        // printf("traste\n");
         
         NODE_TREE *node1 = dequeue(pq);
         NODE_TREE *node2 = dequeue(pq);
-        printf("dequeue1 %c %d\n", node1->character, node1->frequency);
-        printf("dequeue2 %c %d\n", node2->character, node2->frequency);
+        // printf("dequeue1 %c %d\n", node1->character, node1->frequency);
+        // printf("dequeue2 %c %d\n", node2->character, node2->frequency);
 
         node_huff = huffman_create_node(node1, node2);
 
+        // printf("char %c freq %d\n", node_huff->character, node_huff->frequency);
+        // printf("char left %c freq left %d\n", node_huff->left->character, node_huff->left->frequency);
+        // printf("char right %c freq right %d\n", node_huff->right->character, node_huff->right->frequency);
+        // printf("FILA\n");
+        // printing_pq(pq);
         enqueue(pq, node_huff);
         // printf("debug\n");
         // pq->head = pq->head->next;
         // scanf("%d", &t);
         
     }
-    NODE_TREE *test = dequeue(pq);
-    printf("dequeue teste %c %d\n", test->character, test->frequency);
+    // NODE_TREE *test = dequeue(pq);->next->frequency
+    // printf("dequeue teste %c %d\n", test->character, test->frequency);
     // printf("teste dequeue\n");
 
-    return test;
+    return pq->head;
 }
 
 int isEmty(NODE_TREE *node_tree) {
