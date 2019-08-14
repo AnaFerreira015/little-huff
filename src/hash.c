@@ -41,8 +41,3 @@ U_BYTE set_bit(U_BYTE c, int i)
 
     return mask | c;
 }
-
-int main()
-{
-    return 0;
-}
