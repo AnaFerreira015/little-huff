@@ -4,6 +4,20 @@
 #include "../libs/priority_queue.h"
 
 /**
+ * @define ANSI_COLOR_RED
+ * 
+ * @discussion Inserts cyan color into terminal
+*/
+#define ANSI_COLOR_CYAN "\033[1;36m"
+
+/**
+ * @define ANSI_COLOR_RESET
+ * 
+ * @discussion Returns to the default print color
+*/
+#define ANSI_COLOR_RESET "\033[0;0m"
+
+/**
  * @discussion Creates a new node for later addition to the huffman tree.
  * 
  * @result The new node created
@@ -19,15 +33,6 @@ NODE_TREE *create_node()
     return node_tree;
 }
 
-NODE_TREE *associate_nodes(NODE_TREE *node) {
-    NODE_TREE *node_tree = create_node();
-
-    node_tree->character = node->character;
-    node_tree->frequency = node->frequency;
-
-    return node_tree;
-}
-
 /**
  * @discussion Receives two nodes and creates a parent node in the tree by adding the '*' symbol
  * 
@@ -38,10 +43,7 @@ NODE_TREE *associate_nodes(NODE_TREE *node) {
  */
 NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
 {
-    NODE_TREE *node_huff = (NODE_TREE*)malloc(sizeof(NODE_TREE));
-
-    // NODE_TREE *node_tree1 = associate_nodes(node1);
-    // NODE_TREE *node_tree2 = associate_nodes(node2);
+    NODE_TREE *node_huff = (NODE_TREE *)malloc(sizeof(NODE_TREE));
 
     node_huff->left = node1;
     node_huff->right = node2;
@@ -69,48 +71,38 @@ int equate_nodes(NODE_TREE *node1, NODE_TREE *node2)
     return 0;
 }
 
-NODE_TREE *build_node(PRIORITY_QUEUE *pq) {
-    // int t;
+NODE_TREE *build_node(PRIORITY_QUEUE *pq)
+{
+
     NODE_TREE *node_huff = NULL;
-    if(pq->head->next == NULL){
+    if (pq->head->next == NULL)
+    {
         return huffman_create_node(pq->head, create_node());
     }
     while (pq->head->next != NULL)
     {
-        
         NODE_TREE *node1 = dequeue(pq);
         NODE_TREE *node2 = dequeue(pq);
-        // printf("dequeue1 %c %d\n", node1->character, node1->frequency);
-        // printf("dequeue2 %c %d\n", node2->character, node2->frequency);
 
         node_huff = huffman_create_node(node1, node2);
 
-        // printf("char %c freq %d\n", node_huff->character, node_huff->frequency);
-        // printf("char left %c freq left %d\n", node_huff->left->character, node_huff->left->frequency);
-        // printf("char right %c freq right %d\n", node_huff->right->character, node_huff->right->frequency);
-        // printf("FILA\n");
-        // printing_pq(pq);
         enqueue(pq, node_huff);
-        // printf("debug\n");
-        // pq->head = pq->head->next;
-        // scanf("%d", &t);
-        
     }
-    // NODE_TREE *test = dequeue(pq);->next->frequency
-    // printf("dequeue teste %c %d\n", test->character, test->frequency);
-    // printf("teste dequeue\n");
-
     return pq->head;
 }
 
-int isEmty(NODE_TREE *node_tree) {
+int isEmty(NODE_TREE *node_tree)
+{
     return (node_tree == NULL);
 }
 
-void print_pre_order(NODE_TREE *node_tree) {
-    if(node_tree != NULL) {
-        printf("%c (%d)\n", node_tree->character, node_tree->frequency);
+void print_pre_order(NODE_TREE *node_tree)
+{
+    if (node_tree != NULL)
+    {
+        printf(ANSI_COLOR_CYAN "%c (%d)\n", node_tree->character, node_tree->frequency);
         print_pre_order(node_tree->left);
         print_pre_order(node_tree->right);
     }
+    printf(ANSI_COLOR_RESET);
 }

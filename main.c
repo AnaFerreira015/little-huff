@@ -83,120 +83,14 @@ int main()
             // printing_frequency_array(freq);
 
             PRIORITY_QUEUE *pq_frequency = enqueue_f_array(freq);
-            PRIORITY_QUEUE *pq_teste = NULL;
-
-            // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
-            // printf(ANSI_COLOR_RESET);
-            // printf("MAIN\n");
-            // printing_pq(pq_frequency);
-            // desinfileira 2
-            // soma a frequência
-            // cria um novo nó com a soma e enfileira de novo
-
-            NODE_TREE *node_tree = NULL;
             NODE_TREE *tree = NULL;
-            // printf("ANTES DO FOR\n");
-            // printing_pq(pq_frequency);
-
-            // printf("DEPOIS DA BUILD\n");
-            // printing_pq(pq_frequency);
-            // for(i = 0; i < MAX_SIZE; i++) {
-            //     if(freq[i]) {
-            //         node_tree = create_node();
-            //         node_tree->frequency = freq[i];
-            //         node_tree->character = (U_BYTE)i;
-            //         // enqueue(pq_frequency, node_tree);
-            //     }
-            // }
-
             
-            // printf("DEPOIS DA BUILD\n");
+            // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             // printing_pq(pq_frequency);
-            // printf("%c %d", pq_frequency->head->next->character, pq_frequency->head->next->frequency);
-
             
             tree = build_node(pq_frequency);
             printf("PRE ORDER\n");
             print_pre_order(tree);
-            // printf("tree char %c\ttree freq %d\n", tree->character, tree->frequency);
-            
-            // printf("left char %c\nleft freq %d\n", tree->left->character, tree->left->frequency);
-            // printf("left left char %c\tleft left freq %d\n", tree->left->left->character, tree->left->left->frequency);
-            
-            // printf("left right char %c\tleft right freq %d\n", tree->left->right->character, tree->left->right->frequency);
-
-            // printf("right char %c\tright freq %d\n", tree->right->character, tree->right->frequency);
-            // printf("right left char %c\tright left freq %d\n", tree->right->left->character, tree->right->left->frequency);
-            // printf("right left left char %c\tright left left freq %d\n", tree->right->left->left->character, tree->right->left->left->frequency);
-            // printf("right left left left char %c\tright left left left freq %d\n", tree->right->left->left->left->character, tree->right->left->left->left->frequency);
-
-            // printf("right left left right char %c\tright left left right freq %d\n", tree->right->left->left->right->character, tree->right->left->left->right->frequency);
-
-            // printf("right left right char %c\tright left right freq %d\n", tree->right->left->right->character, tree->right->left->right->frequency);
-            // printf("right right char %c\tright right freq %d\n", tree->right->right->character, tree->right->right->frequency);
-            // printf("%c\t%d\n", tree->character, tree->frequency);
-            
-            // printf("%c\n%d\n", tree->left->character, tree->left->frequency);
-            // printf("%c\t%d\n", tree->left->left->character, tree->left->left->frequency);
-            
-            // printf("%c\t%d\n", tree->left->right->character, tree->left->right->frequency);
-
-            // printf("%c\t%d\n", tree->right->character, tree->right->frequency);
-            // printf("%c\t%d\n", tree->right->left->character, tree->right->left->frequency);
-            // printf("%c\t%d\n", tree->right->left->left->character, tree->right->left->left->frequency);
-            // printf("%c\t%d\n", tree->right->left->left->left->character, tree->right->left->left->left->frequency);
-
-            // printf("%c\t%d\n", tree->right->left->left->right->character, tree->right->left->left->right->frequency);
-
-            // printf("%c\t%d\n", tree->right->left->right->character, tree->right->left->right->frequency);
-            // printf("%c\t%d\n", tree->right->right->character, tree->right->right->frequency);
-
-            // AAAAAAAAAA
-            // // printf(ANSI_COLOR_RED "1\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->character);
-
-            // // printf(ANSI_COLOR_RED "2\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->left->character);
-            // // printf(ANSI_COLOR_RED "3\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->left->left->character);
-            // // printf(ANSI_COLOR_RED "4\n");
-            // // printf(ANSI_COLOR_RESET);
-            
-            // // printf(ANSI_COLOR_RED "5\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->left->right->character);
-
-            // // printf(ANSI_COLOR_RED "6\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->right->character);
-            // // printf(ANSI_COLOR_RED "7\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->right->left->character);
-            // // printf(ANSI_COLOR_RED "8\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->right->left->left->character);
-            // // printf(ANSI_COLOR_RED "9\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->right->left->left->left->character);
-
-            // // printf(ANSI_COLOR_RED "10\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->right->left->left->right->character);
-
-            // // printf(ANSI_COLOR_RED "11\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c\n", tree->right->left->right->character);
-            // // printf(ANSI_COLOR_RED "12\n");
-            // // printf(ANSI_COLOR_RESET);
-            // // printf("%c", tree->right->right->character);
-
-            // print_pre_order(node_tree);
-            // NODE_TREE *aux = node_tree->left;
-            // printf("teste %c (%d)\n", aux->left->character, aux->left->frequency);
-
             break;
         }
 

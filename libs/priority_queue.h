@@ -4,23 +4,6 @@
 typedef struct NODE_TREE NODE_TREE;
 
 /**
- * @typedef NODE
- * 
- * @discussion All properties of node (character, frequency, ...)
- *             are stored in this structure
- * 
- * @field character Characters stored in the file
- * @field frequency Frequency of each character above
- * @field next Pointer to the next node
-*/
-// typedef struct NODE
-// {
-//     char character;
-//     int frequency;
-//     struct NODE *next;
-// } NODE;
-
-/**
  * @typedef PRIORITY_QUEUE
  * 
  * @discussion Properties of PRIORITY_QUEUE (head) are stored in this structure
@@ -39,15 +22,6 @@ typedef struct PRIORITY_QUEUE
  * @result true (1) or false (0)
  */
 extern int isEmpty(PRIORITY_QUEUE *pq);
-
-/** @discussion Creates a new cell for the priority queue and returns it
- * 
- * @param character Each character of the file 
- * @param frequency Its respective character frequency
- * 
- * @result A pointer to new node
- */
-extern NODE_TREE *creating_element(char character, int frequency);
 
 /**
  * @discussion You receive a cell from the priority queue and the data to add to it

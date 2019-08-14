@@ -1,20 +1,6 @@
 #include <CUnit/Basic.h>
 #include "../src/priority_queue.c"
 
-void creating_element_test()
-{
-    NODE *new = (NODE *)malloc(sizeof(NODE));
-    new->character = 'x';
-    new->frequency = 6;
-    new->next = NULL;
-
-    NODE *test = creating_element('x', 6);
-    CU_ASSERT(test != NULL);
-    CU_ASSERT_EQUAL(new->frequency, test->frequency);
-    CU_ASSERT_EQUAL(new->character, test->character);
-    CU_ASSERT_PTR_EQUAL(new->next, test->next);
-}
-
 void enqueue_test()
 {
     PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
@@ -87,27 +73,22 @@ int main()
         CU_cleanup_registry();
         return CU_get_error();
     }
-    if (NULL == CU_add_test(pSuite, "test - 1", creating_element_test))
+    if (NULL == CU_add_test(pSuite, "test - 1", enqueue_test))
     {
         CU_cleanup_registry();
         return CU_get_error();
     }
-    if (NULL == CU_add_test(pSuite, "test - 2", enqueue_test))
+    if (NULL == CU_add_test(pSuite, "test - 2", queue_empty_test))
     {
         CU_cleanup_registry();
         return CU_get_error();
     }
-    if (NULL == CU_add_test(pSuite, "test - 3", queue_empty_test))
+    if (NULL == CU_add_test(pSuite, "test - 3", dequeue_test))
     {
         CU_cleanup_registry();
         return CU_get_error();
     }
-    if (NULL == CU_add_test(pSuite, "test - 4", dequeue_test))
-    {
-        CU_cleanup_registry();
-        return CU_get_error();
-    }
-    if (NULL == CU_add_test(pSuite, "test - 5", minimum_test))
+    if (NULL == CU_add_test(pSuite, "test - 4", minimum_test))
     {
         CU_cleanup_registry();
         return CU_get_error();
