@@ -96,6 +96,11 @@ int isEmty(NODE_TREE *node_tree)
     return (node_tree == NULL);
 }
 
+int isLeaf(NODE_TREE *tree)
+{
+    return ((tree->left == NULL) && (tree->right == NULL));
+}
+
 void print_pre_order(NODE_TREE *node_tree)
 {
     if (node_tree != NULL)
