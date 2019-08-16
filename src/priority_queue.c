@@ -105,31 +105,6 @@ NODE_TREE *dequeue(PRIORITY_QUEUE *pq)
     }
 }
 
-/** @discussion Receives a priority queue and returns the highest value (frequency) of the queue
- * 
- * @param pq A priority queue
- * 
- * @result The max value
- */
-int minimum(PRIORITY_QUEUE *pq)
-{
-    if (!isEmpty(pq))
-    {
-        return pq->head->frequency;
-    }
-}
-
-/** @discussion Returns the value of the head (start)
- * 
- * @param pq A priority queue
- * 
- * @result The node of head
- */
-NODE_TREE *peek(PRIORITY_QUEUE *pq)
-{
-    return pq->head;
-}
-
 /** @discussion Prints all priority queue data 
  * 
  * @param pq A priority queue

@@ -51,22 +51,6 @@ extern PRIORITY_QUEUE *enqueue_f_array(int frequency_array[]);
  */
 extern NODE_TREE *dequeue(PRIORITY_QUEUE *pq);
 
-/** @discussion Receives a priority queue and returns the highest value (frequency) of the queue
- * 
- * @param pq A priority queue
- * 
- * @result The max value
- */
-extern int minimum(PRIORITY_QUEUE *pq);
-
-/** @discussion Returns the value of the head (start)
- * 
- * @param pq A priority queue
- * 
- * @result The node of head
- */
-extern NODE_TREE *peek(PRIORITY_QUEUE *pq);
-
 /** @discussion Prints all priority queue data 
  * 
  * @param pq A priority queue
