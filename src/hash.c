@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../libs/hash.h"
+#include "../libs/huffman_tree.h"
 
 #define MAX_SIZE 256
 
@@ -17,15 +18,32 @@ HASH_TABLE *creating_hash_table()
     return new_hash_table;
 }
 
-HASH_TABLE *put(HASH_TABLE *hash_table, uSHORT binary_code, U_BYTE symbol, int i)
+void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, char bit_sequency[], int index)
 {
-    ELEMENT *element = (ELEMENT *)malloc(sizeof(ELEMENT));
-    element->binary_code = binary_code;
-    element->frequency = i;
+    hash_table->table[index]->character = character;
+    hash_table->table[index]->binary_code = bit_sequency;
+}
 
-    hash_table->table[symbol] = element;
+HASH_TABLE *walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree)
+{
+    int i = 0, index = 0;
+    U_BYTE bit_sequency[MAX_SIZE] = 0;
 
-    return hash_table;
+    while (tree != NULL)
+    {
+        if (isLeaf(tree))
+        {
+            put_in_hash(hash_table, tree->character, bit_sequency, index++);
+            
+            return;
+        }
+        bit_sequency[i] = "0";
+        walking_in_the_tree(hash_table, tree->left);
+
+        bit_sequency[i] = "1";
+        walking_in_the_tree(hash_table, tree->right);
+        i++; //Corrigir esse indice
+    }
 }
 
 int is_bit_i_set(U_BYTE c, int i)
