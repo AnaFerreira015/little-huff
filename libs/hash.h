@@ -8,8 +8,8 @@ typedef unsigned short uSHORT;
 
 typedef struct ELEMENT
 {
-    uSHORT binary_code; // codigo binário na tabela ASCII
-    int frequency;
+    U_BYTE binary_code[MAX_SIZE]; // codigo binário na tabela ASCII
+    U_BYTE character;
 } ELEMENT;
 
 typedef struct HASH_TABLE
@@ -19,10 +19,12 @@ typedef struct HASH_TABLE
 
 extern HASH_TABLE *creating_hash_table();
 
-extern HASH_TABLE *put(HASH_TABLE *hash_table, uSHORT binary_code, U_BYTE symbol, int i);
+extern void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, char bit_sequency[], int index);
 
 extern int is_bit_i_set(U_BYTE c, int i);
 
 extern U_BYTE set_bit(U_BYTE c, int i);
+
+extern HASH_TABLE *walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree);
 
 #endif

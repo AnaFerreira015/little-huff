@@ -63,4 +63,6 @@ extern int isEmty(NODE_TREE *node_tree);
 
 extern void print_pre_order(NODE_TREE *node_tree);
 
+extern int isLeaf(NODE_TREE *tree); 
+
 #endif
