@@ -5,14 +5,9 @@
 
 typedef unsigned char U_BYTE;
 
-typedef struct ELEMENT
-{
-    U_BYTE binary_code[MAX_SIZE][MAX_SIZE];
-} ELEMENT;
-
 typedef struct HASH_TABLE
 {
-    ELEMENT *table[MAX_SIZE];
+    U_BYTE matriz[MAX_SIZE][MAX_SIZE];
 } HASH_TABLE;
 
 extern HASH_TABLE *creating_hash_table();

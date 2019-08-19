@@ -9,25 +9,25 @@ HASH_TABLE *creating_hash_table()
 {
     HASH_TABLE *new_hash_table = (HASH_TABLE *)malloc(sizeof(HASH_TABLE));
 
-    int i;
+    int i, j;
     for (i = 0; i < MAX_SIZE; i++)
     {
-        new_hash_table->table[i] = NULL;
+        for (j = 0; j < MAX_SIZE; j++)
+        {
+            new_hash_table->matriz[i][j] = ' ';
+        }
     }
-
     return new_hash_table;
 }
 
 void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, int index, U_BYTE bit_sequency[])
-{    
+{
     int i;
-        // printf("index %d\n", index);
-        // printf("aqui %c: %d\n", character, (int)character);
-    for (i = 0; i < index; i++) {
-        hash_table->table[character]->binary_code[character][i] = bit_sequency[i];
-        // printf("oi\n");
+    for (i = 0; i < index; i++)
+    {
+        hash_table->matriz[character][i] = bit_sequency[i];
     }
-    hash_table->table[character]->binary_code[character][i] = '\0';
+    hash_table->matriz[character][i] = '\0';
 }
 
 void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[])
@@ -39,10 +39,10 @@ void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE 
         return;
     }
     bit_sequency[i] = '0';
-    walking_in_the_tree(hash_table, tree->left, i+1, bit_sequency);
+    walking_in_the_tree(hash_table, tree->left, i + 1, bit_sequency);
 
     bit_sequency[i] = '1';
-    walking_in_the_tree(hash_table, tree->right, i+1, bit_sequency);
+    walking_in_the_tree(hash_table, tree->right, i + 1, bit_sequency);
 }
 
 int is_bit_i_set(U_BYTE c, int i)
@@ -65,13 +65,14 @@ void print_hash(HASH_TABLE *hash)
 
     for (i = 0; i < MAX_SIZE; i++)
     {
-        printf("%c: ", i);
-        if (hash->table[i] != NULL)
+        if (hash->matriz[i][0] != ' ')
         {
-            for(j = 0; j < MAX_SIZE; j++) {
-                printf("%c", hash->table[i]->binary_code[i][j]);
+            printf("%c: ", i);
+            for (j = 0; j < MAX_SIZE; j++)
+            {
+                printf("%c", hash->matriz[i][j]);
             }
+            printf("\n");
         }
-        printf("\n");
     }
 }

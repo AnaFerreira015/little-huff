@@ -101,7 +101,7 @@ int main()
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
             
-            // print_hash(hash);
+            print_hash(hash);
 
             break;
         }
