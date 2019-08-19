@@ -5,6 +5,7 @@
 #include "./src/frequency.c"
 #include "./src/priority_queue.c"
 #include "./src/huffman_tree.c"
+#include "./src/hash.c"
 
 /**
  * @define ANSI_COLOR_RESET
@@ -92,6 +93,15 @@ int main()
             printf("PRE ORDER\n");
             print_pre_order(tree);
             
+            HASH_TABLE *hash = creating_hash_table();
+            
+            U_BYTE bit_sequency[MAX_SIZE];
+            initialize_string(bit_sequency, 0);
+
+            walking_in_the_tree(hash, tree, 0, bit_sequency);
+            print_hash(hash);
+
+
             break;
         }
 
