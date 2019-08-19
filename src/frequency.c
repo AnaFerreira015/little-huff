@@ -43,7 +43,7 @@ void initialize_string(U_BYTE *array, int i)
     {
         array[i] = '0';
         i += 1;
-        initialize_array(array, i);
+        initialize_string(array, i);
     }
 }
 
