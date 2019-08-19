@@ -91,6 +91,7 @@ int main()
             tree = build_node(pq_frequency);
             printf("PRE ORDER\n");
             print_pre_order(tree);
+            
             break;
         }
 

@@ -58,13 +58,17 @@ U_BYTE set_bit(U_BYTE c, int i)
 
 void print_hash(HASH_TABLE *hash)
 {
-    int i;
+    int i, j;
 
     for (i = 0; i < MAX_SIZE; i++)
     {
+        printf("%c: ", i);
         if (hash->table[i] != NULL)
         {
-            printf("%c %s", hash->table[i]->character, hash->table[i]->binary_code);
+            for(j = 0; j < MAX_SIZE; j++) {
+                printf("%c", hash->table[i]->binary_code[i][j]);
+            }
         }
+        printf("\n");
     }
 }
