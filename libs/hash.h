@@ -7,8 +7,7 @@ typedef unsigned char U_BYTE;
 
 typedef struct ELEMENT
 {
-    U_BYTE binary_code[MAX_SIZE]; // codigo binário na tabela ASCII
-    U_BYTE character;
+    U_BYTE binary_code[MAX_SIZE][MAX_SIZE];
 } ELEMENT;
 
 typedef struct HASH_TABLE
