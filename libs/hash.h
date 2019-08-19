@@ -4,7 +4,6 @@
 #define MAX_SIZE 256
 
 typedef unsigned char U_BYTE;
-typedef unsigned short uSHORT;
 
 typedef struct ELEMENT
 {
