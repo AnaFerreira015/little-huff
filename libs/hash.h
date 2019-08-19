@@ -19,7 +19,7 @@ typedef struct HASH_TABLE
 
 extern HASH_TABLE *creating_hash_table();
 
-extern void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, U_BYTE bit_sequency[], int index);
+extern void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, char bit_sequency[], int index);
 
 extern int is_bit_i_set(U_BYTE c, int i);
 

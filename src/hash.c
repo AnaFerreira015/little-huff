@@ -18,13 +18,13 @@ HASH_TABLE *creating_hash_table()
     return new_hash_table;
 }
 
-void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, U_BYTE bit_sequency[], int index)
-{
+void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, char bit_sequency[], int index)
+{    
     int i;
-    for (i = 0; i < MAX_SIZE; i++)
-    {
-       
+    for (i = 0; i < index; i++) {
+        hash_table->table[(int)character]->binary_code[index][i] = bit_sequency;
     }
+    hash_table->table[(int)character]->binary_code[index][i] = '\0';
 }
 
 void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[])
