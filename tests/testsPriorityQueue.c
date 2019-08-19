@@ -32,7 +32,7 @@ void dequeue_test()
 {
     PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
     NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-    int array[5] = {0,1, 2, 3, 4};
+    int array[5] = {0, 1, 2, 3, 4};
 
     CU_ASSERT(pq != NULL);
 
@@ -49,7 +49,7 @@ void dequeue_test()
 
     dequeue(pq);
 
-    CU_ASSERT_EQUAL(pq->head->frequency,array[3]);
+    CU_ASSERT_EQUAL(pq->head->frequency, array[3]);
 }
 
 void enqueue_frequency_test()
@@ -59,8 +59,8 @@ void enqueue_frequency_test()
 
     int i;
     int frequency_array[i];
-    
-    for ( i = 0; i < 6; i++)
+
+    for (i = 0; i < 6; i++)
     {
         frequency_array[i] = i;
     }
@@ -74,8 +74,7 @@ void enqueue_frequency_test()
         }
     }
 
-    CU_ASSERT_EQUAL(node_tree->frequency,5);
-
+    CU_ASSERT_EQUAL(node_tree->frequency, 5);
 }
 
 int main()
@@ -110,7 +109,7 @@ int main()
         CU_cleanup_registry();
         return CU_get_error();
     }
-    if (NULL == CU_add_test(pSuite, "test - 4",enqueue_frequency_test))
+    if (NULL == CU_add_test(pSuite, "test - 4", enqueue_frequency_test))
     {
         CU_cleanup_registry();
         return CU_get_error();

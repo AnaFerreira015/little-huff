@@ -27,13 +27,23 @@ typedef unsigned char U_BYTE;
  * @param size The size of array
  * @param i An index
  */
-void initialize_array(int *array, int size, int i)
+void initialize_array(int *array, int i)
 {
-    if (i < size)
+    if (i < MAX_SIZE)
     {
         array[i] = 0;
         i += 1;
-        initialize_array(array, size, i);
+        initialize_array(array, i);
+    }
+}
+
+void initialize_string(U_BYTE *array, int i)
+{
+    if (i < MAX_SIZE)
+    {
+        array[i] = '0';
+        i += 1;
+        initialize_array(array, i);
     }
 }
 
@@ -50,7 +60,7 @@ void create_frequency_array(char arq[], int freq[])
 
     // if(file != NULL) {
     /** Initializes the array with 0's */
-    initialize_array(freq, MAX_SIZE, 0);
+    initialize_array(freq, 0);
 
     char i[2];
     while (fscanf(file, "%c", i) != EOF)

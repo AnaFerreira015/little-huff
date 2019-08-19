@@ -19,12 +19,12 @@ typedef struct HASH_TABLE
 
 extern HASH_TABLE *creating_hash_table();
 
-extern void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, char bit_sequency[], int index);
+extern void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, U_BYTE bit_sequency[], int index);
 
 extern int is_bit_i_set(U_BYTE c, int i);
 
 extern U_BYTE set_bit(U_BYTE c, int i);
 
-extern HASH_TABLE *walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree);
+extern void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[]);
 
 #endif

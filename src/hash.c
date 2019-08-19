@@ -18,32 +18,28 @@ HASH_TABLE *creating_hash_table()
     return new_hash_table;
 }
 
-void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, char bit_sequency[], int index)
+void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, U_BYTE bit_sequency[], int index)
 {
-    hash_table->table[index]->character = character;
-    hash_table->table[index]->binary_code = bit_sequency;
+    int i;
+    for (i = 0; i < MAX_SIZE; i++)
+    {
+       
+    }
 }
 
-HASH_TABLE *walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree)
+void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[])
 {
-    int i = 0, index = 0;
-    U_BYTE bit_sequency[MAX_SIZE] = 0;
-
-    while (tree != NULL)
+    if (isLeaf(tree))
     {
-        if (isLeaf(tree))
-        {
-            put_in_hash(hash_table, tree->character, bit_sequency, index++);
-            
-            return;
-        }
-        bit_sequency[i] = "0";
-        walking_in_the_tree(hash_table, tree->left);
+        put_in_hash(hash_table, tree->character, bit_sequency, i++);
 
-        bit_sequency[i] = "1";
-        walking_in_the_tree(hash_table, tree->right);
-        i++; //Corrigir esse indice
+        return;
     }
+    bit_sequency[i] = '0';
+    walking_in_the_tree(hash_table, tree->left, i++, bit_sequency);
+
+    bit_sequency[i] = '1';
+    walking_in_the_tree(hash_table, tree->right, i++, bit_sequency);
 }
 
 int is_bit_i_set(U_BYTE c, int i)
@@ -58,4 +54,17 @@ U_BYTE set_bit(U_BYTE c, int i)
     U_BYTE mask = 1 << i;
 
     return mask | c;
+}
+
+void print_hash(HASH_TABLE *hash)
+{
+    int i;
+
+    for (i = 0; i < MAX_SIZE; i++)
+    {
+        if (hash->table[i] != NULL)
+        {
+            printf("%c %s", hash->table[i]->character, hash->table[i]->binary_code);
+        }
+    }
 }

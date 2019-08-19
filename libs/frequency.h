@@ -22,8 +22,10 @@ typedef unsigned char U_BYTE;
  * @param size The size of array
  * @param i An index
  */
-extern void initialize_array(int *array, int size, int i);
+extern void initialize_array(int *array, int i);
 
+
+extern void initialize_string(U_BYTE *array, int i);
 /**
  * @discussion The function receives the file name and returns an array with the frequency of each byte in the file 
  *
