@@ -92,6 +92,7 @@ int main()
             tree = build_node(pq_frequency);
             printf("PRE ORDER\n");
             print_pre_order(tree);
+            printf(ANSI_COLOR_RESET);
             
             HASH_TABLE *hash = creating_hash_table();
             
@@ -99,8 +100,8 @@ int main()
             initialize_string(bit_sequency, 0);
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
-            print_hash(hash);
-
+            
+            // print_hash(hash);
 
             break;
         }
