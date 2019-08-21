@@ -53,11 +53,8 @@ void initialize_string(U_BYTE *array, int i)
  * @param arq The name of a file
  * @param freq The array for frequency 
  */
-void create_frequency_array(char arq[], int freq[])
+void create_frequency_array(FILE *file, int freq[])
 {
-    /** Opens the file in binary read mode */
-    FILE *file = fopen(arq, "rb");
-
     // if(file != NULL) {
     /** Initializes the array with 0's */
     initialize_array(freq, 0);

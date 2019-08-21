@@ -59,10 +59,12 @@ extern int equate_nodes(NODE_TREE *node1, NODE_TREE *node2);
 
 extern NODE_TREE *build_node(PRIORITY_QUEUE *pq);
 
-extern int isEmty(NODE_TREE *node_tree);
+extern int isEmptyTree(NODE_TREE *node_tree);
 
 extern void print_pre_order(NODE_TREE *node_tree);
 
 extern int isLeaf(NODE_TREE *tree); 
+
+extern void size_tree_and_preorder(NODE_TREE *tree, int *size, U_BYTE *tree_preorder);
 
 #endif

@@ -91,7 +91,7 @@ NODE_TREE *build_node(PRIORITY_QUEUE *pq)
     return pq->head;
 }
 
-int isEmty(NODE_TREE *node_tree)
+int isEmptyTree(NODE_TREE *node_tree)
 {
     return (node_tree == NULL);
 }
@@ -110,4 +110,19 @@ void print_pre_order(NODE_TREE *node_tree)
         print_pre_order(node_tree->right);
     }
     printf(ANSI_COLOR_RESET);
+}
+
+void size_tree_and_preorder(NODE_TREE *tree, int *size, U_BYTE *tree_preorder) {
+    if(!isEmptyTree(tree)) {
+        if(isLeaf(tree)) {
+            if(tree->character == '*' || tree->character == '\\') {
+                tree_preorder[*size] = '\\';
+                *size += 1;
+            }      
+        }
+        tree_preorder[*size] = tree->character;
+        *size += 1;      
+        size_tree_and_preorder(tree->left, size, tree_preorder);
+        size_tree_and_preorder(tree->right, size, tree_preorder);
+    }
 }

@@ -45,20 +45,6 @@ void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE 
     walking_in_the_tree(hash_table, tree->right, i + 1, bit_sequency);
 }
 
-int is_bit_i_set(U_BYTE c, int i)
-{
-    U_BYTE mask = 1 << i;
-
-    return mask & c;
-}
-
-U_BYTE set_bit(U_BYTE c, int i)
-{
-    U_BYTE mask = 1 << i;
-
-    return mask | c;
-}
-
 void print_hash(HASH_TABLE *hash)
 {
     int i, j;

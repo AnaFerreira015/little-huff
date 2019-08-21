@@ -6,6 +6,7 @@
 #include "./src/priority_queue.c"
 #include "./src/huffman_tree.c"
 #include "./src/hash.c"
+#include "./src/compress.c"
 
 /**
  * @define ANSI_COLOR_RESET
@@ -75,8 +76,10 @@ int main()
             printf("\n");
 
             printf("THE FILE %s IS OPENED\n", file_name);
+            /** Opens the file in binary read mode */
+            FILE *file = fopen(file_name, "rb");
 
-            create_frequency_array(file_name, freq);
+            create_frequency_array(file, freq);
 
             // printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
             // printf(ANSI_COLOR_RESET);
@@ -96,12 +99,94 @@ int main()
             
             HASH_TABLE *hash = creating_hash_table();
             
-            U_BYTE bit_sequency[MAX_SIZE];
+            U_BYTE bit_sequency[MAX_SIZE], tree_preorder[513];
             initialize_string(bit_sequency, 0);
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
             
             print_hash(hash);
+
+            int size = 0, trash_size = 0;
+            size_tree_and_preorder(tree, &size, tree_preorder);
+            tree_preorder[size] = '\0';
+
+            int bytes[2] = {0}; // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
+            get_trash_size(tree, 0, &trash_size);
+            trash_size = 8 - (trash_size % 8);
+            printf("trash %d\n", trash_size);
+
+            bytes[0] = trash_size << 5;
+            bytes[0] |= size >> 8;
+            bytes[1] = size;
+            int i;
+            // for(i = 7; i >= 0; i--) {
+            //     if(is_bit_i_set(bytes[0], i)) {
+            //         printf("1");
+            //     }
+            //     else {
+            //         printf("0");
+            //     }
+            // }
+            // printf(" ");
+            // for(i = 7; i >= 0; i--) {
+            //     if(is_bit_i_set(bytes[1], i)) {
+            //         printf("1");
+            //     }
+            //     else {
+            //         printf("0");
+            //     }
+            // }
+            // printf("\n");
+            printf("preorder %s\n", tree_preorder);
+            
+            U_BYTE character;
+
+            FILE *compressedFile = fopen("compressed.huff", "wb");
+            fprintf(compressedFile, "%c", bytes[0]);
+            fprintf(compressedFile, "%c", bytes[1]);
+            fprintf(compressedFile, "%s", tree_preorder);
+            // matriz[character][i]
+            int j = 0;
+            U_BYTE byteFile = 0;
+            while(fscanf(file, "%c", &character) != EOF) {
+                // for(i = 0; ) {
+                for(i = 7; i >= 0; i--) {
+                    // fprintf(compressedFile, "%c", hash->matriz[character][i])
+                    // for(j = 0; hash->matriz[character][j] != '\0'; j++) {
+                    if(hash->matriz[character][j] != '\0'){
+                        if(hash->matriz[character][j] != '0') {
+                            byteFile = set_bit(byteFile, i);
+                            j++;
+                        }
+                        else{
+                            j++;
+                        }
+                    }
+                    else {
+                        fscanf(file, "%c", &character);
+                        j = 0;
+                        if(hash->matriz[character][j] != '0') {
+                            byteFile = set_bit(byteFile, i);
+                            j++;
+                        }
+                        else {
+                            j++;
+                        }
+                    }
+                    // }
+                }
+                fprintf(compressedFile, "%c", byteFile);
+                byteFile = 0;
+                while(hash->matriz[character][j] != '\0'){
+                    if(hash->matriz[character][j] != '0') {
+                        byteFile = set_bit(byteFile, i);
+                        j++;
+                    }
+                    else{
+                        j++;
+                    }    
+                }
+            }
 
             break;
         }

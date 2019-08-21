@@ -32,7 +32,7 @@ extern void initialize_string(U_BYTE *array, int i);
  * @param arq The name of a file
  * @param freq The array for frequency 
  */
-extern void create_frequency_array(char arq[], int freq[]);
+extern void create_frequency_array(FILE *file, int freq[]);
 
 /**
  * @discussion Receive an array already created and display what's in it
