@@ -118,76 +118,19 @@ int main()
             bytes[0] = trash_size << 5;
             bytes[0] |= size >> 8;
             bytes[1] = size;
-            int i;
-            // for(i = 7; i >= 0; i--) {
-            //     if(is_bit_i_set(bytes[0], i)) {
-            //         printf("1");
-            //     }
-            //     else {
-            //         printf("0");
-            //     }
-            // }
+            // print_byte(bytes, 0);
             // printf(" ");
-            // for(i = 7; i >= 0; i--) {
-            //     if(is_bit_i_set(bytes[1], i)) {
-            //         printf("1");
-            //     }
-            //     else {
-            //         printf("0");
-            //     }
-            // }
+            // print_byte(bytes, 1);
             // printf("\n");
             printf("preorder %s\n", tree_preorder);
-            
-            U_BYTE character;
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
-            fprintf(compressedFile, "%c", bytes[0]);
-            fprintf(compressedFile, "%c", bytes[1]);
+            write_byte_to_file(compressedFile, bytes, 0);
+            write_byte_to_file(compressedFile, bytes, 1);
             fprintf(compressedFile, "%s", tree_preorder);
-            // matriz[character][i]
-            int j = 0;
-            U_BYTE byteFile = 0;
-            while(fscanf(file, "%c", &character) != EOF) {
-                // for(i = 0; ) {
-                for(i = 7; i >= 0; i--) {
-                    // fprintf(compressedFile, "%c", hash->matriz[character][i])
-                    // for(j = 0; hash->matriz[character][j] != '\0'; j++) {
-                    if(hash->matriz[character][j] != '\0'){
-                        if(hash->matriz[character][j] != '0') {
-                            byteFile = set_bit(byteFile, i);
-                            j++;
-                        }
-                        else{
-                            j++;
-                        }
-                    }
-                    else {
-                        fscanf(file, "%c", &character);
-                        j = 0;
-                        if(hash->matriz[character][j] != '0') {
-                            byteFile = set_bit(byteFile, i);
-                            j++;
-                        }
-                        else {
-                            j++;
-                        }
-                    }
-                    // }
-                }
-                fprintf(compressedFile, "%c", byteFile);
-                byteFile = 0;
-                while(hash->matriz[character][j] != '\0'){
-                    if(hash->matriz[character][j] != '0') {
-                        byteFile = set_bit(byteFile, i);
-                        j++;
-                    }
-                    else{
-                        j++;
-                    }    
-                }
-            }
 
+            write_to_file(file, hash, compressedFile);
+            
             break;
         }
 
