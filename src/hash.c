@@ -3,8 +3,17 @@
 #include "../libs/hash.h"
 #include "../libs/huffman_tree.h"
 
+/**
+ * @define MAX_SIZE
+ * 
+ * @discussion Maximum array size
+*/
 #define MAX_SIZE 256
 
+/** @discussion Inicializa a hash table com espaços vazios
+ * 
+ * @result Uma hash table
+ */
 HASH_TABLE *creating_hash_table()
 {
     HASH_TABLE *new_hash_table = (HASH_TABLE *)malloc(sizeof(HASH_TABLE));
@@ -20,6 +29,13 @@ HASH_TABLE *creating_hash_table()
     return new_hash_table;
 }
 
+/** @discussion Recebe a árvore de Huffman, um ponteiro para o tamanho dela e outro para o tamanho do lixo
+ * 
+ * @param tree A árvore de Huffman
+ * @param height Irá armazenar o tamanho da árvore
+ * @param trash_size Irá armazenar o tamanho do lixo na árvore
+ * 
+ */
 void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, int index, U_BYTE bit_sequency[])
 {
     int i;
