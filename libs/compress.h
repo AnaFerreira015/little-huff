@@ -55,6 +55,6 @@ extern void write_byte_to_file(FILE *compressedFile, int bytes[], int pos);
  * 
  * @result Os bytes escritos no arquivo
  */
-extern void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile);
+extern void write_to_file(FILE *file, HASH_TABLE *hash_table);
 
 #endif
