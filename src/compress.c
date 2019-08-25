@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <string.h>
+#include <string.h>
 #include "../libs/compress.h"
 #include "../libs/huffman_tree.h"
 
@@ -54,14 +54,42 @@ void write_byte_to_file(FILE *compressedFile, int bytes[], int pos)
     fprintf(compressedFile, "%c", bytes[pos]);
 }
 
-
-void write_to_file(FILE *file, HASH_TABLE *hash_table)
+void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile)
 {
     U_BYTE character;
-
+    int i, j = 0, size = 0;
+    U_BYTE byteFile = 0;
     while (fscanf(file, "%c", &character) != EOF)
     {
-            
+        while(hash_table->matriz[character][j] != '\0') {
+            size++;
+            j++;
+        }
+        j = 0;
+        printf("aqui %c %d\n", character, size);
+        for (i = 7; i >= 0; i--)
+        {
+            if (hash_table->matriz[character][j] != '\0')
+            {
+                if (hash_table->matriz[character][j] != '0')
+                {
+                    byteFile = set_bit(byteFile, i);
+                    j++;
+                }
+                else
+                {
+                    j++;
+                }
+            }
+            else
+            {
+
+            }
+        }
+        fprintf(compressedFile, "%c", byteFile);
+        byteFile = 0;
     }
-    
+    int a[1];
+    a[0] = byteFile;
+    print_byte(a, 0);
 }
