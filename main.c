@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "little_huff.c"
+#include "menu.c"
 
 int main()
 {

@@ -113,25 +113,31 @@ void run()
             int bytes[2] = {0}; // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
             get_trash_size(tree, 0, &trash_size);
             trash_size = 8 - (trash_size % 8);
-            printf("trash %d\n", trash_size);
 
+            if(trash_size == 8) {
+                trash_size = 0;
+            } 
             bytes[0] = trash_size << 5;
             bytes[0] |= size >> 8;
             bytes[1] = size;
-            // print_byte(bytes, 0);
-            // printf(" ");
-            // print_byte(bytes, 1);
-            // printf("\n");
+            printf("trash %d\n", trash_size);
+            
+            print_byte(bytes, 0);
+            printf(" ");
+            print_byte(bytes, 1);
+            printf("\n");
             printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
             write_byte_to_file(compressedFile, bytes, 0);
             write_byte_to_file(compressedFile, bytes, 1);
             fprintf(compressedFile, "%s", tree_preorder);
-
+            
+            rewind(file);
             write_to_file(file, hash, compressedFile);
-
+            
             fclose(compressedFile);
+            fclose(file);
             
             break;
         }
