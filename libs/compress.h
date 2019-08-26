@@ -45,7 +45,7 @@ extern void print_byte(int bytes[], int pos);
  * 
  * @result A escrita dos bytes do lixo e do tamanho da árvore no arquivo
  */
-extern void write_byte_to_file(FILE *compressedFile, int bytes[], int pos);
+// extern void write_byte_to_file(FILE *compressedFile, int bytes[], int pos);
 
 /** @discussion Recebe o arquivo informado, a hash_table com os bits e o arquivo que vai ser comprimido
  * 
@@ -55,6 +55,6 @@ extern void write_byte_to_file(FILE *compressedFile, int bytes[], int pos);
  * 
  * @result Os bytes escritos no arquivo
  */
-extern void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile);
+extern void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, int trash_size);
 
 #endif

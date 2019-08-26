@@ -49,18 +49,21 @@ void print_byte(int bytes[], int pos)
 }
 
 // escreve o lixo e o tamanho da árvore
-void write_byte_to_file(FILE *compressedFile, int bytes[], int pos)
-{
-    fprintf(compressedFile, "%c", bytes[pos]);
-}
+// void write_byte_to_file(FILE *compressedFile, int bytes[], int pos)
+// {
+//     fprintf(compressedFile, "%c", bytes[pos]);
+// }
 
-void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile)
+void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, int trash_size)
 {
     U_BYTE character, byteFile = 0;
-    int i, j = 0, size = 0, amount = 0, rest_size = 0;
+    int a[1];
+    int i, j = 0, size = 0, amount = 0, rest_size = 7;
+
     while (fscanf(file, "%c", &character) != EOF)
     {
-        while(hash_table->matriz[character][j] != '\0') {
+        while(hash_table->matriz[character][j] != '\0') 
+        {
             size++;
             j++;
         }
@@ -68,33 +71,56 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile)
         // printf("aqui %c %d\n", character, size);
         for (i = size; i >= 0; i--)
         {
+            // printf("ch %c     size %d\n\n", character, i);
             if (hash_table->matriz[character][j] != '\0')
             {
                 if (hash_table->matriz[character][j] != '0')
                 {
-                    byteFile = set_bit(byteFile, i);
+                
+                    // printf("\tEU: 1   ");
+                    byteFile = set_bit(byteFile, rest_size);
+                    // a[0] = byteFile;
+                    // print_byte(a, 0);
                     amount++;
+                    rest_size--;
                     j++;
                 }
                 else
                 {
+                //   printf("\tEU dnv: 0   ");
+                //   a[0] = byteFile;
+                //     print_byte(a, 0);
                     amount++;
+                    rest_size--;
                     j++;
                 }
             }
+            
             if(amount == 8) 
             {
+                a[0] = byteFile;
+                    print_byte(a, 0);
+                    printf("\n");
                 fprintf(compressedFile, "%c", byteFile);
                 byteFile = 0;
+                rest_size = 7;
                 amount = 0;
             }
+            
         }
+        
     }
-    // if(amount != 0) {
-    //     byteFile = set_bit(byteFile, i);
-    //     byteFile = 0;
-    // }
-    int a[1];
+    // a[0] = byteFile;
+    // print_byte(a, 0);
+    //  printf("\nLIsho %d\nRest: %d\n", trash_size,rest_size);
+    // rest_size = 8 - trash_size;
+
+    // printf("Rest: %d\n", rest_size);
+    // byteFile = set_bit(byteFile, trash_size);
+    fprintf(compressedFile, "%c", trash_size);
+
+    // int a[1];
     a[0] = byteFile;
     print_byte(a, 0);
+    fclose(compressedFile);
 }

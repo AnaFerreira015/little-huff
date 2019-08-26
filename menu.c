@@ -129,20 +129,29 @@ void run()
             printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
-            write_byte_to_file(compressedFile, bytes, 0);
-            write_byte_to_file(compressedFile, bytes, 1);
+
+            // write_byte_to_file(compressedFile, bytes, 0);
+            // write_byte_to_file(compressedFile, bytes, 1);
+
+            fprintf(compressedFile, "%c", bytes[0]);
+            // printf("printa 0: %c\n", bytes[0]);
+            fprintf(compressedFile, "%c", bytes[1]);
+            //  printf("printa 1: %c\n", bytes[0]);
+
             fprintf(compressedFile, "%s", tree_preorder);
             
             rewind(file);
-            write_to_file(file, hash, compressedFile);
+            write_to_file(file, hash, compressedFile, trash_size);
             
-            fclose(compressedFile);
             fclose(file);
+            // fclose(compressedFile);
+            
             
             break;
         }
 
         case 2:
+            return;
             break;
 
         case 3:
