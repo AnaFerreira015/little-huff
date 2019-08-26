@@ -88,23 +88,23 @@ void run()
 
             PRIORITY_QUEUE *pq_frequency = enqueue_f_array(freq);
             NODE_TREE *tree = NULL;
-            
+
             // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             // printing_pq(pq_frequency);
-            
+
             tree = build_node(pq_frequency);
-            printf("PRE ORDER\n");
-            print_pre_order(tree);
-            printf(ANSI_COLOR_RESET);
-            
+            // printf("PRE ORDER\n");
+            // print_pre_order(tree);
+            // printf(ANSI_COLOR_RESET);
+
             HASH_TABLE *hash = creating_hash_table();
-            
+
             U_BYTE bit_sequency[MAX_SIZE], tree_preorder[513];
             initialize_string(bit_sequency, 0);
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
-            
-            print_hash(hash);
+
+            // print_hash(hash);
 
             int size = 0, trash_size = 0;
             size_tree_and_preorder(tree, &size, tree_preorder);
@@ -114,39 +114,43 @@ void run()
             get_trash_size(tree, 0, &trash_size);
             trash_size = 8 - (trash_size % 8);
 
-            if(trash_size == 8) {
+            if (trash_size == 8)
+            {
                 trash_size = 0;
-            } 
+            }
             bytes[0] = trash_size << 5;
             bytes[0] |= size >> 8;
             bytes[1] = size;
-            printf("trash %d\n", trash_size);
-            
-            print_byte(bytes, 0);
-            printf(" ");
-            print_byte(bytes, 1);
-            printf("\n");
-            printf("preorder %s\n", tree_preorder);
+            // printf("trash %d\n", trash_size);
+
+            // print_byte(bytes, 0);
+            // printf(" ");
+            // print_byte(bytes, 1);
+            // printf("\n");
+            // printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
 
             // write_byte_to_file(compressedFile, bytes, 0);
             // write_byte_to_file(compressedFile, bytes, 1);
 
-            fprintf(compressedFile, "%c", bytes[0]);
+            fwrite(&bytes[0], sizeof(U_BYTE), 1, compressedFile);
+            fwrite(&bytes[1], sizeof(U_BYTE), 1, compressedFile);
+
+            // fprintf(compressedFile, "%c", bytes[0]);
             // printf("printa 0: %c\n", bytes[0]);
-            fprintf(compressedFile, "%c", bytes[1]);
+            // fprintf(compressedFile, "%c", bytes[1]);
             //  printf("printa 1: %c\n", bytes[0]);
 
+            // fwrite(tree_preorder, sizeof(U_BYTE), 1, compressedFile);
             fprintf(compressedFile, "%s", tree_preorder);
-            
+
             rewind(file);
             write_to_file(file, hash, compressedFile, trash_size);
-            
+
             fclose(file);
             // fclose(compressedFile);
-            
-            
+
             break;
         }
 
