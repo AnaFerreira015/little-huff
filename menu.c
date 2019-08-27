@@ -7,6 +7,7 @@
 #include "./src/huffman_tree.c"
 #include "./src/hash.c"
 #include "./src/compress.c"
+#include "./src/decompress.c"
 
 /**
  * @define ANSI_COLOR_RESET
@@ -155,17 +156,15 @@ void run()
         }
 
         case 2:
-            printf("Digite um arquivo: \nEx.: arquivo.huff");
-            U_BYTE array[MAX_SIZE], character;
-            FILE *compressedFile;
-            int trash, sizeTree;
+            printf("Digite o nome do arquivo (ex.: arquivo.huff):\n");
+            U_BYTE array[MAX_SIZE];
 
             scanf("%s", array);
 
-            compressedFile = fopen(array, "rb");
-            fscanf(compressedFile, "%c", &character);
-
-        //    character
+            FILE *compressedFile = fopen(array, "rb");
+            // fscanf(compressedFile, "%c", &character);
+            decompress(compressedFile);
+            
 
             break;
 
