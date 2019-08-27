@@ -60,7 +60,7 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, int
     int a[1];
     int i, j = 0, size = 0, amount = 0, rest_size = 7;
 // fscanf(file, "%c", &character) != EOF
-    while (fread(&character, sizeof(U_BYTE),1,file) == 1)
+    while (fscanf(file, "%c", &character) != EOF)
     {
         while(hash_table->matriz[character][j] != '\0') 
         {
@@ -101,8 +101,8 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, int
                 // a[0] = byteFile;
                 // print_byte(a, 0);
                 // printf("\n");
-                // fprintf(compressedFile, "%c", byteFile);
-                fwrite(&byteFile, sizeof(U_BYTE),1,compressedFile);
+                fprintf(compressedFile, "%c", byteFile);
+                // fwrite(&byteFile, sizeof(U_BYTE),1,compressedFile);
                 byteFile = 0;
                 rest_size = 7;
                 amount = 0;
