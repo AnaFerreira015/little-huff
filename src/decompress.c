@@ -8,12 +8,33 @@
 void decompress(int trash, int sizeTree, FILE *compressed, NODE_TREE *node, U_BYTE *input_file)
 {
     int size_input = strlen(input_file); //pegar o tamanho do arquivo
-    
-    U_BYTE out_file[MAX_SIZE];
-    FILE *decompress_file = fopen(out_file, "w"); 
-    
-    
 
+    U_BYTE out_file[MAX_SIZE],character;
+    FILE *decompress_file = fopen(out_file, "w"); 
+    int i;
+    
+    NODE_TREE *tree = node;
+    while (fscanf(compressed, "%c", &character) != EOF)
+    {
+        for (i = 7; i >= 0; i--)
+        {
+            if(isLeaf(tree))
+            {
+                fprintf(decompress_file, "%c", tree->character);
+                tree = node;
+            }
+            if(is_bit_i_set(character,i))
+            {
+                tree = tree->right;
+            }
+            else
+            {
+                tree = tree->left;
+            }
+        }
+    }
+    
+    fclose(decompress_file);
 
 }
 
