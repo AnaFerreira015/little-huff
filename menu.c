@@ -137,7 +137,6 @@ void run()
 
             // fwrite(&bytes[0], sizeof(U_BYTE), 1, compressedFile);
             // fwrite(&bytes[1], sizeof(U_BYTE), 1, compressedFile);
-
             fprintf(compressedFile, "%c", bytes[0]);
             // printf("printa 0: %c\n", bytes[0]);
             fprintf(compressedFile, "%c", bytes[1]);
