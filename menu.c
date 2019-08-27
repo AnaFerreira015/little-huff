@@ -7,6 +7,7 @@
 #include "./src/huffman_tree.c"
 #include "./src/hash.c"
 #include "./src/compress.c"
+#include "./src/decompress.c"
 
 /**
  * @define ANSI_COLOR_RESET
@@ -79,6 +80,7 @@ void run()
             /** Opens the file in binary read mode */
             FILE *file = fopen(file_name, "rb");
 
+            printf("Calculando frequencia do arquivo...\n");
             create_frequency_array(file, freq);
 
             // printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
@@ -121,43 +123,42 @@ void run()
             bytes[0] = trash_size << 5;
             bytes[0] |= size >> 8;
             bytes[1] = size;
-            // printf("trash %d\n", trash_size);
+            printf("trash %d\n", trash_size);
 
-            // print_byte(bytes, 0);
-            // printf(" ");
-            // print_byte(bytes, 1);
-            // printf("\n");
+            print_byte(bytes, 0);
+            printf(" ");
+            print_byte(bytes, 1);
+            printf("\n");
             // printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
-
-            // write_byte_to_file(compressedFile, bytes, 0);
-            // write_byte_to_file(compressedFile, bytes, 1);
 
             // fwrite(&bytes[0], sizeof(U_BYTE), 1, compressedFile);
             // fwrite(&bytes[1], sizeof(U_BYTE), 1, compressedFile);
             fprintf(compressedFile, "%c", bytes[0]);
             fprintf(compressedFile, "%c", bytes[1]);
 
-            // fprintf(compressedFile, "%c", bytes[0]);
-            // printf("printa 0: %c\n", bytes[0]);
-            // fprintf(compressedFile, "%c", bytes[1]);
-            //  printf("printa 1: %c\n", bytes[0]);
-
             // fwrite(tree_preorder, sizeof(U_BYTE), 1, compressedFile);
             fprintf(compressedFile, "%s", tree_preorder);
 
             rewind(file);
-            write_to_file(file, hash, compressedFile, trash_size);
+            write_to_file(file, hash, compressedFile);
 
             fclose(file);
-            // fclose(compressedFile);
-
             break;
         }
 
         case 2:
-            return;
+            printf("Digite o nome do arquivo (ex.: arquivo.huff):\n");
+            U_BYTE array[MAX_SIZE];
+
+            scanf("%s", array);
+
+            FILE *compressedFile = fopen(array, "rb");
+
+            rewind(compressedFile);
+            start_decompress(compressedFile, array);
+
             break;
 
         case 3:

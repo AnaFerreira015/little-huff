@@ -7,7 +7,7 @@ typedef unsigned char U_BYTE;
 
 typedef struct HASH_TABLE
 {
-    U_BYTE matriz[MAX_SIZE][MAX_SIZE];
+    void *matriz[MAX_SIZE][MAX_SIZE];
 } HASH_TABLE;
 
 extern HASH_TABLE *creating_hash_table();

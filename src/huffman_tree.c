@@ -29,7 +29,6 @@ NODE_TREE *create_node()
     node_tree->left = NULL;
     node_tree->right = NULL;
     node_tree->next = NULL;
-
     return node_tree;
 }
 
@@ -105,20 +104,24 @@ void print_pre_order(NODE_TREE *node_tree)
 {
     if (node_tree != NULL)
     {
-        printf(ANSI_COLOR_CYAN "%c (%d)\n", node_tree->character, node_tree->frequency);
+        printf(ANSI_COLOR_CYAN "%c\n", node_tree->character);
         print_pre_order(node_tree->left);
         print_pre_order(node_tree->right);
     }
     printf(ANSI_COLOR_RESET);
 }
 
-void size_tree_and_preorder(NODE_TREE *tree, int *size, U_BYTE *tree_preorder) {
-    if(!isEmptyTree(tree)) {
-        if(isLeaf(tree)) {
-            if(tree->character == '*' || tree->character == '\\') {
+void size_tree_and_preorder(NODE_TREE *tree, int *size, U_BYTE *tree_preorder) 
+{
+    if(!isEmptyTree(tree)) 
+    {
+        if(isLeaf(tree)) 
+        {
+            if(tree->character == '*' || tree->character == '\\') 
+            {
                 tree_preorder[*size] = '\\';
                 *size += 1;
-            }      
+            }       
         }
         tree_preorder[*size] = tree->character;
         *size += 1;      
