@@ -79,6 +79,7 @@ void run()
             /** Opens the file in binary read mode */
             FILE *file = fopen(file_name, "rb");
 
+            printf("Calculando frequencia do arquivo...\n");
             create_frequency_array(file, freq);
 
             // printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
@@ -134,19 +135,19 @@ void run()
             // write_byte_to_file(compressedFile, bytes, 0);
             // write_byte_to_file(compressedFile, bytes, 1);
 
-            fwrite(&bytes[0], sizeof(U_BYTE), 1, compressedFile);
-            fwrite(&bytes[1], sizeof(U_BYTE), 1, compressedFile);
+            // fwrite(&bytes[0], sizeof(U_BYTE), 1, compressedFile);
+            // fwrite(&bytes[1], sizeof(U_BYTE), 1, compressedFile);
 
-            // fprintf(compressedFile, "%c", bytes[0]);
+            fprintf(compressedFile, "%c", bytes[0]);
             // printf("printa 0: %c\n", bytes[0]);
-            // fprintf(compressedFile, "%c", bytes[1]);
+            fprintf(compressedFile, "%c", bytes[1]);
             //  printf("printa 1: %c\n", bytes[0]);
 
             // fwrite(tree_preorder, sizeof(U_BYTE), 1, compressedFile);
             fprintf(compressedFile, "%s", tree_preorder);
 
             rewind(file);
-            write_to_file(file, hash, compressedFile, trash_size);
+            write_to_file(file, hash, compressedFile);
 
             fclose(file);
             // fclose(compressedFile);
@@ -155,7 +156,18 @@ void run()
         }
 
         case 2:
-            return;
+            printf("Digite um arquivo: \nEx.: arquivo.huff");
+            U_BYTE array[MAX_SIZE], character;
+            FILE *compressedFile;
+            int trash, sizeTree;
+
+            scanf("%s", array);
+
+            compressedFile = fopen(array, "rb");
+            fscanf(compressedFile, "%c", &character);
+
+        //    character
+
             break;
 
         case 3:

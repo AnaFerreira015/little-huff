@@ -12,7 +12,6 @@ NODE_TREE *creating_tree(NODE_TREE *node, FILE *compress)
     {
         node = create_node();
         node->character = '*';
-        node->character = character;
         creating_tree(node->left, compress);
         creating_tree(node->right, compress);
     }
@@ -21,8 +20,9 @@ NODE_TREE *creating_tree(NODE_TREE *node, FILE *compress)
         if(character == '\\') //escape
         {
             fscanf(compress,"%c",&character); //verifico se o proximo caracter é * ou \
-            creating_tree(node, compress); //crio o
         }
+        node = create_node();
+        node->character = character;
+        return node;
     }
-    
 }
