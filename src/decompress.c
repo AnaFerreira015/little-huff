@@ -1,59 +1,77 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../libs/huffman_tree.h"
 #include "../libs/decompress.h"
 #include "../libs/compress.h"
 
-NODE_TREE *create_tree_preorder(NODE_TREE *node_tree, FILE *compressed) {
+void decompress(int trash, int sizeTree, FILE *compressed, NODE_TREE *node, U_BYTE *input_file)
+{
+    int size_input = strlen(input_file); //pegar o tamanho do arquivo
+    
+    U_BYTE out_file[MAX_SIZE];
+    FILE *decompress_file = fopen(out_file, "w"); 
+    
+    
+
+
+}
+
+NODE_TREE *create_tree_preorder(NODE_TREE *node_tree, FILE *compressed)
+{
     U_BYTE character;
     fscanf(compressed, "%c", &character);
 
-    if(character == '*') {
+    if (character == '*')
+    {
         node_tree = create_node();
         node_tree->character = '*';
-        create_tree_preorder(node_tree->left, compressed);
-        create_tree_preorder(node_tree->right, compressed);
+        node_tree->left = create_tree_preorder(node_tree->left, compressed);
+        node_tree->right = create_tree_preorder(node_tree->right, compressed);
     }
-    else {
-        if(character == '\\') {
-            fscanf(compressed,"%c",&character);
+    else
+    {
+        if (character == '\\')
+        {
+            fscanf(compressed, "%c", &character);
         }
         node_tree = create_node();
         node_tree->character = character;
     }
-        return node_tree;
+    return node_tree;
 }
 
-void decompress(FILE *compressed) {
+void start_decompress(FILE *compressed, U_BYTE *input_file)
+{
     U_BYTE character;
-            
-    int trash, sizeTree, a[1], bytes[2] = {0};
+
+    int trash, sizeTree = 0, a[1], bytes[2] = {0};
 
     fscanf(compressed, "%c", &character);
-    // trash = character >> 5; // o lixo está 10100000 e vai ficar 00000101, já que ele ocupa apenas 3 bits
-    // // bytes[0] = trash;
-    // // print_byte(bytes, 0);
-    // // printf("\n");
-    // sizeTree = character >> 4; // 10100000 >> 4 = 00001010
-    // fscanf(compressed, "%c", &character); // character = 00001011
-    // sizeTree |= character; // 00001010 |= 00001011 -> 00001011
-    // a[0] = sizeTree;
-    // print_byte(a, 0);
-    // printf("\n");
-    // NODE_TREE *node_tree = create_tree_preorder(node_tree, compressed);
-    // print_pre_order(node_tree);
-    // printf("%c\n", node_tree->left->character);
 
+    printf("\nObtendo tamanho do lixo..\n\n");
     trash = character >> 5;
     bytes[0] = trash;
 
-    sizeTree = character << 3;
-    sizeTree >>= 3;
-    // sizeTree |= character;
+    fscanf(compressed, "%c", &character);
+    bytes[1] = character;
+    printf("Obtendo tamanho da árvore..\n\n");
+    sizeTree = bytes[0] << 3;
+    sizeTree = sizeTree << 5;
+    sizeTree |= bytes[1];
+
     bytes[1] = sizeTree;
 
-    print_byte(bytes, 0);
-    printf(" ");
-    print_byte(bytes, 1);
-    printf("\n");
+    // print_byte(bytes, 0);
+    // printf(" ");
+    // print_byte(bytes, 1);
+    // printf("\n\n");
+
+    NODE_TREE *node = create_node();
+    printf("Montando árvore...\n\n");
+    node = create_tree_preorder(node, compressed);
+
+    // print_pre_order(node);
+    printf("Iniciando descompressão...\n\n");
+    decompress(trash, sizeTree, compressed, node, input_file );
 }

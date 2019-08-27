@@ -123,25 +123,20 @@ void run()
             bytes[0] = trash_size << 5;
             bytes[0] |= size >> 8;
             bytes[1] = size;
-            // printf("trash %d\n", trash_size);
+            printf("trash %d\n", trash_size);
 
-            // print_byte(bytes, 0);
-            // printf(" ");
-            // print_byte(bytes, 1);
-            // printf("\n");
+            print_byte(bytes, 0);
+            printf(" ");
+            print_byte(bytes, 1);
+            printf("\n");
             // printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
 
-            // write_byte_to_file(compressedFile, bytes, 0);
-            // write_byte_to_file(compressedFile, bytes, 1);
-
             // fwrite(&bytes[0], sizeof(U_BYTE), 1, compressedFile);
             // fwrite(&bytes[1], sizeof(U_BYTE), 1, compressedFile);
             fprintf(compressedFile, "%c", bytes[0]);
-            // printf("printa 0: %c\n", bytes[0]);
             fprintf(compressedFile, "%c", bytes[1]);
-            //  printf("printa 1: %c\n", bytes[0]);
 
             // fwrite(tree_preorder, sizeof(U_BYTE), 1, compressedFile);
             fprintf(compressedFile, "%s", tree_preorder);
@@ -150,8 +145,6 @@ void run()
             write_to_file(file, hash, compressedFile);
 
             fclose(file);
-            // fclose(compressedFile);
-
             break;
         }
 
@@ -162,9 +155,9 @@ void run()
             scanf("%s", array);
 
             FILE *compressedFile = fopen(array, "rb");
-            // fscanf(compressedFile, "%c", &character);
-            decompress(compressedFile);
-            
+
+            rewind(compressedFile);
+            start_decompress(compressedFile, array);
 
             break;
 
