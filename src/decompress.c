@@ -18,6 +18,7 @@ void decompress(int trash, int sizeTree, FILE *compressed, NODE_TREE *node, U_BY
         size++;
     }
     printf("size %d\n", size);
+    rewind(decompress_file);
     
     // NODE_TREE *tree = node;
     // while (fscanf(compressed, "%c", &character) != EOF)
@@ -102,5 +103,42 @@ void start_decompress(FILE *compressed, U_BYTE *input_file)
 
     // print_pre_order(node);
     printf("Iniciando descompressão...\n\n");
-    decompress(trash, sizeTree, compressed, node, input_file );
+
+    U_BYTE out_file[MAX_SIZE];
+    FILE *decompress_file = fopen(out_file, "w"); 
+    int i;
+    int size = 0;
+    while (fscanf(compressed, "%c", &character) != EOF)
+    {
+        // printf("size %d\n", size);
+        size++;
+    }
+    printf("size %d\n", size);
+    rewind(decompress_file);
+
+ // NODE_TREE *tree = node;
+    // while (fscanf(compressed, "%c", &character) != EOF)
+    // {
+    //     for (i = 7; i >= 0; i--)
+    //     {
+    //         if(isLeaf(tree))
+    //         {
+    //             printf("%c\n", tree->character);
+    //             fprintf(decompress_file, "%c", tree->character);
+    //             tree = node;
+    //         }
+    //         if(is_bit_i_set(character,i))
+    //         {
+    //             // printf("aqui\n");
+    //             tree = tree->right;
+    //         }
+    //         else
+    //         {
+    //             tree = tree->left;
+    //         }
+    //     }
+    // }
+    
+    fclose(decompress_file);
+    // decompress(trash, sizeTree, compressed, node, input_file );
 }
