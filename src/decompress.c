@@ -33,18 +33,17 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
 {
     U_BYTE character;
 
-    int trash = 0, sizeTree = 0,aux2 = 0, a[1], bytes[2] = {0};
+    int trash = 0, sizeTree = 0, aux2 = 0, a[1], bytes[2] = {0};
     int i;
 
-    // fscanf(compressed, "%c", &character);      
-    // trash = character >> 5;       
-    // sizeTree = character << 11;      
+    // fscanf(compressed, "%c", &character);
+    // trash = character >> 5;
+    // sizeTree = character << 11;
     // // 00000000 00000000 00000000 0000101
-    
-    // sizeTree >>= 3;          
-    // fscanf(compressed, "%c", &character);     
-    // sizeTree |= character;
 
+    // sizeTree >>= 3;
+    // fscanf(compressed, "%c", &character);
+    // sizeTree |= character;
 
     fscanf(compressed, "%c", &character);
 
@@ -52,12 +51,11 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
     trash = character >> 5;
 
     // printf("Obtendo tamanho da árvore..\n\n");
-    sizeTree =(character<<3) & (0xFF);
+    sizeTree = (character << 3) & (0xFF);
     sizeTree = sizeTree << 5;
 
     fscanf(compressed, "%c", &character);
     sizeTree |= character;
-  
 
     NODE_TREE *node = create_node();
     printf("Montando árvore...\n\n");
@@ -71,57 +69,94 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
 
     U_BYTE aux = 0;
 
-    FILE *decompress_file = fopen(out_file, "w+b"); 
+    FILE *decompress_file = fopen(out_file, "wb");
     int size = 0;
-    
+
     while (fscanf(compressed, "%c", &character) != EOF)
     {
         size++;
     }
-   
+    printf("size %d\n", size);
+
     rewind(compressed);
-    fseeko(compressed, 2+sizeTree, SEEK_SET);
+    fseeko(compressed, 2 + sizeTree, SEEK_SET);
 
     NODE_TREE *tree = node;
-    while (fscanf(compressed, "%c", &character) != EOF)
+    // print_pre_order(tree);
+    // while (fscanf(compressed, "%c", &character) != EOF)
+    // {
+    while (size > 0)
     {
-        for (i = 7; i >= 0; i--)
+        // printf("entrou no while\n");
+        fscanf(compressed, "%c", &character);
+        if (size != 1)
         {
-             if(isLeaf(tree))
+            for (i = 7; i >= 0; i--)
             {
-                fprintf(decompress_file, "%c", tree->character);
-                tree = node;
+                if (is_bit_i_set(character, i))
+                {
+                    tree = tree->right;
+                }
+                else
+                {
+                    tree = tree->left;
+                }
+                if (isLeaf(tree))
+                {
+                    fprintf(decompress_file, "%c", tree->character);
+                    tree = node;
+                }
             }
-            if(is_bit_i_set(character,i))
-            {
-                tree = tree->right;
-            }
-            else
-            {
-                tree = tree->left;
-            }
-           
         }
+        else
+        {
+            // printf("aaaa %d\n", size);
+            printf("aaaaa %d\n", trash);
+            for (i = 7; i >= trash; i--)
+            {
+                // printf("else dentro do while\n");
+                if (is_bit_i_set(character, i))
+                {
+                    printf("1");
+                    tree = tree->right;
+                }
+                else
+                {
+                    printf("0");
+                    tree = tree->left;
+                }
+                if (isLeaf(tree))
+                {
+                    printf("folha\n");
+                    fprintf(decompress_file, "%c", tree->character);
+                    tree = node;
+                }
+            }
+        }
+        size--;
     }
-
-
-    //   for (i = 7; i >= trash; i--)
+    // for (i = 7; i >= trash; i--)
+    // {
+    //     printf("else dentro do while\n");
+    //     if(is_bit_i_set(character,i))
     //     {
-    //         if(isLeaf(tree))
-    //         {
-    //             fprintf(decompress_file, "%c", tree->character);
-    //             tree = node;
-    //         }
-    //         if(is_bit_i_set(aux2,i))
-    //         {
-    //             tree = tree->right;
-    //         }
-    //         else
-    //         {
-    //             tree = tree->left;
-    //         }
+    //         printf("1");
+    //         tree = tree->right;
     //     }
-  
+    //     else
+    //     {
+    //         printf("0");
+    //         tree = tree->left;
+    //     }
+    //     if(isLeaf(tree))
+    //     {
+    //         printf("folha\n");
+    //         fprintf(decompress_file, "%c", tree->character);
+    //         tree = node;
+    //     }
+    // }
+    // }
+
     fclose(compressed);
     fclose(decompress_file);
     // decompress(trash, sizeTree, compressed, node, input_file );
