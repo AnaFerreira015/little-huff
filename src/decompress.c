@@ -108,13 +108,14 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
                 }
             }
         }
-        else {
+        else
+        {
             // printf("aaaa %d\n", size);
             printf("aaaaa %d\n", trash);
             for (i = 7; i >= trash; i--)
             {
                 // printf("else dentro do while\n");
-                if(is_bit_i_set(character,i))
+                if (is_bit_i_set(character, i))
                 {
                     printf("1");
                     tree = tree->right;
@@ -124,7 +125,7 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
                     printf("0");
                     tree = tree->left;
                 }
-                if(isLeaf(tree))
+                if (isLeaf(tree))
                 {
                     printf("folha\n");
                     fprintf(decompress_file, "%c", tree->character);
@@ -155,7 +156,6 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
     //     }
     // }
     // }
-
 
     fclose(compressed);
     fclose(decompress_file);
