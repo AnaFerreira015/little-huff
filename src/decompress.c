@@ -87,7 +87,7 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
     // {
     while (size > 0)
     {
-        printf("entrou no while\n");
+        // printf("entrou no while\n");
         fscanf(compressed, "%c", &character);
         if (size != 1)
         {
@@ -109,10 +109,12 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
             }
         }
         else {
+            // printf("aaaa %d\n", size);
+            printf("aaaaa %d\n", trash);
             for (i = 7; i >= trash; i--)
             {
-                printf("else dentro do while\n");
-                if(is_bit_i_set(aux2,i))
+                // printf("else dentro do while\n");
+                if(is_bit_i_set(character,i))
                 {
                     printf("1");
                     tree = tree->right;
