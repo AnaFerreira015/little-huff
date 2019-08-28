@@ -150,14 +150,16 @@ void run()
 
         case 2:
             printf("Digite o nome do arquivo (ex.: arquivo.huff):\n");
-            U_BYTE array[MAX_SIZE];
-
+            U_BYTE array[MAX_SIZE],type[15];
             scanf("%s", array);
+
+            printf("\n\nDigite o tipo do arquivo (ex.: txt):\n");
+            scanf("%s", type);
 
             FILE *compressedFile = fopen(array, "rb");
 
             rewind(compressedFile);
-            start_decompress(compressedFile, array);
+            start_decompress(compressedFile, array,type);
 
             break;
 
