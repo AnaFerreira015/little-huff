@@ -48,6 +48,9 @@ void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, int index, U_BYTE bit
 
 void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[])
 {
+    if(isEmptyTree(tree)) {
+        return;
+    }
     if (isLeaf(tree))
     {
         put_in_hash(hash_table, tree->character, i, bit_sequency);
@@ -60,20 +63,20 @@ void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE 
     walking_in_the_tree(hash_table, tree->right, i + 1, bit_sequency);
 }
 
-// void print_hash(HASH_TABLE *hash)
-// {
-//     int i, j;
+void print_hash(HASH_TABLE *hash)
+{
+    int i, j;
 
-//     for (i = 0; i < MAX_SIZE; i++)
-//     {
-//         if (hash->matriz[i][0] != ' ')
-//         {
-//             printf("%c: ", i);
-//             for (j = 0; j < MAX_SIZE; j++)
-//             {
-//                 printf("%c", hash->matriz[i][j]);
-//             }
-//             printf("\n");
-//         }
-//     }
-// }
+    for (i = 0; i < MAX_SIZE; i++)
+    {
+        if (hash->matriz[i][0] != (U_BYTE)' ')
+        {
+            printf("%c: ", i);
+            for (j = 0; j < MAX_SIZE; j++)
+            {
+                printf("%c", (U_BYTE*)hash->matriz[i][j]);
+            }
+            printf("\n");
+        }
+    }
+}

@@ -32,6 +32,17 @@ NODE_TREE *create_node()
     return node_tree;
 }
 
+NODE_TREE *create_node_enqueued(U_BYTE character, int frequency)
+{
+    NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
+    node_tree->character = character;
+    node_tree->frequency = frequency;
+    node_tree->left = NULL;
+    node_tree->right = NULL;
+    node_tree->next = NULL;
+    return node_tree;
+}
+
 /**
  * @discussion Receives two nodes and creates a parent node in the tree by adding the '*' symbol
  * 
@@ -47,7 +58,10 @@ NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
     node_huff->left = node1;
     node_huff->right = node2;
     node_huff->character = '*';
-    node_huff->frequency = node1->frequency + node2->frequency;
+    if (node2 == NULL)
+        node_huff->frequency = node1->frequency;
+    else
+        node_huff->frequency = node1->frequency + node2->frequency;
     node_huff->next = NULL;
 
     return node_huff;
@@ -72,14 +86,19 @@ int equate_nodes(NODE_TREE *node1, NODE_TREE *node2)
 
 NODE_TREE *build_node(PRIORITY_QUEUE *pq)
 {
+    printf("aqui\n");
+    printf("aaa %d\n", (pq->head == NULL));
+    printf("teste %c %d\n", pq->head->character, pq->head->frequency);
 
     NODE_TREE *node_huff = NULL;
     if (pq->head->next == NULL)
     {
-        return huffman_create_node(pq->head, create_node());
+        printf("nózinho\n");
+        return huffman_create_node(pq->head, NULL);
     }
     while (pq->head->next != NULL)
     {
+        printf("while\n");
         NODE_TREE *node1 = dequeue(pq);
         NODE_TREE *node2 = dequeue(pq);
 
@@ -87,6 +106,22 @@ NODE_TREE *build_node(PRIORITY_QUEUE *pq)
 
         enqueue(pq, node_huff);
     }
+    //  printf("retornou\n");
+    // NODE_TREE *node1, *node2;
+    // int frequency;
+
+    // while(pq->head->next != NULL) {
+    //     node1 = dequeue(pq);
+    //     node2 = dequeue(pq);
+
+    //     frequency = (node1->frequency) + (node2->frequency);
+
+    //     NODE_TREE *enqueued = create_node_enqueued('*', frequency);
+    //     enqueued->left = node1;
+    //     enqueued->right = node2;
+
+    //     enqueue(pq, enqueued);
+    // }
     return pq->head;
 }
 

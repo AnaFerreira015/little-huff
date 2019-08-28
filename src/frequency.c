@@ -30,13 +30,12 @@ void initialize_string(U_BYTE *array, int i)
 void create_frequency_array(FILE *file, int freq[])
 {
     initialize_array(freq, 0);
-
-    char i[2];
-    while (fscanf(file, "%c", i) != EOF)
+    
+    U_BYTE character;
+    while (fscanf(file, "%c", &character) != EOF)
     {
-        U_BYTE c = i[0];
-        freq[c] += 1;
-    }
+        freq[character] += 1;
+    }   
 }
 
 void printing_frequency_array(int *array)

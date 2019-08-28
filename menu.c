@@ -83,30 +83,35 @@ void run()
             printf("Calculando frequencia do arquivo...\n");
             create_frequency_array(file, freq);
 
-            // printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
-            // printf(ANSI_COLOR_RESET);
+            printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
+            printf(ANSI_COLOR_RESET);
 
-            // printing_frequency_array(freq);
+            printing_frequency_array(freq);
 
             PRIORITY_QUEUE *pq_frequency = enqueue_f_array(freq);
-            NODE_TREE *tree = NULL;
+            // printf("menu %c %d\n", pq_frequency->head->character, pq_frequency->head->frequency);
+            // NODE_TREE *tree = NULL;
 
-            // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
+            printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
+            printf(ANSI_COLOR_RESET);
             // printing_pq(pq_frequency);
+            // printing_pq(pq_frequency);
+            // printf("oi char %c oi freq %d\n", pq_frequency->head->character, pq_frequency->head->frequency);
 
-            tree = build_node(pq_frequency);
-            // printf("PRE ORDER\n");
-            // print_pre_order(tree);
-            // printf(ANSI_COLOR_RESET);
+            NODE_TREE *tree = build_node(pq_frequency);
+            printf("PRE ORDER\n");
+            print_pre_order(tree);
+            printf(ANSI_COLOR_RESET);
 
             HASH_TABLE *hash = creating_hash_table();
-
+            // printf("");
             U_BYTE bit_sequency[MAX_SIZE], tree_preorder[513];
             initialize_string(bit_sequency, 0);
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
+            printf("oi\n");
 
-            // print_hash(hash);
+            print_hash(hash);
 
             int size = 0, trash_size = 0;
             size_tree_and_preorder(tree, &size, tree_preorder);
@@ -114,8 +119,8 @@ void run()
 
             int bytes[2] = {0}; // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
             get_trash_size(tree, 0, &trash_size);
+            printf("linha 121 trash %d\n", trash_size);
             trash_size = 8 - (trash_size % 8);
-
             if (trash_size == 8)
             {
                 trash_size = 0;
@@ -129,7 +134,7 @@ void run()
             printf(" ");
             print_byte(bytes, 1);
             printf("\n");
-            // printf("preorder %s\n", tree_preorder);
+            printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
 
@@ -157,6 +162,11 @@ void run()
             scanf("%s", type);
 
             FILE *compressedFile = fopen(array, "rb");
+            if (compressedFile == NULL)
+            {
+                printf("Arquivo não encontrado\n");
+                break;
+            }
 
             rewind(compressedFile);
             start_decompress(compressedFile, array,type);
