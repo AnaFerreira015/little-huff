@@ -48,7 +48,8 @@ void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, int index, U_BYTE bit
 
 void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[])
 {
-    if(isEmptyTree(tree)) {
+    if(isEmptyTree(tree)) 
+    {
         return;
     }
     if (isLeaf(tree))

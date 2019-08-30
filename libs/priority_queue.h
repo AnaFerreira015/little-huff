@@ -13,6 +13,7 @@ typedef struct NODE_TREE NODE_TREE;
 typedef struct PRIORITY_QUEUE
 {
     NODE_TREE *head;
+    int size;
 } PRIORITY_QUEUE;
 
 /** @discussion Checks if queue is empty

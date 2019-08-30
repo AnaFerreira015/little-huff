@@ -11,7 +11,15 @@
  */
 int isEmpty(PRIORITY_QUEUE *pq)
 {
-    return (pq->head == NULL);
+    return (pq->size == 0);
+}
+
+PRIORITY_QUEUE *createEmptyQueue()
+{
+    PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
+    pq->head = NULL;
+    pq->size = 0;
+    return pq;
 }
 
 /**
@@ -24,15 +32,16 @@ int isEmpty(PRIORITY_QUEUE *pq)
  */
 void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree)
 {
-    // dar o malloc da fila aqui e não na hora de criar o nó da árvore
     NODE_TREE *aux = node_tree;
-    if (isEmpty(pq))
+    if (pq->size == 0)
     {
+        pq->size++;
         aux->next = pq->head;
         pq->head = aux;
     }
     else
     {
+        pq->size++;
         NODE_TREE *current = pq->head;
         NODE_TREE *previous = NULL;
         while ((current != NULL) && (current->frequency < aux->frequency))
@@ -51,14 +60,14 @@ void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree)
     }
 }
 
-NODE_TREE *build_node_tree(char character, int frequency)
+NODE_TREE *build_node_tree(U_BYTE character, int frequency, NODE_TREE *left, NODE_TREE *right)
 {
     NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
     node_tree->character = character;
     node_tree->frequency = frequency;
     node_tree->next = NULL;
-    node_tree->left = NULL;
-    node_tree->right = NULL;
+    node_tree->left = left;
+    node_tree->right = right;
 
     return node_tree;
 }
@@ -71,22 +80,19 @@ NODE_TREE *build_node_tree(char character, int frequency)
 PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
 {
     PRIORITY_QUEUE *pq = (PRIORITY_QUEUE *)malloc(sizeof(PRIORITY_QUEUE));
-    // NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-    NODE_TREE *node_tree = NULL;
+    pq->head = NULL;
+    NODE_TREE *node_tree;
     int i;
 
     for (i = 0; i < 256; i++)
     {
         if (frequency_array[i])
         {
-            // printf("não aguento mais\n");
-            node_tree = build_node_tree(i, frequency_array[i]);
-            // printf("linha 84 %c %d\n", node_tree->character, node_tree->frequency);
-            // enfileirar
+            node_tree = build_node_tree(i, frequency_array[i], NULL, NULL);
             enqueue(pq, node_tree);
         }
     }
-    // printf("enqueue sem funcionar %c %d\n", node_tree->character, node_tree->frequency);
+    // printing_pq(pq);
     return pq;
 }
 
@@ -100,13 +106,33 @@ PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
  */
 NODE_TREE *dequeue(PRIORITY_QUEUE *pq)
 {
-    if (!isEmpty(pq))
-    {
-        NODE_TREE *new_node = pq->head;
-        pq->head = pq->head->next;
-        new_node->next = NULL;
-        return new_node;
-    }
+    NODE_TREE *head = pq->head;
+    pq->head = pq->head->next;
+    pq->size--;
+    return head;
+    // printf("oi\n");
+    // NODE_TREE *current = pq->head;
+    //     printf("pq->head == NULL %d\n", pq->head == NULL);
+    // // printf("pq->head->frequency: %d", pq->head == NULL);
+    // NODE_TREE *prev = NULL;
+    // while (current != NULL && !(current->character == ))
+    // {
+    //     printf("AQUI DENTRO\n");
+    //     prev = current;
+    //     current = current->next;
+    // }
+    // if (prev != NULL)
+    // {
+    //     printf("current == NULL == %d\n", current == NULL);
+    //     prev->next = current->next;
+    // }
+    // else
+    // {
+    //     pq->head = current->next;
+    // }
+    // pq->size--;
+    // current->next = NULL;
+    // return current;
 }
 
 /** @discussion Prints all priority queue data 
@@ -115,12 +141,12 @@ NODE_TREE *dequeue(PRIORITY_QUEUE *pq)
  */
 void printing_pq(PRIORITY_QUEUE *pq)
 {
-    PRIORITY_QUEUE *pq_temp = pq;
+    NODE_TREE *node = pq->head;
 
-    while (pq_temp != NULL)
+    while (node != NULL)
     {
-        printf("%c (%d)\n", pq_temp->head->character, pq_temp->head->frequency);
-        pq_temp = pq_temp->head->next;
+        printf("%c (%d)\n", node->character, node->frequency);
+        node = node->next;
     }
     printf("\n");
 }

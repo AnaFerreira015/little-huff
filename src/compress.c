@@ -53,6 +53,7 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile)
     U_BYTE character, byteFile = 0;
     int a[1];
     int i, j = 0, size = 0, amount = 0, rest_size = 7;
+
     while (fscanf(file, "%c", &character) != EOF)
     {
         while(hash_table->matriz[character][j] != (U_BYTE*)'\0') 
@@ -69,19 +70,19 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile)
             {
                 if (hash_table->matriz[character][j] != (U_BYTE*)'0')
                 {
-                    printf("\tEU: 1   ");
                     byteFile = set_bit(byteFile, rest_size);
-                    a[0] = byteFile;
-                    print_byte(a, 0);
+                    // printf("\tEU: 1   ");
+                    // a[0] = byteFile;
+                    // print_byte(a, 0);
                     amount++;
                     rest_size--;
                     j++;
                 }
                 else
                 {
-                  printf("\tEU dnv: 0   ");
-                  a[0] = byteFile;
-                    print_byte(a, 0);
+                //   printf("\tEU dnv: 0   ");
+                //   a[0] = byteFile;
+                //     print_byte(a, 0);
                     amount++;
                     rest_size--;
                     j++;
@@ -99,17 +100,8 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile)
         }
         
     }
-    printf("saiu\n");
-    a[0] = byteFile;
-    print_byte(a, 0);
-    //  printf("\nLIsho %d\nRest: %d\n", trash_size,rest_size);
-    // rest_size = 8 - trash_size;
-    // printf("amount %d\n",amount);
-    // printf("Rest: %d\n", rest_size);
-    // byteFile = set_bit(byteFile, trash_size);
     fprintf(compressedFile, "%c", byteFile);
-    // fwrite(&byteFile, sizeof(U_BYTE),1,compressedFile);
-    // int a[1];
+
     a[0] = byteFile;
     print_byte(a, 0);
     fclose(compressedFile);

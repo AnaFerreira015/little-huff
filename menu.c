@@ -71,7 +71,7 @@ void run()
         {
         case 1:
         {
-            int freq[MAX_SIZE];
+            int freq[MAX_SIZE] = {0};
             printf("FILE: ");
             scanf("%s", file_name);
             printf("\n");
@@ -88,16 +88,19 @@ void run()
 
             printing_frequency_array(freq);
 
-            PRIORITY_QUEUE *pq_frequency = enqueue_f_array(freq);
+            PRIORITY_QUEUE *pq_frequency = createEmptyQueue();
+            pq_frequency = enqueue_f_array(freq);
+            
             // printf("menu %c %d\n", pq_frequency->head->character, pq_frequency->head->frequency);
             // NODE_TREE *tree = NULL;
 
             printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             printf(ANSI_COLOR_RESET);
-            // printing_pq(pq_frequency);
+            printing_pq(pq_frequency);
             // printing_pq(pq_frequency);
             // printf("oi char %c oi freq %d\n", pq_frequency->head->character, pq_frequency->head->frequency);
 
+            printf("NA MAIN PQ->HEAD == %d\n", pq_frequency->head == NULL);
             NODE_TREE *tree = build_node(pq_frequency);
             printf("PRE ORDER\n");
             print_pre_order(tree);
@@ -106,12 +109,12 @@ void run()
             HASH_TABLE *hash = creating_hash_table();
             // printf("");
             U_BYTE bit_sequency[MAX_SIZE], tree_preorder[513];
-            initialize_string(bit_sequency, 0);
+
+            memset(bit_sequency, 0, MAX_SIZE);
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
-            printf("oi\n");
 
-            print_hash(hash);
+            // print_hash(hash);
 
             int size = 0, trash_size = 0;
             size_tree_and_preorder(tree, &size, tree_preorder);
@@ -119,7 +122,7 @@ void run()
 
             int bytes[2] = {0}; // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
             get_trash_size(tree, 0, &trash_size);
-            printf("linha 121 trash %d\n", trash_size);
+            // printf("linha 121 trash %d\n", trash_size);
             trash_size = 8 - (trash_size % 8);
             if (trash_size == 8)
             {
@@ -128,22 +131,19 @@ void run()
             bytes[0] = trash_size << 5;
             bytes[0] |= size >> 8;
             bytes[1] = size;
-            printf("trash %d\n", trash_size);
+            // printf("trash %d\n", trash_size);
 
-            print_byte(bytes, 0);
-            printf(" ");
-            print_byte(bytes, 1);
-            printf("\n");
-            printf("preorder %s\n", tree_preorder);
+            // print_byte(bytes, 0);
+            // printf(" ");
+            // print_byte(bytes, 1);
+            // printf("\n");
+            // printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
 
-            // fwrite(&bytes[0], sizeof(U_BYTE), 1, compressedFile);
-            // fwrite(&bytes[1], sizeof(U_BYTE), 1, compressedFile);
+
             fprintf(compressedFile, "%c", bytes[0]);
             fprintf(compressedFile, "%c", bytes[1]);
-
-            // fwrite(tree_preorder, sizeof(U_BYTE), 1, compressedFile);
             fprintf(compressedFile, "%s", tree_preorder);
 
             rewind(file);

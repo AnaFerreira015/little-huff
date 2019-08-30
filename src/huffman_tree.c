@@ -61,7 +61,9 @@ NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
     if (node2 == NULL)
         node_huff->frequency = node1->frequency;
     else
+        printf("null %d\n", node2 == NULL);
         node_huff->frequency = node1->frequency + node2->frequency;
+        printf("sss\n");
     node_huff->next = NULL;
 
     return node_huff;
@@ -86,42 +88,30 @@ int equate_nodes(NODE_TREE *node1, NODE_TREE *node2)
 
 NODE_TREE *build_node(PRIORITY_QUEUE *pq)
 {
-    printf("aqui\n");
-    printf("aaa %d\n", (pq->head == NULL));
-    printf("teste %c %d\n", pq->head->character, pq->head->frequency);
-
-    NODE_TREE *node_huff = NULL;
-    if (pq->head->next == NULL)
+    NODE_TREE *node_huff = create_node();
+    PRIORITY_QUEUE *aux = pq;
+    printf("MEU AUX NA BUILD == NULL == %d\n", aux == NULL);
+    printf("MEU SIZE NA BUILD == %d\n", pq->size);
+    if (pq->size == 1)
     {
-        printf("nózinho\n");
         return huffman_create_node(pq->head, NULL);
     }
-    while (pq->head->next != NULL)
+    while (pq->size > 1)
     {
-        printf("while\n");
+        printf("pq->head: %d\n", pq->head == NULL);
+        printf("pq->head: %d\n", pq->head == NULL);
+        
+        printf("dps do while\n");
         NODE_TREE *node1 = dequeue(pq);
+        printf("\n");
         NODE_TREE *node2 = dequeue(pq);
 
+
+          printf("entrou\n");
         node_huff = huffman_create_node(node1, node2);
 
         enqueue(pq, node_huff);
     }
-    //  printf("retornou\n");
-    // NODE_TREE *node1, *node2;
-    // int frequency;
-
-    // while(pq->head->next != NULL) {
-    //     node1 = dequeue(pq);
-    //     node2 = dequeue(pq);
-
-    //     frequency = (node1->frequency) + (node2->frequency);
-
-    //     NODE_TREE *enqueued = create_node_enqueued('*', frequency);
-    //     enqueued->left = node1;
-    //     enqueued->right = node2;
-
-    //     enqueue(pq, enqueued);
-    // }
     return pq->head;
 }
 

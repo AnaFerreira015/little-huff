@@ -28,9 +28,7 @@ void initialize_string(U_BYTE *array, int i)
 }
 
 void create_frequency_array(FILE *file, int freq[])
-{
-    initialize_array(freq, 0);
-    
+{    
     U_BYTE character;
     while (fscanf(file, "%c", &character) != EOF)
     {
