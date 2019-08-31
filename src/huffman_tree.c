@@ -4,20 +4,6 @@
 #include "../libs/priority_queue.h"
 
 /**
- * @define ANSI_COLOR_RED
- * 
- * @discussion Inserts cyan color into terminal
-*/
-#define ANSI_COLOR_CYAN "\033[1;36m"
-
-/**
- * @define ANSI_COLOR_RESET
- * 
- * @discussion Returns to the default print color
-*/
-#define ANSI_COLOR_RESET "\033[0;0m"
-
-/**
  * @discussion Creates a new node for later addition to the huffman tree.
  * 
  * @result The new node created
@@ -32,16 +18,16 @@ NODE_TREE *create_node()
     return node_tree;
 }
 
-NODE_TREE *create_node_enqueued(U_BYTE character, int frequency)
-{
-    NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-    node_tree->character = character;
-    node_tree->frequency = frequency;
-    node_tree->left = NULL;
-    node_tree->right = NULL;
-    node_tree->next = NULL;
-    return node_tree;
-}
+// NODE_TREE *create_node_enqueued(U_BYTE character, int frequency)
+// {
+//     NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
+//     node_tree->character = character;
+//     node_tree->frequency = frequency;
+//     node_tree->left = NULL;
+//     node_tree->right = NULL;
+//     node_tree->next = NULL;
+//     return node_tree;
+// }
 
 /**
  * @discussion Receives two nodes and creates a parent node in the tree by adding the '*' symbol
@@ -54,10 +40,11 @@ NODE_TREE *create_node_enqueued(U_BYTE character, int frequency)
 NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
 {
     NODE_TREE *node_huff = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-
+    unsigned char *aux = (unsigned char *)malloc(sizeof(unsigned char));
+    *aux = '*';
     node_huff->left = node1;
     node_huff->right = node2;
-    node_huff->character = '*';
+    node_huff->character = aux;
     if (node2 == NULL)
         node_huff->frequency = node1->frequency;
     else
@@ -117,32 +104,45 @@ void print_pre_order(NODE_TREE *node_tree)
 {
     if (node_tree != NULL)
     {
-        printf(ANSI_COLOR_CYAN "%c\n", node_tree->character);
+        unsigned char *aux = (unsigned char *)malloc(sizeof(unsigned char));
+        aux = node_tree->character;
+        printf("%c\n", *aux);
         print_pre_order(node_tree->left);
         print_pre_order(node_tree->right);
     }
-    printf(ANSI_COLOR_RESET);
 }
 
-void size_tree_and_preorder(NODE_TREE *tree, lli *size, U_BYTE *tree_preorder)
+void size_tree_and_preorder(NODE_TREE *tree, int *size, U_BYTE *tree_preorder)
 {
-    // printf("entrou na sizetree\n");
+
     if (tree == NULL)
     {
+        // printf("tree == null\n");
         return;
     }
-    if (isLeaf(tree))
+    else
     {
-        if (tree->character == '*' || tree->character == '\\')
+         unsigned char *aux = (unsigned char *)malloc(sizeof(unsigned char));
+        aux = tree->character;
+        // printf("#################################\n");
+        // printf("CARACTER :%c  TREE:%s\n",*aux, tree_preorder);
+        //  printf("#################################\n");
+        if (isLeaf(tree))
         {
-            tree_preorder[*size] = '\\';
-            *size += 1;
+            // printf("entrou on isleaf %c\n", tree->character);
+            if (*aux == '*' || *aux == '\\')
+            {
+                // printf("eh * ou \\\n");
+                tree_preorder[*size] = '\\';
+                *size += 1;
+            }
+            
         }
+        tree_preorder[*size] = *aux;
+        *size += 1;
+        
+        size_tree_and_preorder(tree->left, size, tree_preorder);
+        // printf("saiu do isleaf\n");
+        size_tree_and_preorder(tree->right, size, tree_preorder);
     }
-    tree_preorder[*size] = tree->character;
-    *size += 1;
-    size_tree_and_preorder(tree->left, size, tree_preorder);
-    size_tree_and_preorder(tree->right, size, tree_preorder);
-
-    // printf("acabou\n");
 }

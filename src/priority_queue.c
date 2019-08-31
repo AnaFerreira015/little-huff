@@ -9,6 +9,8 @@
  * 
  * @result true (1) or false (0)
  */
+
+typedef unsigned char U_BYTE;
 int isEmpty(PRIORITY_QUEUE *pq)
 {
     return (pq->size == 0);
@@ -60,10 +62,12 @@ void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree)
     }
 }
 
-NODE_TREE *build_node_tree(U_BYTE character, int frequency, NODE_TREE *left, NODE_TREE *right)
+NODE_TREE *build_node_tree(void *character, int frequency, NODE_TREE *left, NODE_TREE *right)
 {
+    unsigned char *aux = (unsigned char *)malloc(sizeof(unsigned char));
+    aux = character;
     NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-    node_tree->character = character;
+    node_tree->character = aux;
     node_tree->frequency = frequency;
     node_tree->next = NULL;
     node_tree->left = left;
@@ -88,7 +92,12 @@ PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
     {
         if (frequency_array[i])
         {
-            node_tree = build_node_tree(i, frequency_array[i], NULL, NULL);
+            unsigned char *aux = (unsigned char *)malloc(sizeof(unsigned char));
+            // *aux = i;
+            *aux = (unsigned char)i;
+
+            // printf("UBYTE: %c\n", *aux);
+            node_tree = build_node_tree(aux, frequency_array[i], NULL, NULL);
             enqueue(pq, node_tree);
         }
     }
@@ -121,7 +130,9 @@ void printing_pq(PRIORITY_QUEUE *pq)
 
     while (node != NULL)
     {
-        printf("%c (%d)\n", node->character, node->frequency);
+        unsigned char *aux = (unsigned char *) malloc(sizeof(unsigned char));
+        aux = node->character;
+        printf("%c (%d)\n", *aux, node->frequency);
         node = node->next;
     }
     printf("\n");

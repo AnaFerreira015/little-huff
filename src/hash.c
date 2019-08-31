@@ -54,7 +54,9 @@ void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE 
     }
     if (isLeaf(tree))
     {
-        put_in_hash(hash_table, tree->character, i, bit_sequency);
+         unsigned char *aux = (unsigned char*) malloc(sizeof(unsigned char));
+      aux = tree->character;
+        put_in_hash(hash_table, *aux, i, bit_sequency);
         return;
     }
     bit_sequency[i] = '0';

@@ -5,17 +5,39 @@
 #include "../libs/decompress.h"
 #include "../libs/compress.h"
 
-NODE_TREE *create_tree_preorder(NODE_TREE *node_tree, FILE *compressed)
+typedef unsigned char U_BYTE;
+
+typedef struct NODE
+{
+    U_BYTE character;
+    int frequency;
+    struct NODE *left;
+    struct NODE *right;
+    struct NODE *next;
+} NODE;
+
+NODE *create_node_decompress()
+{
+    NODE *node = (NODE *)malloc(sizeof(NODE));
+    node->frequency = 0;
+    node->left = NULL;
+    node->right = NULL;
+    node->next = NULL;
+    return node;
+}
+
+
+NODE *create_tree_preorder(NODE *node, FILE *compressed)
 {
     U_BYTE character;
     fscanf(compressed, "%c", &character);
 
     if (character == '*')
     {
-        node_tree = create_node();
-        node_tree->character = '*';
-        node_tree->left = create_tree_preorder(node_tree->left, compressed);
-        node_tree->right = create_tree_preorder(node_tree->right, compressed);
+        node = create_node_decompress();
+        node->character = '*';
+        node->left = create_tree_preorder(node->left, compressed);
+        node->right = create_tree_preorder(node->right, compressed);
     }
     else
     {
@@ -23,10 +45,10 @@ NODE_TREE *create_tree_preorder(NODE_TREE *node_tree, FILE *compressed)
         {
             fscanf(compressed, "%c", &character);
         }
-        node_tree = create_node();
-        node_tree->character = character;
+        node = create_node_decompress();
+        node->character = character;
     }
-    return node_tree;
+    return node;
 }
 
 void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
@@ -47,7 +69,7 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
     fscanf(compressed, "%c", &character);
     sizeTree |= character;
 
-    NODE_TREE *node = create_node();
+    NODE *node = create_node_decompress();
     printf("Montando árvore...\n\n");
     node = create_tree_preorder(node, compressed);
     // print_pre_order(node);
@@ -66,12 +88,12 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
     {
         size++;
     }
-    printf("size %d\n", size);
+    // printf("size %d\n", size);
 
     rewind(compressed);
     fseeko(compressed, 2 + sizeTree, SEEK_SET);
 
-    NODE_TREE *tree = node;
+    NODE *tree = node;
     while (size > 0)
     {
         fscanf(compressed, "%c", &character);
@@ -87,7 +109,7 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
                 {
                     tree = tree->left;
                 }
-                if (isLeaf(tree))
+                if (tree->left == NULL && tree->right == NULL)
                 {
                     fprintf(decompress_file, "%c", tree->character);
                     tree = node;
@@ -106,7 +128,7 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
                 {
                     tree = tree->left;
                 }
-                if (isLeaf(tree))
+                if (tree->left == NULL && tree->right == NULL)
                 {
                     fprintf(decompress_file, "%c", tree->character);
                     tree = node;
