@@ -61,9 +61,7 @@ NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
     if (node2 == NULL)
         node_huff->frequency = node1->frequency;
     else
-        printf("null %d\n", node2 == NULL);
         node_huff->frequency = node1->frequency + node2->frequency;
-        printf("sss\n");
     node_huff->next = NULL;
 
     return node_huff;
@@ -90,24 +88,14 @@ NODE_TREE *build_node(PRIORITY_QUEUE *pq)
 {
     NODE_TREE *node_huff = create_node();
     PRIORITY_QUEUE *aux = pq;
-    printf("MEU AUX NA BUILD == NULL == %d\n", aux == NULL);
-    printf("MEU SIZE NA BUILD == %d\n", pq->size);
     if (pq->size == 1)
     {
         return huffman_create_node(pq->head, NULL);
     }
     while (pq->size > 1)
     {
-        printf("pq->head: %d\n", pq->head == NULL);
-        printf("pq->head: %d\n", pq->head == NULL);
-        
-        printf("dps do while\n");
         NODE_TREE *node1 = dequeue(pq);
-        printf("\n");
         NODE_TREE *node2 = dequeue(pq);
-
-
-          printf("entrou\n");
         node_huff = huffman_create_node(node1, node2);
 
         enqueue(pq, node_huff);
@@ -136,21 +124,25 @@ void print_pre_order(NODE_TREE *node_tree)
     printf(ANSI_COLOR_RESET);
 }
 
-void size_tree_and_preorder(NODE_TREE *tree, int *size, U_BYTE *tree_preorder) 
+void size_tree_and_preorder(NODE_TREE *tree, lli *size, U_BYTE *tree_preorder)
 {
-    if(!isEmptyTree(tree)) 
+    // printf("entrou na sizetree\n");
+    if (tree == NULL)
     {
-        if(isLeaf(tree)) 
-        {
-            if(tree->character == '*' || tree->character == '\\') 
-            {
-                tree_preorder[*size] = '\\';
-                *size += 1;
-            }       
-        }
-        tree_preorder[*size] = tree->character;
-        *size += 1;      
-        size_tree_and_preorder(tree->left, size, tree_preorder);
-        size_tree_and_preorder(tree->right, size, tree_preorder);
+        return;
     }
+    if (isLeaf(tree))
+    {
+        if (tree->character == '*' || tree->character == '\\')
+        {
+            tree_preorder[*size] = '\\';
+            *size += 1;
+        }
+    }
+    tree_preorder[*size] = tree->character;
+    *size += 1;
+    size_tree_and_preorder(tree->left, size, tree_preorder);
+    size_tree_and_preorder(tree->right, size, tree_preorder);
+
+    // printf("acabou\n");
 }

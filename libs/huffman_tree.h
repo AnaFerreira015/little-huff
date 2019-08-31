@@ -19,6 +19,9 @@ typedef unsigned char U_BYTE;
  * @field left Pointer to the left child
  * @field rigth Pointer to the right child
 */
+
+typedef long long int lli;
+
 typedef struct NODE_TREE
 {
     U_BYTE character;
@@ -65,6 +68,6 @@ extern void print_pre_order(NODE_TREE *node_tree);
 
 extern int isLeaf(NODE_TREE *tree); 
 
-extern void size_tree_and_preorder(NODE_TREE *tree, int *size, U_BYTE *tree_preorder);
+extern void size_tree_and_preorder(NODE_TREE *tree, lli *size, U_BYTE *tree_preorder);
 
 #endif

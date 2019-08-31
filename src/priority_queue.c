@@ -92,7 +92,6 @@ PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
             enqueue(pq, node_tree);
         }
     }
-    // printing_pq(pq);
     return pq;
 }
 
@@ -110,29 +109,6 @@ NODE_TREE *dequeue(PRIORITY_QUEUE *pq)
     pq->head = pq->head->next;
     pq->size--;
     return head;
-    // printf("oi\n");
-    // NODE_TREE *current = pq->head;
-    //     printf("pq->head == NULL %d\n", pq->head == NULL);
-    // // printf("pq->head->frequency: %d", pq->head == NULL);
-    // NODE_TREE *prev = NULL;
-    // while (current != NULL && !(current->character == ))
-    // {
-    //     printf("AQUI DENTRO\n");
-    //     prev = current;
-    //     current = current->next;
-    // }
-    // if (prev != NULL)
-    // {
-    //     printf("current == NULL == %d\n", current == NULL);
-    //     prev->next = current->next;
-    // }
-    // else
-    // {
-    //     pq->head = current->next;
-    // }
-    // pq->size--;
-    // current->next = NULL;
-    // return current;
 }
 
 /** @discussion Prints all priority queue data 

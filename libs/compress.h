@@ -15,6 +15,7 @@
  */
 typedef unsigned char U_BYTE;
 
+
 /** @discussion Recebe a árvore de Huffman, um ponteiro para o tamanho dela e outro para o tamanho do lixo
  * @discussion Calcula o tamanho da árvore e do lixo
  * 
@@ -22,7 +23,7 @@ typedef unsigned char U_BYTE;
  * @param height Irá armazenar o tamanho da árvore
  * @param trash_size Irá armazenar o tamanho do lixo na árvore
  */
-extern void get_trash_size(NODE_TREE *tree, int height, int *trash_size);
+extern void get_trash_size(NODE_TREE *tree, int height, U_BYTE *trash_size);
 
 extern int is_bit_i_set(U_BYTE c, int i);
 
@@ -55,6 +56,6 @@ extern void print_byte(int bytes[], int pos);
  * 
  * @result Os bytes escritos no arquivo
  */
-extern void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile);
+extern void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile,lli sizetree);
 
 #endif

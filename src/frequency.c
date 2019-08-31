@@ -7,26 +7,6 @@
 
 typedef unsigned char U_BYTE;
 
-void initialize_array(int *array, int i)
-{
-    if (i < MAX_SIZE)
-    {
-        array[i] = 0;
-        i += 1;
-        initialize_array(array, i);
-    }
-}
-
-void initialize_string(U_BYTE *array, int i)
-{
-    if (i < MAX_SIZE)
-    {
-        array[i] = '0';
-        i += 1;
-        initialize_string(array, i);
-    }
-}
-
 void create_frequency_array(FILE *file, int freq[])
 {    
     U_BYTE character;
