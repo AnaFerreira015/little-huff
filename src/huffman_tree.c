@@ -17,11 +17,6 @@
 */
 #define ANSI_COLOR_RESET "\033[0;0m"
 
-/**
- * @discussion Creates a new node for later addition to the huffman tree.
- * 
- * @result The new node created
- */
 NODE_TREE *create_node()
 {
     NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
@@ -32,25 +27,6 @@ NODE_TREE *create_node()
     return node_tree;
 }
 
-NODE_TREE *create_node_enqueued(U_BYTE character, int frequency)
-{
-    NODE_TREE *node_tree = (NODE_TREE *)malloc(sizeof(NODE_TREE));
-    node_tree->character = character;
-    node_tree->frequency = frequency;
-    node_tree->left = NULL;
-    node_tree->right = NULL;
-    node_tree->next = NULL;
-    return node_tree;
-}
-
-/**
- * @discussion Receives two nodes and creates a parent node in the tree by adding the '*' symbol
- * 
- * @param node1 The first lowest frequency node in the queue
- * @param node2 The second lowest frequency node in the queue
- * 
- * @result A knot of huffman tree
- */
 NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
 {
     NODE_TREE *node_huff = (NODE_TREE *)malloc(sizeof(NODE_TREE));
@@ -65,23 +41,6 @@ NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
     node_huff->next = NULL;
 
     return node_huff;
-}
-
-/**
- * @discussion Get two nodes and compare which one is the smallest
- * 
- * @param node1 A queue node
- * @param node2 A queue node
- * 
- * @result True (1) or False (0)
- */
-int equate_nodes(NODE_TREE *node1, NODE_TREE *node2)
-{
-    if (node1->frequency < node2->frequency)
-    {
-        return 1;
-    }
-    return 0;
 }
 
 NODE_TREE *build_node(PRIORITY_QUEUE *pq)
@@ -124,7 +83,7 @@ void print_pre_order(NODE_TREE *node_tree)
     printf(ANSI_COLOR_RESET);
 }
 
-void size_tree_and_preorder(NODE_TREE *tree, lli *size, U_BYTE *tree_preorder)
+void size_tree_and_preorder(NODE_TREE *tree, lli *size, U_CHAR *tree_preorder)
 {
     // printf("entrou na sizetree\n");
     if (tree == NULL)

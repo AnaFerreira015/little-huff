@@ -4,51 +4,40 @@
 #include "../libs/huffman_tree.h"
 
 /**
- * @define MAX_SIZE
+ * @define ASCII_SIZE
  * 
  * @discussion Maximum array size
 */
-#define MAX_SIZE 256
+#define ASCII_SIZE 256
 
-/** @discussion Inicializa a hash table com espaços vazios
- * 
- * @result Uma hash table
- */
 HASH_TABLE *creating_hash_table()
 {
     HASH_TABLE *new_hash_table = (HASH_TABLE *)malloc(sizeof(HASH_TABLE));
 
     int i, j;
-    for (i = 0; i < MAX_SIZE; i++)
+    for (i = 0; i < ASCII_SIZE; i++)
     {
-        for (j = 0; j < MAX_SIZE; j++)
+        for (j = 0; j < ASCII_SIZE; j++)
         {
-            new_hash_table->matriz[i][j] = (U_BYTE*)' ';
+            new_hash_table->matriz[i][j] = (U_CHAR *)' ';
         }
     }
     return new_hash_table;
 }
 
-/** @discussion Recebe a árvore de Huffman, um ponteiro para o tamanho dela e outro para o tamanho do lixo
- * 
- * @param tree A árvore de Huffman
- * @param height Irá armazenar o tamanho da árvore
- * @param trash_size Irá armazenar o tamanho do lixo na árvore
- * 
- */
-void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, int index, U_BYTE bit_sequency[])
+void put_in_hash(HASH_TABLE *hash_table, U_CHAR character, int index, U_CHAR bit_sequency[])
 {
     int i;
     for (i = 0; i < index; i++)
     {
-        hash_table->matriz[character][i] = (U_BYTE)bit_sequency[i];
+        hash_table->matriz[character][i] = (U_CHAR)bit_sequency[i];
     }
     hash_table->matriz[character][i] = '\0';
 }
 
-void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[])
+void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_CHAR bit_sequency[])
 {
-    if(isEmptyTree(tree)) 
+    if (isEmptyTree(tree))
     {
         return;
     }
@@ -68,14 +57,14 @@ void print_hash(HASH_TABLE *hash)
 {
     int i, j;
 
-    for (i = 0; i < MAX_SIZE; i++)
+    for (i = 0; i < ASCII_SIZE; i++)
     {
-        if (hash->matriz[i][0] != (U_BYTE)' ')
+        if (hash->matriz[i][0] != (U_CHAR)' ')
         {
             printf("%c: ", i);
-            for (j = 0; j < MAX_SIZE; j++)
+            for (j = 0; j < ASCII_SIZE; j++)
             {
-                printf("%c", (U_BYTE*)hash->matriz[i][j]);
+                printf("%c", (U_CHAR *)hash->matriz[i][j]);
             }
             printf("\n");
         }

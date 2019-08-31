@@ -7,7 +7,7 @@
 
 NODE_TREE *create_tree_preorder(NODE_TREE *node_tree, FILE *compressed)
 {
-    U_BYTE character;
+    U_CHAR character;
     fscanf(compressed, "%c", &character);
 
     if (character == '*')
@@ -29,9 +29,9 @@ NODE_TREE *create_tree_preorder(NODE_TREE *node_tree, FILE *compressed)
     return node_tree;
 }
 
-void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
+void start_decompress(FILE *compressed, U_CHAR *type)
 {
-    U_BYTE character;
+    U_CHAR character;
 
     int trash = 0, sizeTree = 0, aux2 = 0, a[1], bytes[2] = {0}, i;
 
@@ -53,11 +53,11 @@ void start_decompress(FILE *compressed, U_BYTE *input_file, U_BYTE *type)
     // print_pre_order(node);
     printf("Iniciando descompressão...\n\n");
 
-    U_BYTE out_file[MAX_SIZE];
+    U_CHAR out_file[ASCII_SIZE];
     strcpy(out_file, "descompactado.");
     strcat(out_file, type);
 
-    U_BYTE aux = 0;
+    U_CHAR aux = 0;
 
     FILE *decompress_file = fopen(out_file, "wb");
     int size = 0;

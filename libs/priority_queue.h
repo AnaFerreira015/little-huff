@@ -1,6 +1,12 @@
 #ifndef _PRIORITY_QUEUE_H_
 #define _PRIORITY_QUEUE_H_
 
+/**
+ * @typedef NODE_TREE
+ * 
+ * @discussion Defines a structure for NODE_TREE, huffman tree node, declared in huffman_tree.h
+ * 
+*/
 typedef struct NODE_TREE NODE_TREE;
 
 /**
@@ -9,6 +15,7 @@ typedef struct NODE_TREE NODE_TREE;
  * @discussion Properties of PRIORITY_QUEUE (head) are stored in this structure
  * 
  * @field head Pointer to the first node in the queue
+ * @field size Integer indicating queue size
 */
 typedef struct PRIORITY_QUEUE
 {
@@ -29,12 +36,26 @@ extern int isEmpty(PRIORITY_QUEUE *pq);
  *             Add the parameter data in the queue
  * 
  * @param pq A priority queue
- * @param character Each character of the file
- * @param frequency Character frequency
+ * @param node_tree Huffman node created from queue
+ * 
+ * @result Queued huffman node
  */
 extern void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree);
 
-/** @discussion Line each character and frequency of the array
+/**
+ * @discussion Get its character and frequency in the previously created frequency array, and a pointer 
+ * to its left and right child and create a huffman node
+ * 
+ * @param character File character
+ * @param frequency Frequency of each character saved in frequency array
+ * @param left Pointer to the left child of the node
+ * @param right Pointer to the right node child
+ * 
+ * @result A huffman node created from his frequency in the frequency array
+ */
+extern NODE_TREE *build_node_tree(U_CHAR character, int frequency, NODE_TREE *left, NODE_TREE *right);
+
+/** @discussion Get the previously calculated frequency array and create huffman nodes from each frequency
  * 
  * @param frequency_array A frequency array
  * 
@@ -43,8 +64,7 @@ extern void enqueue(PRIORITY_QUEUE *pq, NODE_TREE *node_tree);
 extern PRIORITY_QUEUE *enqueue_f_array(int frequency_array[]);
 
 /**
- * @discussion Receives a cell from the priority queue and removes it from the queue
- *             Returns the value taken
+ * @discussion Get a priority queue, remove node from head and shrink queue size
  * 
  * @param pq A priority queue
  * 
@@ -54,7 +74,7 @@ extern NODE_TREE *dequeue(PRIORITY_QUEUE *pq);
 
 /** @discussion Prints all priority queue data 
  * 
- * @param pq A priority queue
+ * @param pq The printout of all queue values
  */
 extern void printing_pq(PRIORITY_QUEUE *pq);
 

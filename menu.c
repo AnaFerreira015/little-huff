@@ -35,18 +35,18 @@
 #define ANSI_COLOR_RED "\033[0;31m"
 
 /**
- * @define MAX_SIZE
+ * @define ASCII_SIZE
  * 
  * @discussion Maximum array size
 */
-#define MAX_SIZE 256
+#define ASCII_SIZE 256
 
 /**
  * @typedef BYTE 
  * 
  * @discussion Uses unsigned char to preserve the pattern and the most significant bit to lose its function as signal bit
  */
-typedef unsigned char U_BYTE;
+typedef unsigned char U_CHAR;
 typedef long long int lli;
 
 void run()
@@ -66,13 +66,13 @@ void run()
         printf("3. Exit\n");
         scanf("%d", &opt);
 
-        char file_name[MAX_SIZE];
+        char file_name[ASCII_SIZE];
 
         switch (opt)
         {
         case 1:
         {
-            int freq[MAX_SIZE] = {0};
+            int freq[ASCII_SIZE] = {0};
             printf("FILE: ");
             scanf("%s", file_name);
             printf("\n");
@@ -91,7 +91,6 @@ void run()
 
             PRIORITY_QUEUE *pq_frequency = createEmptyQueue();
             pq_frequency = enqueue_f_array(freq);
-            
 
             printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
             printf(ANSI_COLOR_RESET);
@@ -103,9 +102,9 @@ void run()
             print_pre_order(tree);
             printf(ANSI_COLOR_RESET);
             HASH_TABLE *hash = creating_hash_table();
-            U_BYTE bit_sequency[MAX_SIZE], tree_preorder[514];
+            U_CHAR bit_sequency[ASCII_SIZE], tree_preorder[514];
 
-            memset(bit_sequency, 0, MAX_SIZE);
+            memset(bit_sequency, 0, ASCII_SIZE);
             printf("depois do memset\n");
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
@@ -113,7 +112,7 @@ void run()
             // print_hash(hash);
 
             lli size = 0;
-            U_BYTE trash_size = 0;
+            U_CHAR trash_size = 0;
 
             printf("antes do tamanho da arvore\n");
             size_tree_and_preorder(tree, &size, tree_preorder);
@@ -134,7 +133,7 @@ void run()
             bytes[0] |= size >> 8;
             bytes[1] = size;
             printf("trash %d\n", trash_size);
-            printf("SIZE TREE: %lld\n",size);
+            printf("SIZE TREE: %lld\n", size);
 
             print_byte(bytes, 0);
             printf(" ");
@@ -148,9 +147,9 @@ void run()
             fprintf(compressedFile, "%c", bytes[0]);
             printf("escreveu o byte[0]\n");
             fprintf(compressedFile, "%c", bytes[1]);
-             printf("escreveu o byte[1]\n");
+            printf("escreveu o byte[1]\n");
             fprintf(compressedFile, "%s", tree_preorder);
-             printf("escreveu a arvore\n");
+            printf("escreveu a arvore\n");
 
             rewind(file);
             // printf("dps do rewind\n");
@@ -162,7 +161,7 @@ void run()
 
         case 2:
             printf("Digite o nome do arquivo (ex.: arquivo.huff):\n");
-            U_BYTE array[MAX_SIZE],type[15];
+            U_CHAR array[ASCII_SIZE], type[15];
             scanf("%s", array);
 
             printf("\n\nDigite o tipo do arquivo (ex.: txt):\n");
@@ -176,7 +175,7 @@ void run()
             }
 
             rewind(compressedFile);
-            start_decompress(compressedFile, array,type);
+            start_decompress(compressedFile, type);
 
             break;
 
