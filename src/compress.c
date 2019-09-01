@@ -106,7 +106,11 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
         
     }
     printf("acabou a compressao\n");
+    if(amount != 0)
+    {
+
     fprintf(compressedFile, "%c", byteFile);
+    }
 
     a[0] = byteFile;
     print_byte(a, 0);

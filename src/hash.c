@@ -23,7 +23,7 @@ HASH_TABLE *creating_hash_table()
     {
         for (j = 0; j < MAX_SIZE; j++)
         {
-            new_hash_table->matriz[i][j] = (U_BYTE*)' ';
+            new_hash_table->matriz[i][j] = (unsigned char*)' ';
         }
     }
     return new_hash_table;
@@ -36,17 +36,17 @@ HASH_TABLE *creating_hash_table()
  * @param trash_size Irá armazenar o tamanho do lixo na árvore
  * 
  */
-void put_in_hash(HASH_TABLE *hash_table, U_BYTE character, int index, U_BYTE bit_sequency[])
+void put_in_hash(HASH_TABLE *hash_table, unsigned char character, int index, unsigned char bit_sequency[])
 {
     int i;
     for (i = 0; i < index; i++)
     {
-        hash_table->matriz[character][i] = (U_BYTE)bit_sequency[i];
+        hash_table->matriz[character][i] = (unsigned char*)bit_sequency[i];
     }
     hash_table->matriz[character][i] = '\0';
 }
 
-void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, U_BYTE bit_sequency[])
+void walking_in_the_tree(HASH_TABLE *hash_table, NODE_TREE *tree, int i, unsigned char bit_sequency[])
 {
     if(isEmptyTree(tree)) 
     {
@@ -72,12 +72,12 @@ void print_hash(HASH_TABLE *hash)
 
     for (i = 0; i < MAX_SIZE; i++)
     {
-        if (hash->matriz[i][0] != (U_BYTE)' ')
+        if (hash->matriz[i][0] != (unsigned char*)' ')
         {
             printf("%c: ", i);
             for (j = 0; j < MAX_SIZE; j++)
             {
-                printf("%c", (U_BYTE*)hash->matriz[i][j]);
+                printf("%c", hash->matriz[i][j]);
             }
             printf("\n");
         }
