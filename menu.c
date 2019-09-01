@@ -102,8 +102,9 @@ void run()
             print_pre_order(tree);
             printf(ANSI_COLOR_RESET);
             HASH_TABLE *hash = creating_hash_table();
-            U_CHAR bit_sequency[ASCII_SIZE], tree_preorder[514];
 
+
+            U_CHAR bit_sequency[ASCII_SIZE], tree_preorder[514];
             memset(bit_sequency, 0, ASCII_SIZE);
             printf("depois do memset\n");
 
@@ -121,7 +122,7 @@ void run()
 
             int bytes[2] = {0}; // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
             printf("antes do tamanho do lixo\n");
-            get_trash_size(tree, 0, &trash_size);
+            get_trash_size(tree, 0, &trash_size);// o valor trash_size agora é o tamanho total de bits do arquivo
             trash_size = 8 - (trash_size % 8);
 
             if (trash_size == 8)
@@ -148,6 +149,7 @@ void run()
             printf("escreveu o byte[0]\n");
             fprintf(compressedFile, "%c", bytes[1]);
             printf("escreveu o byte[1]\n");
+            printf("arvore huff preordem: %s\n", tree_preorder);
             fprintf(compressedFile, "%s", tree_preorder);
             printf("escreveu a arvore\n");
 

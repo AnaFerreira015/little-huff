@@ -46,6 +46,7 @@ void print_byte(int bytes[], int pos)
             printf("0");
         }
     }
+    printf("\n");
 }
 
 void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli sizetree)
@@ -104,8 +105,9 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
         }
     }
     printf("acabou a compressao\n");
-    fprintf(compressedFile, "%c", byteFile);
-
+    if (amount != 0){
+        fprintf(compressedFile, "%c", byteFile);
+    }
     a[0] = byteFile;
     print_byte(a, 0);
     fclose(compressedFile);
