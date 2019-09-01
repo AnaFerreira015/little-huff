@@ -96,7 +96,8 @@ void start_decompress(FILE *compressed, U_CHAR *type)
         }
         size--;
     }
-
+    
+    fscanf(compressed, "%c", &character);
     for (i = 7; i >= trash; i--)
     {
         if (is_bit_i_set(character, i))

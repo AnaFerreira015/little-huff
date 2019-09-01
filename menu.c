@@ -49,6 +49,20 @@
 typedef unsigned char U_CHAR;
 typedef long long int lli;
 
+void put_tree(NODE_TREE *bt,FILE* output)
+{ 
+  if(bt != NULL)
+  {
+    if((bt->character=='*' || bt->character=='\\') && bt->left==NULL && bt->right==NULL)
+    {
+        fputc('\\',output);
+    }
+    fputc(bt->character,output);
+    put_tree(bt->left,output);
+    put_tree(bt->right,output);
+  }
+}
+
 void run()
 {
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
@@ -110,7 +124,7 @@ void run()
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
             printf("depois da hash\n");
-            // print_hash(hash);
+            print_hash(hash);
 
             lli size = 0;
             U_CHAR trash_size = 0;
@@ -150,7 +164,8 @@ void run()
             fprintf(compressedFile, "%c", bytes[1]);
             printf("escreveu o byte[1]\n");
             printf("arvore huff preordem: %s\n", tree_preorder);
-            fprintf(compressedFile, "%s", tree_preorder);
+            // fprintf(compressedFile, "%s", tree_preorder);
+            put_tree(tree, compressedFile);
             printf("escreveu a arvore\n");
 
             rewind(file);
