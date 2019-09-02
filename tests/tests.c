@@ -53,6 +53,7 @@ void enqueue_test()
 void queue_empty_test()
 {
     PRIORITY_QUEUE *pq;
+    // CU_ASSERT(pq == NULL);
     CU_ASSERT(pq != NULL);
 }
 
