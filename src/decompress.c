@@ -72,7 +72,7 @@ void start_decompress(FILE *compressed, U_CHAR *type)
     fseeko(compressed, 2 + sizeTree, SEEK_SET);
 
     NODE_TREE *tree = node;
-    while (size > 0)
+    while (size > 1)
     {
         fscanf(compressed, "%c", &character);
         if (size != 1)
@@ -94,26 +94,25 @@ void start_decompress(FILE *compressed, U_CHAR *type)
                 }
             }
         }
+        size--;
+    }
+    
+    fscanf(compressed, "%c", &character);
+    for (i = 7; i >= trash; i--)
+    {
+        if (is_bit_i_set(character, i))
+        {
+            tree = tree->right;
+        }
         else
         {
-            for (i = 7; i >= trash; i--)
-            {
-                if (is_bit_i_set(character, i))
-                {
-                    tree = tree->right;
-                }
-                else
-                {
-                    tree = tree->left;
-                }
-                if (isLeaf(tree))
-                {
-                    fprintf(decompress_file, "%c", tree->character);
-                    tree = node;
-                }
-            }
+            tree = tree->left;
         }
-        size--;
+        if (isLeaf(tree))
+        {
+            fprintf(decompress_file, "%c", tree->character);
+            tree = node;
+        }
     }
 
     fclose(compressed);

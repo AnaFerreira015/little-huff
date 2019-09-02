@@ -51,6 +51,8 @@ extern NODE_TREE *create_node();
  */
 extern NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2);
 
+extern void put_tree(NODE_TREE *bt,FILE* output);
+
 /**
  * @discussion Receives the priority queue and creating tree nodes from the first least frequent nodes 
  * until there is only one node in the queue
