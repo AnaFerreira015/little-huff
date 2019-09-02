@@ -71,22 +71,10 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
             if (hash_table->matriz[character][j] != (U_CHAR *)'0')
             {
                 byteFile = set_bit(byteFile, byte_size);
-                // printf("\tEU: 1   ");
-                // a[0] = byteFile;
-                // print_byte(a, 0);
-                amount++;
-                byte_size--;
-                j++;
             }
-            else
-            {
-                //   printf("\tEU dnv: 0   ");
-                //   a[0] = byteFile;
-                //     print_byte(a, 0);
-                amount++;
-                byte_size--;
-                j++;
-            }
+            amount++;
+            byte_size--;
+            j++;
             
             if (amount == 8)
             {
