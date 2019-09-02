@@ -59,16 +59,17 @@ void run()
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
     printf("\n\tWELCOME TO LITTLE HUFF\n");
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
-    printf(ANSI_COLOR_RESET);
 
     int opt, i;
 
     while (1)
     {
+        printf(ANSI_COLOR_CYAN);
         printf("Choose an Option\n");
         printf("1. Compress\n");
         printf("2. Decompress\n");
         printf("3. Exit\n");
+        printf(ANSI_COLOR_RESET);
         scanf("%d", &opt);
 
         char file_name[ASCII_SIZE];
