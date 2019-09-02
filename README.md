@@ -7,14 +7,13 @@ In computer science and information theory, a Huffman code is a particular type 
 
 This project is being developed jointly during the discipline **data structure 2019.1** by the students:
 * [Ana Ferreira](https://github.com/AnaFerreira015)
-* Gabriel César
 * [Kelly Bianca](https://github.com/kellybianca)
-* Marcos Ivan
 
 The following libraries were developed to make the code simpler to understand, each library dealing with a different data type or with functions that have a common goal:
 1. Hash Table (hash.h)
 2. Priority Queue (priority_queue.h)
 3. Double Linked List
+4. Tree (huffman_tree.h)
 
 ## Programming language, compilation and execution
 
@@ -29,7 +28,7 @@ For the **compilation and execution of the program**, the following commands wil
 * Compilation of the project:
 
 ```
-gcc main.c -o main 
+gcc -g main.c -o main -w
 ```
 
 * Execution of the project:
