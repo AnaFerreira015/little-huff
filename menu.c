@@ -83,11 +83,11 @@ void run()
 
             if (file == NULL)
             {
-                printf("Arquivo vazio..\n\n");
+                printf("Empty file...\n\n");
                 break;
             }
 
-            printf("Calculando frequencia do arquivo...\n\n");
+            printf("Calculating file frequency...\n\n");
             create_frequency_array(file, freq);
 
             PRIORITY_QUEUE *pq_frequency = createEmptyQueue();
@@ -128,7 +128,7 @@ void run()
 
             put_tree(tree, compressedFile);
 
-            printf("Aguarde um momento...\n\n");
+            printf("Wait a moment...\n\n");
             rewind(file);
             write_to_file(file, hash, compressedFile, size);
             fclose(file);
@@ -136,22 +136,22 @@ void run()
         }
 
         case 2:
-            printf("Digite o nome do arquivo (ex.: arquivo.huff):\n");
-            U_CHAR array[ASCII_SIZE], type[15];
-            scanf("%s", array);
+            printf("FILE TO UNCOMPRESS (ex.: file.huff):\n");
+            U_CHAR file_name_dec[ASCII_SIZE], extension[15];
+            scanf("%s", file_name_dec);
 
-            printf("\n\nDigite o tipo do arquivo (ex.: txt):\n");
-            scanf("%s", type);
+            printf("\n\nEnter file extension (ex.: txt):\n");
+            scanf("%s", extension);
 
-            FILE *compressedFile = fopen(array, "rb");
+            FILE *compressedFile = fopen(file_name_dec, "rb");
             if (compressedFile == NULL)
             {
-                printf("Arquivo não encontrado\n");
+                printf("File not found\n");
                 break;
             }
 
             rewind(compressedFile);
-            start_decompress(compressedFile, type);
+            start_decompress(compressedFile, extension);
 
             break;
 
