@@ -51,7 +51,14 @@ extern NODE_TREE *create_node();
  */
 extern NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2);
 
-extern void put_tree(NODE_TREE *bt,FILE* output);
+/**
+ * @discussion Saves the tree in preorder, character by character, within the file
+ * 
+ * @param bt The mounted huffman tree
+ * 
+ * @result The huffman tree written in preorder in the file
+ */
+extern void put_tree(NODE_TREE *bt, FILE *output);
 
 /**
  * @discussion Receives the priority queue and creating tree nodes from the first least frequent nodes 
