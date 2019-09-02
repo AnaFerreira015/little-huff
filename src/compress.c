@@ -56,18 +56,12 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
     int i, j = 0, size = 0, bit_amount = 0, byte_size = 7; // bit_amount é o controlador de bits, para a cada 8 bits, escrever no arquivo
 
     rewind(compressedFile);
-    printf("antes de escrever\n");
     fseek(compressedFile, 2 + sizetree, SEEK_SET);
     while (fscanf(file, "%c", &character) != EOF)
-    // while (!feof(file))
     {
-        // printf("lendo os caracteres\n");
         j = 0;
-        // printf("aqui %c %d\n", character, size);
         while (hash_table->matriz[character][j] != (U_CHAR *)'\0')
         {
-            // printf("ch %c     size %d\n\n", character, i);
-            
             if (hash_table->matriz[character][j] != (U_CHAR *)'0')
             {
                 byteFile = set_bit(byteFile, byte_size);
@@ -75,12 +69,9 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
             bit_amount++;
             byte_size--;
             j++;
-            
+
             if (bit_amount == 8)
             {
-                // printf("completou 1 byte\n");
-                // a[0] = byteFile;
-                // print_byte(a, 0);
                 fprintf(compressedFile, "%c", byteFile);
                 byteFile = 0;
                 byte_size = 7;
@@ -88,11 +79,11 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
             }
         }
     }
-    printf("acabou a compressao\n");
-    if (bit_amount != 0){
+    if (bit_amount != 0)
+    {
         fprintf(compressedFile, "%c", byteFile);
     }
-    // a[0] = byteFile;
-    // print_byte(a, 0);
+    printf("Arquivo comprimido com sucesso...\n\n");
+
     fclose(compressedFile);
 }
