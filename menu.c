@@ -49,20 +49,6 @@
 typedef unsigned char U_CHAR;
 typedef long long int lli;
 
-void put_tree(NODE_TREE *bt,FILE* output)
-{ 
-  if(bt != NULL)
-  {
-    if((bt->character=='*' || bt->character=='\\') && bt->left==NULL && bt->right==NULL)
-    {
-        fputc('\\',output);
-    }
-    fputc(bt->character,output);
-    put_tree(bt->left,output);
-    put_tree(bt->right,output);
-  }
-}
-
 void run()
 {
     printf(ANSI_COLOR_LIGHT_MAGENTA "\n==============================================\n");
@@ -98,44 +84,44 @@ void run()
             printf("Calculando frequencia do arquivo...\n");
             create_frequency_array(file, freq);
 
-            printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
-            printf(ANSI_COLOR_RESET);
+            // printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
+            // printf(ANSI_COLOR_RESET);
 
-            printing_frequency_array(freq);
+            // printing_frequency_array(freq);
 
             PRIORITY_QUEUE *pq_frequency = createEmptyQueue();
             pq_frequency = enqueue_f_array(freq);
 
-            printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
-            printf(ANSI_COLOR_RESET);
-            printing_pq(pq_frequency);
+            // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
+            // printf(ANSI_COLOR_RESET);
+            // printing_pq(pq_frequency);
             // printing_pq(pq_frequency);
 
             NODE_TREE *tree = build_node(pq_frequency);
-            printf("PRE ORDER\n");
-            print_pre_order(tree);
-            printf(ANSI_COLOR_RESET);
+            // printf("PRE ORDER\n");
+            // print_pre_order(tree);
+            // printf(ANSI_COLOR_RESET);
             HASH_TABLE *hash = creating_hash_table();
 
 
             U_CHAR bit_sequency[ASCII_SIZE], tree_preorder[514];
             memset(bit_sequency, 0, ASCII_SIZE);
-            printf("depois do memset\n");
+            // printf("depois do memset\n");
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
-            printf("depois da hash\n");
+            // printf("depois da hash\n");
             print_hash(hash);
 
             lli size = 0;
             U_CHAR trash_size = 0;
 
-            printf("antes do tamanho da arvore\n");
+            // printf("antes do tamanho da arvore\n");
             size_tree_and_preorder(tree, &size, tree_preorder);
             // printf("SIZE TREE: %lld\n",size);
             tree_preorder[size] = '\0';
 
             int bytes[2] = {0}; // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
-            printf("antes do tamanho do lixo\n");
+            // printf("antes do tamanho do lixo\n");
             get_trash_size(tree, 0, &trash_size);// o valor trash_size agora é o tamanho total de bits do arquivo
             trash_size = 8 - (trash_size % 8);
 

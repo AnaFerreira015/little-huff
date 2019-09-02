@@ -43,6 +43,20 @@ NODE_TREE *huffman_create_node(NODE_TREE *node1, NODE_TREE *node2)
     return node_huff;
 }
 
+void put_tree(NODE_TREE *bt,FILE* output)
+{ 
+  if(bt != NULL)
+  {
+    if((bt->character=='*' || bt->character=='\\') && bt->left==NULL && bt->right==NULL)
+    {
+        fputc('\\',output);
+    }
+    fputc(bt->character,output);
+    put_tree(bt->left,output);
+    put_tree(bt->right,output);
+  }
+}
+
 NODE_TREE *build_node(PRIORITY_QUEUE *pq)
 {
     NODE_TREE *node_huff = create_node();

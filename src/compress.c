@@ -53,7 +53,7 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
 {
     U_CHAR character, byteFile = 0;
     int a[1];
-    int i, j = 0, size = 0, amount = 0, byte_size = 7;
+    int i, j = 0, size = 0, bit_amount = 0, byte_size = 7; // bit_amount é o controlador de bits, para a cada 8 bits, escrever no arquivo
 
     rewind(compressedFile);
     printf("antes de escrever\n");
@@ -72,11 +72,11 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
             {
                 byteFile = set_bit(byteFile, byte_size);
             }
-            amount++;
+            bit_amount++;
             byte_size--;
             j++;
             
-            if (amount == 8)
+            if (bit_amount == 8)
             {
                 // printf("completou 1 byte\n");
                 // a[0] = byteFile;
@@ -84,12 +84,12 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
                 fprintf(compressedFile, "%c", byteFile);
                 byteFile = 0;
                 byte_size = 7;
-                amount = 0;
+                bit_amount = 0;
             }
         }
     }
     printf("acabou a compressao\n");
-    if (amount != 0){
+    if (bit_amount != 0){
         fprintf(compressedFile, "%c", byteFile);
     }
     // a[0] = byteFile;
