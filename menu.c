@@ -77,87 +77,60 @@ void run()
             scanf("%s", file_name);
             printf("\n");
 
-            printf("THE FILE %s IS OPENED\n", file_name);
+            printf("THE FILE %s IS OPENED\n\n", file_name);
             /** Opens the file in binary read mode */
             FILE *file = fopen(file_name, "rb");
 
-            printf("Calculando frequencia do arquivo...\n");
+            if (file == NULL)
+            {
+                printf("Arquivo vazio..\n\n");
+                break;
+            }
+
+            printf("Calculando frequencia do arquivo...\n\n");
             create_frequency_array(file, freq);
-
-            // printf(ANSI_COLOR_RED "\nPrinting frequency array: \n");
-            // printf(ANSI_COLOR_RESET);
-
-            // printing_frequency_array(freq);
 
             PRIORITY_QUEUE *pq_frequency = createEmptyQueue();
             pq_frequency = enqueue_f_array(freq);
 
-            // printf(ANSI_COLOR_RED "\nPrinting priority queue: \n");
-            // printf(ANSI_COLOR_RESET);
-            // printing_pq(pq_frequency);
-            // printing_pq(pq_frequency);
-
             NODE_TREE *tree = build_node(pq_frequency);
-            // printf("PRE ORDER\n");
-            // print_pre_order(tree);
-            // printf(ANSI_COLOR_RESET);
+
             HASH_TABLE *hash = creating_hash_table();
 
-
-            U_CHAR bit_sequency[ASCII_SIZE], tree_preorder[514];
+            U_CHAR bit_sequency[ASCII_SIZE];
             memset(bit_sequency, 0, ASCII_SIZE);
-            // printf("depois do memset\n");
 
             walking_in_the_tree(hash, tree, 0, bit_sequency);
-            // printf("depois da hash\n");
-            print_hash(hash);
+            // print_hash(hash);
 
             lli size = 0;
             U_CHAR trash_size = 0;
 
-            // printf("antes do tamanho da arvore\n");
-            size_tree_and_preorder(tree, &size, tree_preorder);
-            // printf("SIZE TREE: %lld\n",size);
-            tree_preorder[size] = '\0';
+            size_tree_and_preorder(tree, &size);
 
-            int bytes[2] = {0}; // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
-            // printf("antes do tamanho do lixo\n");
-            get_trash_size(tree, 0, &trash_size);// o valor trash_size agora é o tamanho total de bits do arquivo
+            int bytes[2] = {0};                   // bytes[0] -> lixo e bytes[1] -> tamanho da árvore
+            get_trash_size(tree, 0, &trash_size); // o valor trash_size agora é o tamanho total de bits do arquivo
             trash_size = 8 - (trash_size % 8);
 
             if (trash_size == 8)
             {
                 trash_size = 0;
             }
-            printf("trash dps do if: %d\n", trash_size);
+
             bytes[0] = trash_size << 5;
             bytes[0] |= size >> 8;
             bytes[1] = size;
-            printf("trash %d\n", trash_size);
-            printf("SIZE TREE: %lld\n", size);
-
-            print_byte(bytes, 0);
-            printf(" ");
-            print_byte(bytes, 1);
-            printf("\n");
-            printf("preorder %s\n", tree_preorder);
 
             FILE *compressedFile = fopen("compressed.huff", "wb");
-            printf("abriu o arquivo\n");
 
             fprintf(compressedFile, "%c", bytes[0]);
-            printf("escreveu o byte[0]\n");
             fprintf(compressedFile, "%c", bytes[1]);
-            printf("escreveu o byte[1]\n");
-            printf("arvore huff preordem: %s\n", tree_preorder);
-            // fprintf(compressedFile, "%s", tree_preorder);
-            put_tree(tree, compressedFile);
-            printf("escreveu a arvore\n");
 
+            put_tree(tree, compressedFile);
+
+            printf("Aguarde um momento...\n\n");
             rewind(file);
-            // printf("dps do rewind\n");
             write_to_file(file, hash, compressedFile, size);
-            printf("depois de escrever\n");
             fclose(file);
             break;
         }

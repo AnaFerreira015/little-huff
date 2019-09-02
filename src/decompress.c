@@ -50,7 +50,6 @@ void start_decompress(FILE *compressed, U_CHAR *type)
     NODE_TREE *node = create_node();
     printf("Montando árvore...\n\n");
     node = create_tree_preorder(node, compressed);
-    // print_pre_order(node);
     printf("Iniciando descompressão...\n\n");
 
     U_CHAR out_file[ASCII_SIZE];
@@ -66,7 +65,6 @@ void start_decompress(FILE *compressed, U_CHAR *type)
     {
         size++;
     }
-    printf("size %d\n", size);
 
     rewind(compressed);
     fseeko(compressed, 2 + sizeTree, SEEK_SET);
@@ -114,7 +112,7 @@ void start_decompress(FILE *compressed, U_CHAR *type)
             tree = node;
         }
     }
-
+    printf("Arquivo descomprimido com Sucesso...\n\n");
     fclose(compressed);
     fclose(decompress_file);
 }

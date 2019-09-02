@@ -100,6 +100,6 @@ extern void print_pre_order(NODE_TREE *node_tree);
  * 
  * @result The size of the tree and it saves in preorder to an array
  */
-extern void size_tree_and_preorder(NODE_TREE *tree, lli *size, U_CHAR *tree_preorder);
+extern void size_tree_and_preorder(NODE_TREE *tree, lli *size);
 
 #endif
