@@ -39,6 +39,9 @@
  * 
  * @discussion Maximum array size
 */
+
+#define ANSI_COLOR_WHITE "\033[1;97m" 
+
 #define ASCII_SIZE 256
 
 /**
@@ -64,7 +67,7 @@ void run()
 
     while (1)
     {
-        printf(ANSI_COLOR_CYAN);
+        printf(ANSI_COLOR_WHITE);
         printf("Choose an Option\n");
         printf("1. Compress\n");
         printf("2. Decompress\n");
