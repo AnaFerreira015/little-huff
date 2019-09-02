@@ -65,7 +65,7 @@ PRIORITY_QUEUE *enqueue_f_array(int frequency_array[])
     NODE_TREE *node_tree;
     int i;
 
-    for (i = 0; i < 256; i++)
+    for (i = 0; i < ASCII_SIZE; i++)
     {
         if (frequency_array[i])
         {
