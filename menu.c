@@ -47,6 +47,11 @@
  * @discussion Uses unsigned char to preserve the pattern and the most significant bit to lose its function as signal bit
  */
 typedef unsigned char U_CHAR;
+/**
+ * @typedef lli
+ * 
+ * @discussion Used to shorten type name
+ */
 typedef long long int lli;
 
 void run()
