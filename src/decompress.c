@@ -37,10 +37,10 @@ void start_decompress(FILE *compressed, U_CHAR *type)
 
     fscanf(compressed, "%c", &character);
 
-    printf("\nObtendo tamanho do lixo..\n\n");
+    printf("\nGetting the trash size...\n\n");
     trash = character >> 5;
 
-    printf("Obtendo tamanho da árvore..\n\n");
+    printf("Getting the tree size...\n\n");
     sizeTree = (character << 3) & (0xFF);
     sizeTree = sizeTree << 5;
 
@@ -48,9 +48,9 @@ void start_decompress(FILE *compressed, U_CHAR *type)
     sizeTree |= character;
 
     NODE_TREE *node = create_node();
-    printf("Montando árvore...\n\n");
+    printf("Riding the tree...\n\n");
     node = create_tree_preorder(node, compressed);
-    printf("Iniciando descompressão...\n\n");
+    printf("Starting decompression...\n\n");
 
     U_CHAR out_file[ASCII_SIZE];
     strcpy(out_file, "descompactado.");
@@ -112,7 +112,7 @@ void start_decompress(FILE *compressed, U_CHAR *type)
             tree = node;
         }
     }
-    printf("Arquivo descomprimido com Sucesso...\n\n");
+    printf("Successfully decompressed file...\n\n");
     fclose(compressed);
     fclose(decompress_file);
 }

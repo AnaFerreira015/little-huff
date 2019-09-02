@@ -82,7 +82,7 @@ void write_to_file(FILE *file, HASH_TABLE *hash_table, FILE *compressedFile, lli
     {
         fprintf(compressedFile, "%c", byteFile);
     }
-    printf("Arquivo comprimido com sucesso...\n\n");
+    printf("Successfully compressed file...\n\n");
 
     fclose(compressedFile);
 }
